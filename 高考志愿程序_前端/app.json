@@ -1,0 +1,14 @@
+{
+  "window": {
+    "navigationBarBackgroundColor": "#43CD80",
+    "navigationBarTitleText": "基本信息",
+    "navigationBarTextStyle": "white"
+  },
+  "pages": [
+    "pages/index/index",
+    "pages/list/list", 
+    "pages/tianbao/tianbao",
+    "pages/result/result",
+    "pages/recommend/recommend"
+  ]
+}
