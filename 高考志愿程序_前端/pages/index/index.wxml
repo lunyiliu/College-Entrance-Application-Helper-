@@ -3,7 +3,7 @@
 </view>
 
 <view class='Input'>
-  <picker bindchange="bindPickerChange1" value="{{index}}" range="{{selectData1}}">
+  <picker class="input" bindchange="bindPickerChange1" value="{{index}}" range="{{selectData1}}">
     <view class="picker">
       <text class='select_text' style="margin-left: 30rpx;">{{selectData1[index]}}</text>
     </view>
@@ -15,7 +15,7 @@
 </view>
 
 <view class="Input">
-  <picker bindchange="bindPickerChange" value="{{areaIndex}}" range="{{area}}">
+  <picker class="input" bindchange="bindPickerChange" value="{{areaIndex}}" range="{{area}}">
     <view class="picker">
       <text class='select_text' style="margin-left: 30rpx;">{{area[areaIndex]}}</text>
     </view>
@@ -27,7 +27,7 @@
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
-  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="请输入总分" placeholder-style="color: black" bindinput="listenerGradeInput" />
+  <input class="input" style="margin-left: 30rpx;" type="number" placeholder="请输入总分" placeholder-style="color: black" bindinput="listenerGradeInput" />
 </view>
 
 <view>
@@ -35,7 +35,8 @@
 </view>
 
 <view class="Input">
-  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="请输入本省排名" placeholder-style="color: black" bindinput="listenerRankInput" />
+  <input class="input" style="margin-left: 30rpx;" type="number" placeholder="请输入本省排名" placeholder-style="color: black" bindinput="listenerRankInput" />
 </view>
 
-<button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 250rpx; border-radius: 40rpx" type="primary" bindtap="listenerLogin">查看推荐院校</button>
+<button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 250rpx; border-radius: 40rpx" type="primary" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="listenerLogin">授权登录</button>
+<view wx:else>请升级微信版本</view>
