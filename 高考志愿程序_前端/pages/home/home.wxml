@@ -1,0 +1,38 @@
+<view class='content'>
+  <view class='nav'>
+    <view class="top" style="margin-left:40rpx;width:5%">
+      <open-data style='border-radius:50%;overflow:hidden;display:block;height:18vw;width:18vw;margin-left:0rpx;border: 2px solid #fff;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);' type="userAvatarUrl"></open-data>
+    </view>
+    <view class='nickname' style="margin-left:0rpx;flex:1">
+      <open-data style="color:white" type="userNickName"></open-data> 
+    </view>
+    <view class="tui-menu-list {{'tui-youjiantou'}}" style="flex:1;color:white;margin-top:0rpx;height:70%" bindtap='exit'>
+    </view>
+  </view>
+
+  <view class='box_'>
+    <view class='box'>
+      <text class='left'>省份</text>
+      <text class='right' wx:if="{{Province!=0}}">{{Province}}</text>
+      <text class='right' wx:else>未选择省份</text>
+    </view>
+    <view class="divLine"></view>
+    <view class='box'>
+      <text class='left'>科类</text>
+      <text class='right' wx:if="{{Kelei!=0}}">{{Kelei}}</text>
+      <text class='right' wx:else>未选择科类</text>
+    </view>
+    <view class="divLine"></view>
+    <view class='box'>
+     <text class='left'> 分数</text>
+     <text class='right' wx:if="{{Grade!=0}}">{{Grade}}</text>
+     <text class='right' wx:else>未输入分数</text>
+    </view>
+    <view class="divLine"></view>
+    <view class='box'>
+      <text class='left'>排名</text>
+      <text class='right' wx:if="{{Rank!=0}}">{{Rank}}</text>
+      <text class='right' wx:else>未输入排名</text>
+    </view>
+  </view>
+</view>
