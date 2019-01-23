@@ -1,7 +1,8 @@
-<view style='margin-top:5px'>
+<view style='margin-top:5px;margin-left:15px'>
   <text class="textstyle">考生所在省份</text>
 </view>
 
+<view class='box'>
 <view class='Input'>
   <picker class="input" bindchange="bindPickerChange1" value="{{index}}" range="{{selectData1}}">
     <view class="picker">
@@ -9,11 +10,13 @@
     </view>
   </picker>
 </view>
+</view>
 
-<view style='margin-top:0px'>
+<view style='margin-top:0px;margin-left:15px'>
   <text class="textstyle">科目分类</text>
 </view>
 
+<view class='box'>
 <view class="Input">
   <picker class="input" bindchange="bindPickerChange" value="{{areaIndex}}" range="{{area}}">
     <view class="picker">
@@ -21,21 +24,26 @@
     </view>
   </picker>
 </view>
+</view>
 
-<view style='margin-top:0px'>
+<view style='margin-top:0px;margin-left:15px'>
   <text class="textstyle">考生总分</text>
 </view>
 
+<view class='box'>
 <view class="Input" style="margin-top: 30rpx">
   <input class="input" style="margin-left: 30rpx;" type="number" placeholder="请输入总分" placeholder-style="color: black" bindinput="listenerGradeInput" />
 </view>
+</view>
 
-<view>
+<view style='margin-top:0px;margin-left:15px'>
   <text class="textstyle">在本省的排名</text>
 </view>
 
+<view class='box'>
 <view class="Input">
   <input class="input" style="margin-left: 30rpx;" type="number" placeholder="请输入本省排名" placeholder-style="color: black" bindinput="listenerRankInput" />
+</view>
 </view>
 
 <button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 250rpx; border-radius: 40rpx" type="primary" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="listenerLogin">授权登录</button>
