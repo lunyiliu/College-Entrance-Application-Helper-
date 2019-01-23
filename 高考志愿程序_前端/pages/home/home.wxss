@@ -30,7 +30,6 @@ page {
   width: 100%;
   height: 410rpx;
   border: 1px solid #efefef;
-  border-radius: 8rpx;
   align-items: center;
   padding: 0 20rpx;
   margin-top: 30rpx
