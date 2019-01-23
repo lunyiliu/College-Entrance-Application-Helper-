@@ -1,0 +1,11 @@
+{
+  "window": {
+    "navigationBarBackgroundColor": "#43CD80",
+    "navigationBarTitleText": "信息采集",
+    "navigationBarTextStyle": "white"
+  },
+  "pages": [
+    "pages/login/login",
+    "pages/dataCollection/dataCollection"
+  ]
+}

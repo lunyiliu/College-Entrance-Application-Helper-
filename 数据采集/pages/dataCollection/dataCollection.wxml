@@ -1,0 +1,74 @@
+<view style='margin-left:10px;margin-right:10rpx'>
+  <text class="textstyle" style="font-size: 30rpx">请依次完成下列数据填写；学校（此栏为预置，请查找对应学校的信息）、招生年份、科类、省份、门类及一级学科、专业（此栏若预置请不要修改，请查找此专业相关的数据填入）、录取分数、学科评估结果（以教育部第四次学科评估为准），除分数外其余项均为必填项，分数如若数据缺失填入0
+  </text>
+</view>
+
+<view class="Input" style="margin-top:15rpx">
+  <text style="margin-left: 35rpx; font-size: 35rpx">{{School}}</text>
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="招生年份" value=
+  '{{Year}}' placeholder-style="color: black" bindinput="listenerYearInput" />
+</view>
+
+<view class="Input">
+  <picker bindchange="bindPickerChange2" value="{{keleiIndex}}" range="{{kelei}}">
+    <view class="picker">
+      <text class='select_text' style="margin-left: 38rpx;">{{kelei[keleiIndex]}}</text>
+    </view>
+  </picker>
+</view>
+
+<view class="Input">
+  <picker bindchange="bindPickerChange" value="{{areaIndex}}" range="{{area}}">
+    <view class="picker">
+      <text class='select_text' style="margin-left: 38rpx;">{{area[areaIndex]}}</text>
+    </view>
+  </picker>
+</view>
+
+<view class="Input">
+  <picker bindchange="bindPickerChange3" value="{{PiciIndex}}" range="{{pici}}">
+    <view class="picker">
+      <text class='select_text' style="margin-left: 38rpx;">{{pici[PiciIndex]}}</text>
+    </view>
+  </picker>
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
+    </view>
+  </picker>
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="专业名称" value='{{Major}}' placeholder-style="color: black" bindinput="listenerMajorInput" />
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="最低分" value='{{Clear}}' placeholder-style="color: black" bindinput="listenerLowestInput" />
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="平均分" value='{{Avg}}' placeholder-style="color: black" bindinput="listenerAvgInput" />
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="最高分" value='{{Highest}}' placeholder-style="color: black" bindinput="listenerHighestInput" />
+</view>
+
+<view class='Input' style="margin-top: 30rpx">
+  <picker bindchange="bindPickerChange1" value="{{index}}" range="{{selectData1}}">
+    <view class="picker">
+      <text class='select_text' style="margin-left: 38rpx;">{{selectData1[index]}}</text>
+    </view>
+  </picker>
+</view>
+
+<view style="display: flex;flex-direction: row;margin-top: 20rpx">
+  <button style="font-size:35rpx;width:50%;margin-left: 15rpx; margin-right: 15rpx; margin-top: 40rpx; border-radius: 40rpx;margin-bottom: 50rpx;" type="primary" bindtap="listenerLogin">提交</button>
+  <button style="font-size:35rpx;width:50%;margin-left: 15rpx; margin-right: 15rpx; margin-top: 40rpx; border-radius: 40rpx;margin-bottom: 50rpx;" type="primary" bindtap="NextSchool">进入下一所学校</button>
+</view>
