@@ -8,12 +8,12 @@
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
-  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="招生年份" value=
+  <input class="input" style="margin-left: 15rpx;" disabled='{{Year}}' type="number" placeholder="招生年份" value=
   '{{Year}}' placeholder-style="color: black" bindinput="listenerYearInput" />
 </view>
 
 <view class="Input">
-  <picker bindchange="bindPickerChange2" value="{{keleiIndex}}" range="{{kelei}}">
+  <picker bindchange="bindPickerChange2" disabled="{{keleiIndex}}" value="{{keleiIndex}}" range="{{kelei}}">
     <view class="picker">
       <text class='select_text' style="margin-left: 38rpx;">{{kelei[keleiIndex]}}</text>
     </view>
@@ -21,7 +21,7 @@
 </view>
 
 <view class="Input">
-  <picker bindchange="bindPickerChange" value="{{areaIndex}}" range="{{area}}">
+  <picker bindchange="bindPickerChange" disabled="{{areaIndex}}" value="{{areaIndex}}" range="{{area}}">
     <view class="picker">
       <text class='select_text' style="margin-left: 38rpx;">{{area[areaIndex]}}</text>
     </view>
@@ -29,7 +29,7 @@
 </view>
 
 <view class="Input">
-  <picker bindchange="bindPickerChange3" value="{{PiciIndex}}" range="{{pici}}">
+  <picker bindchange="bindPickerChange3" disabled="{{PiciIndex}}" value="{{PiciIndex}}" range="{{pici}}">
     <view class="picker">
       <text class='select_text' style="margin-left: 38rpx;">{{pici[PiciIndex]}}</text>
     </view>
@@ -45,7 +45,7 @@
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
-  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="专业名称" value='{{Major}}' placeholder-style="color: black" bindinput="listenerMajorInput" />
+  <input class="input" style="margin-left: 15rpx;" disabled='{{Major}}' placeholder="专业名称" value='{{Major}}' placeholder-style="color: black" bindinput="listenerMajorInput" />
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
@@ -53,15 +53,15 @@
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
-  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="平均分" value='{{Avg}}' placeholder-style="color: black" bindinput="listenerAvgInput" />
+  <input class="input" style="margin-left: 15rpx;" disabled='{{Avg}}' type="number" placeholder="平均分" value='{{Avg}}' placeholder-style="color: black" bindinput="listenerAvgInput" />
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
-  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="最高分" value='{{Highest}}' placeholder-style="color: black" bindinput="listenerHighestInput" />
+  <input class="input" style="margin-left: 15rpx;" disabled='{{Highest}}' type="number" placeholder="最高分" value='{{Highest}}' placeholder-style="color: black" bindinput="listenerHighestInput" />
 </view>
 
 <view class='Input' style="margin-top: 30rpx">
-  <picker bindchange="bindPickerChange1" value="{{index}}" range="{{selectData1}}">
+  <picker bindchange="bindPickerChange1" disabled='{{index}}' value="{{index}}" range="{{selectData1}}">
     <view class="picker">
       <text class='select_text' style="margin-left: 38rpx;">{{selectData1[index]}}</text>
     </view>
