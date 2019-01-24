@@ -3,6 +3,8 @@
   padding-left: 10px;
   height: 30px;
   font-family: microsoft yahei;
+  display: flex;
+  align-items: center;
 }
 .multiSelector{
   font-size: 35rpx;
@@ -12,10 +14,11 @@
 }
 
 .Input {
+  border-radius: 20rpx;
   font-size: 35rpx;
-  height: 70rpx;
+  height: 80rpx;
   background: #fff;
-  width: 100%;
+  width: 85%;
   margin: 30rpx auto;
   position: relative;
 }

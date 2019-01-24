@@ -241,6 +241,7 @@ Page({
       data: {
         command: 'get_school',
         userID: app.globalData.userID,
+        user_nickname: app.globalData.nickName
       },
       method: 'GET',
       header: {
@@ -406,6 +407,7 @@ Page({
         url: 'https://lunyiliu.eicp.vip/DataInsert.php',
         data: {
           command: 'update_data',
+          user_nickname: app.globalData.nickName,
           userID: app.globalData.userID,
           trans_major: app.globalData.Major,
           trans_school: app.globalData.School,
@@ -447,6 +449,7 @@ Page({
         url: 'https://lunyiliu.eicp.vip/DataInsert.php',
         data: {
           command: 'insert_data',
+          user_nickname: app.globalData.nickName,
           userID: app.globalData.userID,
           trans_major: app.globalData.Major,
           trans_school: app.globalData.School,
