@@ -1,5 +1,6 @@
 Page({
   onLoad: function() {
+    //wx.clearStorageSync()
     wx.loadFontFace({
       family: 'webfont',
       source: 'url("//at.alicdn.com/t/webfont_1f7b3qbimiv.eot")',
@@ -15,6 +16,7 @@ Page({
     });
   },
   bingGetOpenID: function() {
+    var app = getApp();
     wx.login({
       success: function(data) {
         console.log('获取登录 Code：' + data.code)
@@ -22,6 +24,35 @@ Page({
           code: data.code
 
         };
+          /**
+           * 获取用户信息
+           */
+      //console.log(app.globalData.nickName)
+          const value = wx.getStorageSync('123456')
+          if (value) {
+            app.globalData.nickName = value
+            console.log(value)
+          }
+          else{
+            app.globalData.nickName == ' '
+          }
+if (app.globalData.nickName==' '){
+              wx.showModal({
+                title:  '警告',
+                content:  '尚未进行授权，请点击确定跳转到授权页面进行授权。',
+                success:  function  (res)  {
+                  if  (res.confirm)  {
+                    console.log('用户同意授权')
+                    wx.navigateTo({
+                      url:  '../authorization/authorization',
+
+                    })
+                  }
+                }
+              })
+}
+          
+ else {
         wx.showLoading({
           title: '登录中...',
         });
@@ -45,6 +76,7 @@ Page({
             console.log(error);
           }
         })
+      }
       },
       
       fail: function() {

@@ -4,6 +4,7 @@ App({
     //get_school
     //get_major
     //除School与Major项外其余项在每次提交后存入数据库,School与major为应读取的项
+    nickName :' ',
     areaindex:0, 
     piciindex:0,
      keleiindex:0,
