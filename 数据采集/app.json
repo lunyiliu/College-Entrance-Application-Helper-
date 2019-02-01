@@ -6,7 +6,7 @@
   },
   "pages": [
     "pages/login/login",
-    "pages/dataCollection/dataCollection",
-    "pages/authorization/authorization"
+    "pages/dataCollection/dataCollection"
+  
   ]
 }

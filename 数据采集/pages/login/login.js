@@ -1,6 +1,6 @@
 Page({
   onLoad: function() {
-    //wx.clearStorageSync()
+   // wx.clearStorageSync()
     wx.loadFontFace({
       family: 'webfont',
       source: 'url("//at.alicdn.com/t/webfont_1f7b3qbimiv.eot")',
@@ -36,23 +36,27 @@ Page({
           else{
             app.globalData.nickName == ' '
           }
-if (app.globalData.nickName==' '){
-              wx.showModal({
-                title:  '警告',
-                content:  '尚未进行授权，请点击确定跳转到授权页面进行授权。',
-                success:  function  (res)  {
-                  if  (res.confirm)  {
-                    console.log('用户同意授权')
-                    wx.navigateTo({
-                      url:  '../authorization/authorization',
+          /*
+        if (app.globalData.nickName == ' ') {
 
-                    })
-                  }
-                }
-              })
-}
           
- else {
+            wx.showModal({
+              title:  '警告',
+              content:  '尚未进行授权，请点击确定跳转到授权页面进行授权。',
+              success:  function  (res)  {
+                if  (res.confirm)  {
+                  console.log('用户同意授权')
+                  wx.navigateTo({
+                    url:  '../authorization/authorization',
+    
+                  })
+                }
+              }
+            })
+            
+        }
+      */    
+        if (app.globalData.nickName != ' ') {
         wx.showLoading({
           title: '登录中...',
         });
@@ -64,7 +68,7 @@ if (app.globalData.nickName==' '){
             'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
           },
           success: function(res) { //回调处理 
-            console.log('getOpenID-OK!');
+            console.log(res);
             getApp().globalData.userID = res.data.openid;
             console.log(getApp().globalData.userID);
             wx.hideLoading();
@@ -83,5 +87,19 @@ if (app.globalData.nickName==' '){
         console('登录获取Code失败！');
       }
     })
+  },
+  bindGetUserInfo: function (e) {
+    var app = getApp();
+    if (app.globalData.nickName == ' ') {
+    var that = this;
+    //此处授权得到user NickName
+    console.log(e.detail.userInfo);
+    getApp().globalData.nickName = e.detail.userInfo.nickName;
+    wx.setStorage({
+      key: '123456',
+      data: getApp().globalData.nickName
+
+    })
+    }
   },
 })
