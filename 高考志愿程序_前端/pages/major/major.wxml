@@ -1,2 +1,7 @@
-<!--pages/major/major.wxml-->
-<text>pages/major/major.wxml</text>
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
+    </view>
+  </picker>
+</view>
