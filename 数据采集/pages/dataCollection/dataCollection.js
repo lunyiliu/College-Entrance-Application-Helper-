@@ -241,7 +241,8 @@ Page({
       data: {
         command: 'get_school',
         userID: app.globalData.userID,
-        user_nickname: app.globalData.nickName
+        user_nickname:'轮'
+        //user_nickname: app.globalData.nickName
       },
       method: 'GET',
       header: {
@@ -327,6 +328,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res)
         if (res.data[0] != 0) {
           app.globalData.Major = res.data[0];
           app.globalData.Avg = res.data[2];
