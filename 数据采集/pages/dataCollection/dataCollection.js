@@ -1,6 +1,15 @@
 var app = getApp(); //其后可通过app变量获取全局变量（存于globalData）
 Page({
   data: {
+    isyear: 0,
+    iskelei: 0,
+    isprovince: 0,
+    ispici: 0,
+    ismajor: 0,
+    isavg: 0,
+    ishighest: 0,
+    islowest: 0,
+    isindex: 0,
     Clear: null, //用于清空输入框，每次提交后将所有输入框内容置为null
     School: app.globalData.School, //从全局变量中获取学校名
     Kelei: 0, //文、理、不分文理
@@ -199,11 +208,21 @@ Page({
           })
         }
         else{
-          app.globalData.School = res.data[0];
-          that.setData({
-            'School': app.globalData.School
-          });
-          that.get_major();
+          wx.showModal({
+            title: '警告',
+            showCancel: true,
+            content: '请尽可能寻找更多的该学校的专业，确定要开始下一所学校？',
+            success: function (res) {
+              if (res.confirm) {
+                app.globalData.School = res.data[0];
+                that.setData({
+                  'School': app.globalData.School
+                });
+                that.get_major();
+              }
+            }
+          })
+
         }
        
       },
@@ -241,8 +260,8 @@ Page({
       data: {
         command: 'get_school',
         userID: app.globalData.userID,
-        user_nickname:'轮'
-        //user_nickname: app.globalData.nickName
+        //user_nickname:'轮'
+        user_nickname: app.globalData.nickName
       },
       method: 'GET',
       header: {
@@ -367,12 +386,30 @@ Page({
         if (app.globalData.Major != 0) {
           that.setData({
             'areaIndex': app.globalData.areaindex,
+            'isprovince': app.globalData.areaindex,
             'Year': app.globalData.Year,
+            'isyear': app.globalData.Year,
             'Avg': app.globalData.Avg,
+            'isavg': app.globalData.Avg,
             'Highest': app.globalData.Highest,
+            'ishighest': app.globalData.Highest,
             'Major': app.globalData.Major,
+            'ismajor': app.globalData.Major,
             'PiciIndex': app.globalData.piciindex,
-            'keleiIndex': app.globalData.keleiindex
+            'ispici': app.globalData.piciindex,
+            'keleiIndex': app.globalData.keleiindex,
+            'iskelei': app.globalData.keleiindex
+          })
+        }
+        else {
+          that.setData({
+            'isprovince': 0,
+            'isyear': 0,
+            'isavg': 0,
+            'ishighest': 0,
+            'ismajor': 0,
+            'ispici': 0,
+            'iskelei': 0
           })
         }
         /*
@@ -471,6 +508,7 @@ Page({
           'content-type': 'application/json'
         },
         success: function (res) {
+          console.log(res.data)
           wx.hideLoading();
           that.get_major();
         },
@@ -877,7 +915,7 @@ Page({
     //提交后重置数据及清空输入框
     this.setData({
       Kelei: '',
-      keleiIndex: '',
+      keleiIndex: 0,
       Pici: '',
       PiciIndex: 0,
       Province: '',

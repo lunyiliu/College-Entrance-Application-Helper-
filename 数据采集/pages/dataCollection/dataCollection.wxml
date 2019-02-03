@@ -4,52 +4,52 @@
 </view>
 
 <view class="Input" style="margin-top:15rpx">
-  <text style="margin-left: 35rpx; font-size: 35rpx">{{School}}</text>
+  <text class="input" style="margin-left: 15rpx; font-size: 35rpx">{{School}}</text>
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
-  <input class="input" style="margin-left: 15rpx;" disabled='{{Year}}' type="number" placeholder="招生年份" value=
+  <input class="input" style="margin-left: 15rpx;" disabled='{{isyear}}' type="number" placeholder="招生年份" value=
   '{{Year}}' placeholder-style="color: black" bindinput="listenerYearInput" />
 </view>
 
 <view class="Input">
-  <picker bindchange="bindPickerChange2" disabled="{{keleiIndex}}" value="{{keleiIndex}}" range="{{kelei}}">
-    <view class="picker">
-      <text class='select_text' style="margin-left: 38rpx;">{{kelei[keleiIndex]}}</text>
+  <picker bindchange="bindPickerChange2" disabled="{{iskelei}}" value="{{keleiIndex}}" range="{{kelei}}">
+    <view class="input">
+      <text class='select_text' style="margin-left: 15rpx;">{{kelei[keleiIndex]}}</text>
     </view>
   </picker>
 </view>
 
 <view class="Input">
-  <picker bindchange="bindPickerChange" disabled="{{areaIndex}}" value="{{areaIndex}}" range="{{area}}">
-    <view class="picker">
-      <text class='select_text' style="margin-left: 38rpx;">{{area[areaIndex]}}</text>
+  <picker bindchange="bindPickerChange" disabled="{{isprovince}}" value="{{areaIndex}}" range="{{area}}">
+    <view class="input">
+      <text class='select_text' style="margin-left: 15rpx;">{{area[areaIndex]}}</text>
     </view>
   </picker>
 </view>
 
 <view class="Input">
-  <picker bindchange="bindPickerChange3" disabled="{{PiciIndex}}" value="{{PiciIndex}}" range="{{pici}}">
-    <view class="picker">
-      <text class='select_text' style="margin-left: 38rpx;">{{pici[PiciIndex]}}</text>
+  <picker bindchange="bindPickerChange3" disabled="{{ispici}}" value="{{PiciIndex}}" range="{{pici}}">
+    <view class="input">
+      <text class='select_text' style="margin-left: 15rpx;">{{pici[PiciIndex]}}</text>
     </view>
   </picker>
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
   <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-    <view class="picker" style="margin-left: 38rpx">
+    <view class="input" style="margin-left: 15rpx">
       {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
     </view>
   </picker>
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
-  <input class="input" style="margin-left: 15rpx;" disabled='{{Major}}' placeholder="专业名称" value='{{Major}}' placeholder-style="color: black" bindinput="listenerMajorInput" />
+  <input class="input" style="margin-left: 15rpx;" disabled='{{ismajor}}' placeholder="专业名称" value='{{Major}}' placeholder-style="color: black" bindinput="listenerMajorInput" />
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
-  <input class="input" style="margin-left: 15rpx;" type="number" placeholder="最低分" value='{{Clear}}' placeholder-style="color: black" bindinput="listenerLowestInput" />
+  <input class="input" style="margin-left: 15rpx;" disabled='{{islowest}}' type="number" placeholder="最低分" value='{{Clear}}' placeholder-style="color: black" bindinput="listenerLowestInput" />
 </view>
 
 <view class="Input" style="margin-top: 30rpx">
@@ -61,9 +61,9 @@
 </view>
 
 <view class='Input' style="margin-top: 30rpx">
-  <picker bindchange="bindPickerChange1" disabled='{{index}}' value="{{index}}" range="{{selectData1}}">
-    <view class="picker">
-      <text class='select_text' style="margin-left: 38rpx;">{{selectData1[index]}}</text>
+  <picker bindchange="bindPickerChange1" disabled='{{isindex}}' value="{{index}}" range="{{selectData1}}">
+    <view class="input">
+      <text class='select_text' style="margin-left: 15rpx;">{{selectData1[index]}}</text>
     </view>
   </picker>
 </view>
