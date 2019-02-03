@@ -1,6 +1,6 @@
 Page({
   onLoad: function() {
-   // wx.clearStorageSync()
+    //wx.clearStorageSync()
     wx.loadFontFace({
       family: 'webfont',
       source: 'url("//at.alicdn.com/t/webfont_1f7b3qbimiv.eot")',
