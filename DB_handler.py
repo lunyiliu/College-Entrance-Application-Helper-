@@ -9,7 +9,7 @@ import pymysql
 class DB_handler:
     #数据库基础操作
     def __init__(self):
-        self.conn = pymysql.connect(host='39.107.97.123', user='root', passwd='123456', db='gaokao', charset='utf8')
+        self.conn = pymysql.connect(host='39.96.168.183', user='root', passwd='123456', db='gaokao', charset='utf8')
         self.cursor=self.conn.cursor()
     def select(self,FormList:"list，从哪几个表中选",ResultList:"list，需要返回哪几个字段的结果",ConditionList:"列表，查询的条件，列表元素格式：XX=XX",para_logic:"哪些条件需要或逻辑"=[],para_OrderBy:"第一个元素，排序的字段，第二个元素，true为降序，无为升序"=[],para_dict:"这个参数是true的话，返回的结果是pymysql默认的字典"=False,para_distinct=False,para_limitation:"限制返回的参数个数"=0,para_debug:'此参数开启将打印出sql语句'=False)->"返回的结果是这样的：[[字段1的所有结果],[字段2的所有结果]]":
         if para_dict==True:
