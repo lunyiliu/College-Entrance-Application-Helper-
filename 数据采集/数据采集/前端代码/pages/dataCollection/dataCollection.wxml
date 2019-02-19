@@ -1,0 +1,84 @@
+<view style='margin-left:15px;margin-right:15rpx;margin-top:15rpx;margin-bottom:15rpx'>
+  <text class="textstyle" style="font-size: 30rpx">请依次完成下列数据填写；学校（此栏为预置，请查找对应学校的信息）、招生年份、科类、省份、门类及一级学科、专业（此栏若预置请不要修改，请查找此专业相关的数据填入；若此栏未预置，请查找该学校之前未出现预置过的新专业填入）、录取分数、学科评估结果（以教育部第四次学科评估为准），除分数及学科评估结果外其余项均为必填项，分数如若数据缺失填入0,学科评级若缺失则不填
+  </text>
+</view>
+
+<movable-area class="moveArea">
+  <movable-view class='moveView' x="{{x}}" y="{{y}}" damping="40" direction="all" inertia='true'>
+  <text style="margin:10px">预置专业提交数：{{preset}}
+     新增专业提交数：{{new}}
+  </text>
+  </movable-view>
+
+<view class="Input" style="margin-top:15rpx">
+  <text class="input" style="margin-left: 15rpx; font-size: 35rpx">{{School}}</text>
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;" disabled='{{isyear}}' type="number" placeholder="招生年份" value=
+  '{{Year}}' placeholder-style="color: black" bindinput="listenerYearInput" />
+</view>
+
+<view class="Input">
+  <picker bindchange="bindPickerChange2" disabled="{{iskelei}}" value="{{keleiIndex}}" range="{{kelei}}">
+    <view class="input">
+      <text class='select_text' style="margin-left: 15rpx;">{{kelei[keleiIndex]}}</text>
+    </view>
+  </picker>
+</view>
+
+<view class="Input">
+  <picker bindchange="bindPickerChange" disabled="{{isprovince}}" value="{{areaIndex}}" range="{{area}}">
+    <view class="input">
+      <text class='select_text' style="margin-left: 15rpx;">{{area[areaIndex]}}</text>
+    </view>
+  </picker>
+</view>
+
+<view class="Input">
+  <picker bindchange="bindPickerChange3" disabled="{{ispici}}" value="{{PiciIndex}}" range="{{pici}}">
+    <view class="input">
+      <text class='select_text' style="margin-left: 15rpx;">{{pici[PiciIndex]}}</text>
+    </view>
+  </picker>
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="input" style="margin-left: 15rpx">
+      {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
+    </view>
+  </picker>
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;" disabled='{{ismajor}}' placeholder="专业名称" value='{{Major}}' placeholder-style="color: black" bindinput="listenerMajorInput" />
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;" disabled='{{islowest}}' type="number" placeholder="最低分" value='{{Clear}}' placeholder-style="color: black" bindinput="listenerLowestInput" />
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;" disabled='{{Avg}}' type="number" placeholder="平均分" value='{{Avg}}' placeholder-style="color: black" bindinput="listenerAvgInput" />
+</view>
+
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;" disabled='{{Highest}}' type="number" placeholder="最高分" value='{{Highest}}' placeholder-style="color: black" bindinput="listenerHighestInput" />
+</view>
+
+<view class='Input' style="margin-top: 30rpx">
+  <picker bindchange="bindPickerChange1" disabled='{{isindex}}' value="{{index}}" range="{{selectData1}}">
+    <view class="input">
+      <text class='select_text' style="margin-left: 15rpx;">{{selectData1[index]}}</text>
+    </view>
+  </picker>
+</view>
+
+<view style="display: flex;flex-direction: row;margin-top: 20rpx">
+  <button style="font-size:35rpx;width:50%;margin-left: 15rpx; margin-right: 15rpx; margin-top: 40rpx; border-radius: 40rpx;margin-bottom: 50rpx;" type="primary" bindtap="listenerLogin">提交</button>
+  <button style="font-size:35rpx;width:50%;margin-left: 15rpx; margin-right: 15rpx; margin-top: 40rpx; border-radius: 40rpx;margin-bottom: 50rpx;" type="primary" bindtap="NextSchool">进入下一所学校</button>
+</view>
+
+
+</movable-area>
