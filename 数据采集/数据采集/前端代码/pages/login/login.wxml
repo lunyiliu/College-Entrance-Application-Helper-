@@ -1,0 +1,7 @@
+<view class="main">
+<text class="web-font" style="letter-spacing:5rpx;font-size:35rpx;">智愿树数据标注表单</text>
+</view>
+
+<view class="main">
+  <button style="letter-spacing:5rpx;font-size:35rpx;width:30%;margin-left: 15rpx; margin-right: 15rpx; margin-top: 40rpx; border-radius: 20rpx;margin-bottom: 50rpx;" type="primary" bindtap="bingGetOpenID" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+</view>
