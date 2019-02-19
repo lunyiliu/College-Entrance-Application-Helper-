@@ -1,6 +1,6 @@
 App({
   globalData:{
-    //初始时（第一轮信息）直接写入下面School和Major
+    //初始（第一轮信息）直接写入下面School和Major
     //get_school
     //get_major
     //除School与Major项外其余项在每次提交后存入数据库,School与major为应读取的项
