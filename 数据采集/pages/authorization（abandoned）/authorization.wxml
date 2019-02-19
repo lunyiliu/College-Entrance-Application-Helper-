@@ -1,4 +1,0 @@
-
-<view style='margin-left:15px;margin-right:15rpx;margin-top:500rpx;margin-bottom:15rpx'>
-<button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
-</view>
