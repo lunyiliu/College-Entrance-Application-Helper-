@@ -12,8 +12,6 @@ Page({
     area: ['未选择科类', '文史', '理工', '不分文理'], //下拉列表的数据
     index: 0, //选择的下拉列表下标
     areaIndex: 0,
-
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
   /** * 监听成绩输入 */
@@ -28,21 +26,6 @@ Page({
   listenertestInput: function(e) {
     this.data.result = e.detail.value;
   },
-  onLoad: function () {
-    // 查看是否授权
-    wx.getSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          wx.getUserInfo({
-            success: function (res) {
-              console.log(res.userInfo)
-            }
-          })
-        }
-      }
-    })
-  },
   listenerLogin: function() {
     if (this.data.Province != 0 && this.data.Kelei != 0 && this.data.Grade != 0 && this.data.Grade <= 750 && this.data.Rank > 0) {
       //更改变量
@@ -50,11 +33,14 @@ Page({
       app.globalData.StudentKelei = this.data.area[parseInt(this.data.Kelei)];
       app.globalData.StudentGrade = this.data.Grade;
       app.globalData.StudentRank = this.data.Rank;
-      
-
+      //打印信息 
+      console.log('所在省份: ', app.globalData.StudentProvince);
+      console.log('科类为: ', app.globalData.StudentKelei);
+      console.log('成绩为: ', app.globalData.StudentGrade);
+      console.log('排名为: ', app.globalData.StudentRank);
       //页面跳转
-      wx.switchTab({
-        url: '../home/home'
+      wx.navigateTo({
+        url: '../list/list'
       })
     }
      else {
