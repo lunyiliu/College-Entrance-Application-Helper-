@@ -50,18 +50,18 @@ class DB_methods:
                 score:'学生分数'):
         rank = 0
         count = 0
-        storeScore = self.DB.select([FormList],['self_rank'],conditionList)
+        storeScore = self.DB.select([FormList],['store_rank_all'],conditionList)
         #ranklist = storeScore[0]
         score = score
         str = ''
-        if storeScore[0] is None:
+        if storeScore[0] is None or storeScore[0] is '':
             #print('first')
             rank = 1
             count = 1
             print(score)
             str = score+'.'
             #print(str)
-            self.DB.update(FormList,['self_rank ='+'\"'+ str+'\"' ],conditionList)
+            self.DB.update(FormList,['store_rank_all ='+'\"'+ str+'\"' ],conditionList)
         else:
             #print(storeScore[0])
             str = ''
@@ -83,50 +83,93 @@ class DB_methods:
                 str = str + element +'.'
                 #print(element)
             #print(str)
-            self.DB.update(FormList, ['self_rank =' +'\"'+ str+'\"'], conditionList)
+            self.DB.update(FormList, ['store_rank_all =' +'\"'+ str+'\"'], conditionList)
         return rank,count
 #"""
     def deleteRecords(self,user_ID):
         #获得user的基本信息 chooselist 里 形式如'schoolID1.schoolID2'
-        store = self.DB.select(['client'],['choose_list'],['user_ID ='+user_ID])[0][:-1].split('.')
-        score = self.DB.select(['client'], ['score'], ['user_ID =' + user_ID])[0]
-        provinceID = self.DB.select(['client'], ['provinceID'], ['user_ID =' + user_ID])[0]
+        store_pre = self.DB.select(['client'],['choose_list'],['user_ID ='+user_ID])[0]
+        score = str(self.DB.select(['client'], ['score'], ['user_ID =' + user_ID])[0])
+        provinceID = str(self.DB.select(['client'], ['provinceID'], ['user_ID =' + user_ID])[0])
         subject = self.DB.select(['client'], ['subject'], ['user_ID =' + user_ID])[0]
-        year = self.DB.select(['client'], ['year'], ['user_ID =' + user_ID])[0]
-        for element in store:
-            list = self.DB.select(['school'],['store_rank_chosen'],['schoolID ='+element,'year ='+year,'provinceID ='+provinceID,'subject ='+'\"'+subject+'\"'])[0][:-1].split('.') #分数排名
-            for i in len(list):
-                if score == list[i]:
-                    list = list.remove(list[i])
-                    break
-            self.DB.update('client',['store_rank_chosen ='+list],['schoolID ='+element,'year ='+year,'provinceID ='+provinceID,'subject ='+'\"'+subject+'\"'])
-        self.DB.update('client',['choose_list ='+''],['user_ID =' + user_ID])#可能存在问题 这个清除
+        year = str(self.DB.select(['client'], ['year'], ['user_ID =' + user_ID])[0])
+        if store_pre is None or store_pre is '':
+            return 0 #其实什么都不执行就行
+        else:
+            store = self.DB.select(['client'],['choose_list'],['user_ID ='+user_ID])[0][:-1].split('.')
+            for element in store:
+                list2str = ''
+                list1 = self.DB.select(['test'],
+                                       ['store_rank_chosen'],
+                                       ['schoolID ='+element,
+                                        'year ='+year,
+                                        'provinceID ='+provinceID,
+                                        'subject ='+'\"'+subject+'\"'])[0][:-1].split('.') #分数排名
+                '''
+                for i in range(len(list1)):
+                    if score == list1[i]:
+                        list1 = list1.remove(list1[i])
+                        break
+                '''
+                list1.remove(score)
+                print(list1)
+                if list1 is None:
+                    list2str = ''
+                else:
+                    for j in range(len(list1)):
+                        list2str = list2str + list1[j] +'.'
+                self.DB.update('test',
+                               ['store_rank_chosen ='+'\"'+list2str+'\"'],
+                               ['schoolID ='+element,
+                                'year ='+year,
+                                'provinceID ='+provinceID,
+                                'subject ='+'\"'+subject+'\"'])
+            self.DB.update('client',['choose_list ='+'\"'+''+'\"'],['user_ID =' + user_ID])#可能存在问题 这个清除
 
     def setRecords(self,user_ID,referenceList):#referenceList为志愿学校形式为list，里面有学校id  输入志愿学校 存储 返回各校排名2
-        score = self.DB.select(['client'], ['score'], ['user_ID=' + user_ID])[0]
-        provinceID = self.DB.select(['client'], ['provinceID'], ['user_ID=' + user_ID])[0]
+        score = str(self.DB.select(['client'], ['score'], ['user_ID=' + user_ID])[0])
+        provinceID = str(self.DB.select(['client'], ['provinceID'], ['user_ID=' + user_ID])[0])
         subject = self.DB.select(['client'], ['subject'], ['user_ID=' + user_ID])[0]
         year = self.DB.select(['client'], ['year'], ['user_ID=' + user_ID])[0]
+        year = str(year)
         ranklist = []
-        str = '' #记录到choose_list
-        liststr ='' #记录到client-choose_list
+        str1 = '' #记录到choose_list
         for element in referenceList:
-            str = str + element +'.'
-            list = self.DB.select(['school'], ['store_rank_chosen'],
-                                  ['schoolID =' + element, 'year =' + year, 'provinceID =' + provinceID,
-                                   'subject =' + '\"' + subject + '\"'])[0][:-1].split('.')
+            liststr = ''  # 记录到client-choose_list
+            str1 = str1 + element +'.'
+            list2 = self.DB.select(['test'],
+                                   ['store_rank_chosen'],
+                                   ['schoolID =' + element,
+                                   'year =' + year,
+                                   'provinceID =' + provinceID,
+                                   'subject =' + '\"' + subject + '\"'])[0] #代表choose——list
 
-            if int(list[-1]) > int(score):
-                ranklist.append(len(list)+1)
-                list.append(score)
+            if list2 is None or list2 is '':
+                ranklist.append(1)
+                list1 = [score]
+
             else:
-                for i in range(len(list)):
-                    ranklist.append(i+1)
-                    list.insert(i,score)
-            for j in list:
+                list1 =self.DB.select(['test'], ['store_rank_chosen'],
+                                  ['schoolID =' + element,
+                                   'year =' + year,
+                                   'provinceID =' + provinceID,
+                                   'subject =' + '\"' + subject + '\"'])[0][:-1].split('.')
+                if int(list1[-1]) > int(score):
+                    ranklist.append(len(list1)+1)
+                    list1.append(score)
+                else:
+                    for i in range(len(list1)):
+                        if int(list1[i]) <= int(score):
+                            ranklist.append(i+1)
+                            list1.insert(i,score)
+                            break
+            for j in list1:
                 liststr = liststr + j + '.'
-            self.DB.update('client',['choose_list = '+'\"'+liststr+'\"'],['schoolID =' + element, 'year =' + year, 'provinceID =' + provinceID,
-                                   'subject =' + '\"' + subject + '\"'])
-        self.DB.update('client',['choose_list ='+'\"'+str+'\"'],['user_ID = '+user_ID])
+            self.DB.update('test',['store_rank_chosen = '+'\"'+liststr+'\"'],
+                           ['schoolID =' + element,
+                            'year =' + year,
+                            'provinceID =' + provinceID,
+                            'subject =' + '\"' + subject + '\"'])
+        self.DB.update('client',['choose_list ='+'\"'+str1+'\"'],['user_ID = '+user_ID])
         return ranklist
 
