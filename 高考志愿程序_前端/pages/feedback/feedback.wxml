@@ -1,0 +1,8 @@
+<view class='feedback'>请留下您宝贵的意见</view>
+
+<view class='box'>
+<view class="Input">
+  <input class="input" style="margin-left: 30rpx;" type="number" placeholder="您的意见使我们进步的源泉" placeholder-style="color: black" bindinput="listenerRankInput" />
+</view>
+</view>
+<button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 250rpx; border-radius: 40rpx" type="primary"  open-type="getUserInfo" bindgetuserinfo="listenerLogin" bindtap='exit'>提交</button>

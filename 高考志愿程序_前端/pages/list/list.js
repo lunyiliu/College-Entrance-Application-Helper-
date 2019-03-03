@@ -26,6 +26,8 @@ Page({
       })
       app.globalData.FocusSchool.push(this.data.SchoolName[i])
       app.globalData.FocusSchoolID.push(this.data.SchoolID[i])
+      console.log(app.globalData.FocusSchool)
+      console.log(app.globalData.FocusSchoolID)
     } else {
       var up = "start[" + i + "]";
       this.setData({
@@ -35,6 +37,8 @@ Page({
         if (this.data.SchoolName[i] == app.globalData.FocusSchool[index]) {
           app.globalData.FocusSchool.splice(index, 1)
           app.globalData.FocusSchoolID.splice(index, 1)
+          console.log(app.globalData.FocusSchool)
+          console.log(app.globalData.FocusSchoolID)
         }
       }
     }

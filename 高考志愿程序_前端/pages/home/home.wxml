@@ -1,0 +1,84 @@
+<view class='content'>
+  <view class='nav'>
+    <view class="top" style="margin-left:40rpx;width:5%">
+      <open-data style='border-radius:50%;overflow:hidden;display:block;height:18vw;width:18vw;margin-left:0rpx;border: 2px solid #fff;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);' type="userAvatarUrl"></open-data>
+    </view>
+    <view class='nickname' style="margin-left:0rpx;flex:1">
+      <open-data style="color:white" type="userNickName"></open-data> 
+    </view>
+    <view class="tui-menu-list {{'tui-youjiantou'}}" style="flex:1;color:white;margin-top:0rpx;height:70%" bindtap='exit'>
+    </view>
+  </view>
+
+    <view class="table">
+      <view class="tr1">
+          <view class="th th1">省份</view>
+          <view class="th th2">科类</view>
+          <view class="th th3">分数</view>
+          <view class="th th4">排名</view>
+      </view>
+      <view class="tr" >
+          <view class="td td1">
+          <text class='right1' wx:if="{{Province!=0}}">{{Province}}</text>
+          <text class='right' wx:else>未选择省份</text>
+          </view>
+          <view class="td td2">
+          <text class='right1' wx:if="{{Kelei!=0}}">{{Kelei}}</text>
+      <text class='right' wx:else>未选择科类</text>
+          </view>
+          <view class="td td3">
+          <text class='right1' wx:if="{{Grade!=0}}">{{Grade}}</text>
+     <text class='right' wx:else>未输入分数</text>
+          </view>
+          <view class="td td4">
+          <text class='right1' wx:if="{{Rank!=0}}">{{Rank}}</text>
+      <text class='right' wx:else>未输入排名</text>
+          </view>
+      </view>
+     </view>
+
+<view class='white1'>
+</view>     
+
+<view class='empty'>
+   <text class='centerself'>个人中心</text>
+</view>
+
+<view class='white2'>
+</view>     
+
+<view class='tr2'>
+  <button type='primary' class="type type1"   bindtap='jumptofocus'>
+  <image mode='scaleToFill' src='src/images/1.jpg' plain='true'  class='image'></image>
+  </button>
+  <button class="type type2" type='primary'  bindtap='jumptomessage'>
+  <image mode='scaleToFill' src='src/images/2.jpg' plain='true'  class='image2'></image>
+  </button>
+  <button class="type type3" type='primary'  bindtap='jumptohistroy'>
+  <image mode='scaleToFill' src='src/images/2_his.jpg' plain='true'  class='image'></image>
+  </button>
+</view>
+<view class='white3'>
+</view>     
+<view class='textls'>
+  <view class='viewclass'>关注院校</view>
+  <view class='viewclass'>院系消息</view>
+  <view class='viewclass'>历史记录</view>
+</view>
+  </view>
+<view class='white2'>
+</view>     
+  <view class='white1'>
+</view>
+
+<view class='empty'>
+   <text class='centerself'>设置</text>
+</view>
+<button class='help'  bindtap='jumptohelp'>
+  帮助
+  </button>
+  <button class='help2'  bindtap='jumptofeedback'>
+  反馈
+  </button>
+
+

@@ -1,0 +1,21 @@
+<view class='content'>
+请选择您的身份
+</view>
+<view class='tr2'>
+  <button type='primary' class="type type1"   bindtap='jumptoteacher'>
+  <image mode='scaleToFill' src='1.jpg' plain='true'  class='image'></image>
+  </button>
+  <button class="type type3" type='primary'  bindtap='jumptostudent'>
+  <image mode='scaleToFill' src='2.png' plain='true'  class='image'></image>
+  </button>
+</view>
+<view class='white3'>
+</view>     
+<view class='textls'>
+  <view class='viewclass'>教师</view>
+  <view class='viewclass'>考生</view>
+</view>
+
+
+ 
+

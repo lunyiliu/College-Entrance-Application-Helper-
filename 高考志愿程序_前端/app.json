@@ -4,11 +4,48 @@
     "navigationBarTitleText": "基本信息",
     "navigationBarTextStyle": "white"
   },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "images/首页.png",
+        "iconPath": "images/首页.png",
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "images/专业.png",
+        "iconPath": "images/专业.png",
+        "pagePath": "pages/major/major",
+        "text": "专业推荐"
+      },
+      {
+        "selectedIconPath": "images/填报.png",
+        "iconPath": "images/填报.png",
+        "pagePath": "pages/list/list",
+        "text": "模拟填报"
+      }
+    ],
+    "position": "bottom"
+  },
   "pages": [
+    "pages/choice/choice",
+    "pages/home/home",
     "pages/index/index",
+    "pages/major/major",
     "pages/list/list", 
     "pages/tianbao/tianbao",
     "pages/result/result",
-    "pages/recommend/recommend"
+    "pages/recommend/recommend",
+    "pages/histroy/histroy",
+    "pages/focus/focus",
+    "pages/message/message",
+    "pages/help/help",
+    "pages/feedback/feedback",
+    "pages/teacher/teacher"
+    
   ]
 }
+

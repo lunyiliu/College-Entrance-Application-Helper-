@@ -1,0 +1,41 @@
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
+    </view>
+  </picker>
+</view>
+
+
+<view class='history-table-wrap'>
+    <view class="table">
+      <view class="tr">
+          <view class="th th1">大学名称</view>
+          <view class="th th2">专业名称</view>
+          <view class="th th3">分数</view>
+          <view class="th th4">学科评级</view>
+          <view class="th th5">风险评定</view>
+      </view>
+      <view class="tr" >
+          <view class="td td1">北京工业大学</view>
+          <view class="td td2">控制工程</view>
+          <view class="td td3">635</view>
+          <view class="td td4">A</view>
+          <view class="td td5">中</view>
+      </view>
+       <view class="tr" >
+          <view class="td td1">北京大学</view>
+          <view class="td td2">自动化</view>
+          <view class="td td3">675</view>
+          <view class="td td4">A</view>
+          <view class="td td5">高</view>
+      </view>
+       <view class="tr" >
+          <view class="td td1">内蒙古大学</view>
+          <view class="td td2">自动化</view>
+          <view class="td td3">628</view>
+          <view class="td td4">B</view>
+          <view class="td td5">低</view>
+      </view>
+    </view>
+ </view>

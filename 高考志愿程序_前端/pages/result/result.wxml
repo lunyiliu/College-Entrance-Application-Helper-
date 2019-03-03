@@ -178,6 +178,42 @@
   <text class="textstyle">五志愿成功率：{{success_ratio[4]}}</text>
 </view>
 
+<view class="tui-accordion-content" style="background-color:white">
+    <view class="tui-menu-list {{isShowFrom1 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="1">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[5]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[5]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <view class="{{isShowFrom1 ? '' : 'tui-hide'}}">
+      <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+            indicator-color="#777" indicator-active-color="red">
+        <block wx:for-items="{{banner_url1}}">
+          <swiper-item>
+            <block wx:if="{{item}}">
+              <image class="tui-img" src="{{item}}"  mode="aspectFill"/>
+            </block>
+            <block wx:else>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+</view>
+
+<view style='margin-top:0px'>
+  <text class="textstyle">六志愿成功率：{{success_ratio[5]}}</text>
+</view>
+
 <button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 30rpx; border-radius: 40rpx" type="primary" bindtap="ToRecommend">获取智能志愿推荐</button>
 
 <button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 30rpx; border-radius: 40rpx;margin-bottom: 100rpx;" type="primary" bindtap="listenerLogin">返回主页</button>

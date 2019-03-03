@@ -59,4 +59,16 @@
   </picker>
 </view>
 
-<button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 150rpx; border-radius: 40rpx" type="primary" bindtap="listenerLogin">查看分析结果</button>
+<view style='margin-top:0px'>
+  <text class="textstyle">六志愿</text>
+</view>
+
+<view class='box' style="height:70rpx">
+  <picker data-id='6' bindchange="bindPickerChange" value="{{index6}}" range="{{focusSchool}}">
+    <view class="picker">
+      <text class='select_text' style="margin-left: 30rpx;">{{focusSchool[index6]}}</text>
+    </view>
+  </picker>
+</view>
+
+<button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 90rpx; border-radius: 40rpx" type="primary" bindtap="listenerLogin">查看分析结果</button>

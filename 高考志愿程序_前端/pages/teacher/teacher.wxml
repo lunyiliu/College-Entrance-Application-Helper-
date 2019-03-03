@@ -1,0 +1,35 @@
+<view style='margin-top:0px;margin-left:15px'>
+  <text class="textstyle">姓名</text>
+</view>
+
+<view class='box'>
+<view class="Input">
+  <input class="input" style="margin-left: 30rpx;" type="number" placeholder="请输入您的姓名" placeholder-style="color: black" bindinput="listenerRankInput" />
+</view>
+</view>
+
+<view style='margin-top:0px;margin-left:15px'>
+  <text class="textstyle">工作单位</text>
+</view>
+
+<view class='box'>
+<view class="Input">
+  <input class="input" style="margin-left: 30rpx;" type="number" placeholder="请输入您所在的学校" placeholder-style="color: black" bindinput="listenerRankInput" />
+</view>
+</view>
+
+<view style='margin-top:0px;margin-left:15px'>
+  <text class="textstyle">邀请码</text>
+</view>
+
+<view class='box'>
+<view class="Input">
+  <input class="input" style="margin-left: 30rpx;" type="number" placeholder="请输入我们给您的邀请码" placeholder-style="color: black" bindinput="listenerRankInput" />
+</view>
+</view>
+
+
+<button style="margin-left: 25rpx; margin-right: 25rpx; margin-top: 250rpx; border-radius: 40rpx" type="primary"  open-type="getUserInfo"bindgetuserinfo="listenerLogin" bindtap='jumptohome' >授权登录</button>
+
+ 
+

@@ -1,34 +1,26 @@
 .input {
   font-size: 35rpx;
-  padding-left: 5px;
+  padding-left: 10px;
+  height: 30px;
   font-family: microsoft yahei;
-  box-sizing: border-box;
-  width: 85%;
-  height: 100rpx;
-  border-radius: 8rpx;
   display: flex;
   align-items: center;
-  padding: 0 20rpx;
 }
-.box{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.multiSelector{
+  font-size: 35rpx;
+  padding-left: 10px;
+  height: 30px;
+  font-family: microsoft yahei;
 }
+
 .Input {
-  background:white;
-  box-sizing: border-box;
+  border-radius: 20rpx;
+  font-size: 35rpx;
+  height: 80rpx;
+  background: #fff;
   width: 85%;
-  height: 100rpx;
-  border: 1px solid #efefef;
-  border-radius: 25rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20rpx;
-  margin-top: 10rpx
+  margin: 30rpx auto;
+  position: relative;
 }
 
 page {
@@ -119,4 +111,57 @@ page {
 
 .off {
   display: none;
+}
+
+.history-table-wrap{
+  position: absolute;
+  width: 668rpx;
+  height: 578rpx;
+  left: 50%;
+  margin-left: -334rpx;
+  top:300rpx;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+/* 表格代码   */
+.table{
+  border:1px solid #dadada;
+  border-right:0;
+  border-bottom: 0;
+  width: 98%;
+  margin-left: 1%;
+}
+.tr{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+}
+.th,.td{
+  padding: 10px;
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: center;
+  width: 100%;
+}
+.th1,.th2,.td1,.td2{
+  width: 100%;
+}
+.th{
+  font-weight: 800;
+  background-color:  #43cd80;
+  font-size: 30rpx;
+  color: #330e0e;
+}
+.td{
+  font-size: 25rpx;
+  color:  #330e0e;
+}
+.ty
+{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;  
+  font-size: 50rpx;
+  color:  #330e0e;
 }
