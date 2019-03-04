@@ -15,6 +15,8 @@ Page({
     autoplay: true,
     interval: 3000,
     duration: 800,
+    //以下应全部改为FocusSchool
+    /*
     AccomandSchool: app.globalData.AccomandSchool,
     AccomandSchoolID: app.globalData.AccomandSchoolID,
     banner_url1: ['../../SchoolPic/' + app.globalData.AccomandSchool[0] + '/1.jpg', '../../SchoolPic/' + app.globalData.AccomandSchool[0] + '/2.jpg', '../../SchoolPic/' + app.globalData.AccomandSchool[0] + '/3.jpg', '../../SchoolPic/' + app.globalData.AccomandSchool[0] + '/4.jpg'],
@@ -124,8 +126,9 @@ Page({
       isShowFrom4: param == 4 ? (!this.data.isShowFrom4) : false,
       isShowFrom5: param == 5 ? (!this.data.isShowFrom5) : false
     });
-
+*/
   },
+  
 
 
 })

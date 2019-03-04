@@ -107,12 +107,13 @@ page {
 }
 .image
 {
+  background-color: #fff;
   top: -22rpx;
-  margin-left: -40rpx;
-  margin-top: 0rpx;
+  margin-left: -22rpx;
+  margin-top: 5rpx;
   display: flex;
-  width: 130rpx;
-  height: 125rpx;
+  width: 95rpx;
+  height: 95rpx;
 }
 .image2
 {

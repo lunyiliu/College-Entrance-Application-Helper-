@@ -1,4 +1,6 @@
 <!--pages/accordion/accordion.wxml-->
+
+<!--全部应改为FocusSchool-->
 <view class="tui-accordion-content" style="background-color:white">
   
   <view class="tui-menu-list {{isShowFrom1 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
