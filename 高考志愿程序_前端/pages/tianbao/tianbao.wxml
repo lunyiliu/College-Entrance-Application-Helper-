@@ -71,4 +71,4 @@
   </picker>
 </view>
 
-<button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 90rpx; border-radius: 40rpx" type="primary" bindtap="listenerLogin">查看分析结果</button>
+<button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 90rpx; border-radius: 40rpx" type="primary" bindtap="listenerLogin">填写专业志愿</button>

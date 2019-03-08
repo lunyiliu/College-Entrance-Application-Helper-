@@ -125,7 +125,7 @@ page {
 }
 /* 表格代码   */
 .table{
-  border:1px solid #dadada;
+  border:1px solid #b4b4b4;
   border-right:0;
   border-bottom: 0;
   width: 98%;
@@ -138,8 +138,8 @@ page {
 }
 .th,.td{
   padding: 10px;
-  border-bottom: 1px solid #dadada;
-  border-right: 1px solid #dadada;
+  border-bottom: 1px solid #b4b4b4;
+  border-right: 1px solid #b4b4b4;
   text-align: center;
   width: 100%;
 }
@@ -148,11 +148,12 @@ page {
 }
 .th{
   font-weight: 800;
-  background-color:  #43cd80;
+  background-color:  #43cd81c5;
   font-size: 30rpx;
   color: #330e0e;
 }
 .td{
+  background-color:white;
   font-size: 25rpx;
   color:  #330e0e;
 }

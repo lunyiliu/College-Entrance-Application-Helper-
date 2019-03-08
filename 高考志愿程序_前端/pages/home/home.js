@@ -20,10 +20,6 @@ Page({
       Grade: app.globalData.StudentGrade,
       Rank: app.globalData.StudentRank,
     })
-    console.log('所在省份: ', this.Province);
-    console.log('科类为: ', this.Kelei);
-    console.log('成绩为: ', this.Grade);
-    console.log('排名为: ', this.Rank);
   },
   jumptohistroy:function(e)
   {

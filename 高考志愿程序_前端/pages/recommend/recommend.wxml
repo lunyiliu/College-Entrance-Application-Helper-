@@ -4,8 +4,8 @@
   <view class="tui-menu-list {{isShowFrom1 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
     <view class="content" bindtap="showFrom" data-param="1">
       <view class="content1">
-        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{AccomandSchoolID[0]}}.png" mode="aspectFit"> </image>
-        <text class="text">{{AccomandSchool[0]}}</text>
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[0]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{SelectedSchool[0]}}</text>
       </view>
       <view class="content2">
         <text class="information">高校类型：</text>
@@ -35,8 +35,8 @@
   <view class="tui-menu-list {{isShowFrom2 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
     <view class="content" bindtap="showFrom" data-param="2">
       <view class="content1">
-        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{AccomandSchoolID[1]}}.png" mode="aspectFit"> </image>
-        <text class="text">{{AccomandSchool[1]}}</text>
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[1]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{SelectedSchool[1]}}</text>
       </view>
       <view class="content2">
         <text class="information">高校类型：</text>
@@ -66,8 +66,8 @@
   <view class="tui-menu-list {{isShowFrom3 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
     <view class="content" bindtap="showFrom" data-param="3">
       <view class="content1">
-        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{AccomandSchoolID[2]}}.png" mode="aspectFit"> </image>
-        <text class="text">{{AccomandSchool[2]}}</text>
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[2]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{SelectedSchool[2]}}</text>
       </view>
       <view class="content2">
         <text class="information">高校类型：</text>
@@ -97,8 +97,8 @@
   <view class="tui-menu-list {{isShowFrom4 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
     <view class="content" bindtap="showFrom" data-param="4">
       <view class="content1">
-        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{AccomandSchoolID[3]}}.png" mode="aspectFit"> </image>
-        <text class="text">{{AccomandSchool[3]}}</text>
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[3]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{SelectedSchool[3]}}</text>
       </view>
       <view class="content2">
         <text class="information">高校类型：</text>
@@ -128,8 +128,8 @@
   <view class="tui-menu-list {{isShowFrom5 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
     <view class="content" bindtap="showFrom" data-param="5">
       <view class="content1">
-        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{AccomandSchoolID[4]}}.png" mode="aspectFit"> </image>
-        <text class="text">{{AccomandSchool[4]}}</text>
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[4]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{SelectedSchool[4]}}</text>
       </view>
       <view class="content2">
         <text class="information">高校类型：</text>
@@ -153,6 +153,37 @@
         </block>
       </swiper>
       <canvas canvas-id='Canvas5'></canvas> 
+    </view>
+  </view>
+
+   <view class="tui-menu-list {{isShowFrom6 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="6">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[5]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{SelectedSchool[5]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <view class="{{isShowFrom6 ? '' : 'tui-hide'}}">
+      <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+            indicator-color="#777" indicator-active-color="red">
+        <block wx:for-items="{{banner_url5}}">
+          <swiper-item>
+            <block wx:if="{{item}}">
+              <image class="tui-img" src="{{item}}"  mode="aspectFit"/>
+            </block>
+            <block wx:else>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>
+      <canvas canvas-id='Canvas6'></canvas> 
     </view>
   </view>
 

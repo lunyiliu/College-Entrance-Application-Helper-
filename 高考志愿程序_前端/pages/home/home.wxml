@@ -48,14 +48,14 @@
 </view>     
 
 <view class='tr2'>
-  <button type='primary' class="type type1"   bindtap='jumptofocus'>
-  <image mode='scaleToFill' src='src/images/1.jpg' plain='true'  class='image'></image>
+  <button type='primary' class="type type1" plain="true"   bindtap='jumptofocus'>
+  <image mode='scaleToFill' src='src/images/喜爱_填充.png' plain='true'  class='image'></image>
   </button>
-  <button class="type type2" type='primary'  bindtap='jumptomessage'>
-  <image mode='scaleToFill' src='src/images/2.jpg' plain='true'  class='image2'></image>
+  <button class="type type2" type='primary' plain="true"  bindtap='jumptomessage'>
+  <image mode='scaleToFill' src='src/images/对话信息_填充.png' plain='true'  class='image'></image>
   </button>
-  <button class="type type3" type='primary'  bindtap='jumptohistroy'>
-  <image mode='scaleToFill' src='src/images/2_his.jpg' plain='true'  class='image'></image>
+  <button class="type type3" type='primary' plain="true"  bindtap='jumptohistroy'>
+  <image mode='scaleToFill' src='src/images/时钟_填充.png' plain='true'  class='image'></image>
   </button>
 </view>
 <view class='white3'>
