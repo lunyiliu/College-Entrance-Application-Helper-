@@ -615,16 +615,7 @@ Page({
             console.log('用户点击确定')
           }
         })
-      } else if (this.data.index == 0) {
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '请正确填写学科评级!',
-          success: function(res) {
-            console.log('用户点击确定')
-          }
-        })
-      } else if (this.data.Year == 0) {
+      }  else if (this.data.Year == 0) {
         wx.showModal({
           title: '提示',
           showCancel: false,
