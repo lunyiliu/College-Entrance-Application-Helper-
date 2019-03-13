@@ -535,7 +535,7 @@ Page({
   listenerLogin: function() {
     //点击提交时判断各项输入是否合法
     //确认年份、专业名称已输入，科类、省份、学科门类等已选择，分数输入合法
-    if (this.data.PiciIndex && this.data.areaIndex && this.data.School && this.data.Year && this.data.Major && this.data.Lowest <= 750 && this.data.Avg <= 750 && this.data.Highest <= 750 && this.data.keleiIndex && this.data.Lowest <= this.data.Avg && this.data.Lowest <= this.data.Highest && this.data.Avg <=this.data.Highest && this.data.multiIndex[0] !=0) {
+    if (this.data.PiciIndex && this.data.areaIndex && this.data.School && this.data.Year && this.data.Major && this.data.Lowest <= 750 && this.data.Avg <= 750 && this.data.Highest <= 750 && this.data.keleiIndex  && this.data.multiIndex[0] !=0) {
       //将所有结果返回全局变量
       app.globalData.Province = this.data.area[parseInt(this.data.areaIndex)];
       app.globalData.Rank = this.data.selectData1[parseInt(this.data.Rank)];
@@ -606,7 +606,7 @@ Page({
             console.log('用户点击确定')
           }
         })
-      } else if (this.data.Lowest > 750 || this.data.Avg > 750 || this.data.Highest > 750 || this.data.Lowest > this.data.Avg || this.data.Lowest > this.data.Highest || this.data.Avg > this.data.Highest) {
+      } else if (this.data.Lowest > 750 || this.data.Avg > 750 || this.data.Highest > 750) {
         wx.showModal({
           title: '提示',
           showCancel: false,
