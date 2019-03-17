@@ -6,13 +6,13 @@ class getRank():
         self.DBh = DB_handler()
         self.DBm = DB_methods()
         self.user = user_ID
-        self.score = str(self.DBh.select(['client'], ['score'], ['user_ID =' + user_ID])[0])
-        self.provinceID = str(self.DBh.select(['client'], ['provinceID'], ['user_ID =' + user_ID])[0])
-        self.subject = self.DBh.select(['client'], ['subject'], ['user_ID =' + user_ID])[0]
-        self.year = str(self.DBh.select(['client'], ['year'], ['user_ID =' + user_ID])[0])
-        self.pici = str(self.DBh.select(['client'], ['pici'], ['user_ID =' + user_ID])[0])
+        self.score = str(self.DBh.select(['client'], ['score'], ['user_ID =' + user_ID]))
+        self.provinceID = str(self.DBh.select(['client'], ['provinceID'], ['user_ID =' + user_ID]))
+        self.subject = self.DBh.select(['client'], ['subject'], ['user_ID =' + user_ID])
+        self.year = str(self.DBh.select(['client'], ['year'], ['user_ID =' + user_ID]))
+        self.pici = str(self.DBh.select(['client'], ['pici'], ['user_ID =' + user_ID]))
         self.intension_list =[]
-        self.mid_list = self.DBh.select(['client'],['choose_list'],['user_ID ='+user_ID])[0][:-1].split(',')
+        self.mid_list = self.DBh.select(['client'],['choose_list'],['user_ID ='+user_ID])[:-1].split(',')
         for element in self.mid_list:
             self.intension_list.append(element[:-1].split('.'))
         self.rank_school = 0
@@ -40,7 +40,7 @@ class getRank():
                 serial = str(number+1)
                 Conditionlist = ['schoolID ='+school_str,
                                  'provinceID ='+self.provinceID,
-                                 'subject =' +'\"'+self.subject+'\"',
+                                 'subject =' +self.subject,
                                  'pici =' + self.pici,
                                  'serialnumber ='+serial]
                 print(Conditionlist)
@@ -48,11 +48,11 @@ class getRank():
                 print(self.DBh.select(['intension_school_table'], ['block1'], Conditionlist))
 
 
-                store1 = self.DBh.select(['intension_school_table'], ['block1'], Conditionlist)[0]
-                store2 = self.DBh.select(['intension_school_table'], ['block2'], Conditionlist)[0]
-                store3 = self.DBh.select(['intension_school_table'], ['block3'], Conditionlist)[0]
-                store4 = self.DBh.select(['intension_school_table'], ['block4'], Conditionlist)[0]
-                store5 = self.DBh.select(['intension_school_table'], ['block5'], Conditionlist)[0]
+                store1 = self.DBh.select(['intension_school_table'], ['block1'], Conditionlist)
+                store2 = self.DBh.select(['intension_school_table'], ['block2'], Conditionlist)
+                store3 = self.DBh.select(['intension_school_table'], ['block3'], Conditionlist)
+                store4 = self.DBh.select(['intension_school_table'], ['block4'], Conditionlist)
+                store5 = self.DBh.select(['intension_school_table'], ['block5'], Conditionlist)
                 #获取每一block内存的人数
 
                 if  store1 == None or store1 =='':
@@ -82,7 +82,7 @@ class getRank():
 
 
                 if int(self.score) < 430:#block1内查询 block内包含以逗号隔开的第一位人数，后面用点隔开的分数排行。
-                    store_pre = self.DBh.select(['intension_school_table'],['block1'],Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_school_table'],['block1'],Conditionlist)
                     if store_pre == None or store_pre == '':
                         rank_current = 1
                     else:
@@ -91,14 +91,14 @@ class getRank():
                             rank_current = count1 +1
                         else:
                             for j in range(len(new_store)):
-                                if self.score >new_store[j]:
+                                if self.score >=new_store[j]:
                                     rank_current = j+1
                                     break
                     self.rank_school = rank_current + count2 + count3 + count4 + count5
 
 
                 elif int(self.score)< 510:#block1内查询 block内包含以逗号隔开的第一位人数，后面用点隔开的分数排行。
-                    store_pre = self.DBh.select(['intension_school_table'],['block2'],Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_school_table'],['block2'],Conditionlist)
                     if store_pre == None or store_pre == '':
                         rank_current = 1
                     else:
@@ -107,14 +107,14 @@ class getRank():
                             rank_current = count2 +1
                         else:
                             for j in range(len(new_store)):
-                                if self.score >new_store[j]:
+                                if self.score >=new_store[j]:
                                     rank_current = j+1
                                     break
                     self.rank_school = rank_current  + count3 + count4 + count5
 
 
                 elif int(self.score) < 590:#block1内查询 block内包含以逗号隔开的第一位人数，后面用点隔开的分数排行。
-                    store_pre = self.DBh.select(['intension_school_table'],['block3'],Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_school_table'],['block3'],Conditionlist)
                     if store_pre == None or store_pre == '':
                         rank_current = 1
                     else:
@@ -123,14 +123,14 @@ class getRank():
                             rank_current = count3 +1
                         else:
                             for j in range(len(new_store)):
-                                if self.score >new_store[j]:
+                                if self.score >=new_store[j]:
                                     rank_current = j+1
                                     break
                     self.rank_school = rank_current  + count4 + count5
 
 
                 elif int(self.score) < 670:#block1内查询 block内包含以逗号隔开的第一位人数，后面用点隔开的分数排行。
-                    store_pre = self.DBh.select(['intension_school_table'],['block4'],Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_school_table'],['block4'],Conditionlist)
                     if store_pre == None or store_pre == '':
                         rank_current = 1
                     else:
@@ -139,14 +139,14 @@ class getRank():
                             rank_current = count4 +1
                         else:
                             for j in range(len(new_store)):
-                                if self.score >new_store[j]:
+                                if self.score >=new_store[j]:
                                     rank_current = j+1
                                     break
                     self.rank_school = rank_current   + count5
 
 
                 elif int(self.score) < 750:#block1内查询 block内包含以逗号隔开的第一位人数，后面用点隔开的分数排行。
-                    store_pre = self.DBh.select(['intension_school_table'],['block5'],Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_school_table'],['block5'],Conditionlist)
                     if store_pre == None or store_pre == '':
                         rank_current = 1
                     else:
@@ -155,7 +155,7 @@ class getRank():
                             rank_current = count5 +1
                         else:
                             for j in range(len(new_store)):
-                                if self.score >new_store[j]:
+                                if self.score >=new_store[j]:
                                     rank_current = j+1
                                     break
                     self.rank_school = rank_current  + count5
@@ -188,13 +188,13 @@ class getRank():
                     new_store = []
 
                     Conditionlist = ['schoolID =' + school, 'provinceID =' + self.provinceID,
-                                     'subject =' + '\"' + self.subject + '\"', 'pici =' + self.pici,
-                                     'serialnumber =' + serial,'zhuanye ='+'\"'+zhuanye+'\"']
-                    store1 = self.DBh.select(['intension_zhuanye_table'], ['block1'], Conditionlist)[0]
-                    store2 = self.DBh.select(['intension_zhuanye_table'], ['block2'], Conditionlist)[0]
-                    store3 = self.DBh.select(['intension_zhuanye_table'], ['block3'], Conditionlist)[0]
-                    store4 = self.DBh.select(['intension_zhuanye_table'], ['block4'], Conditionlist)[0]
-                    store5 = self.DBh.select(['intension_zhuanye_table'], ['block5'], Conditionlist)[0]
+                                     'subject ='  + self.subject , 'pici =' + self.pici,
+                                     'serialnumber =' + serial,'zhuanye ='+zhuanye]
+                    store1 = self.DBh.select(['intension_zhuanye_table'], ['block1'], Conditionlist)
+                    store2 = self.DBh.select(['intension_zhuanye_table'], ['block2'], Conditionlist)
+                    store3 = self.DBh.select(['intension_zhuanye_table'], ['block3'], Conditionlist)
+                    store4 = self.DBh.select(['intension_zhuanye_table'], ['block4'], Conditionlist)
+                    store5 = self.DBh.select(['intension_zhuanye_table'], ['block5'], Conditionlist)
                     # 获取每一block内存的人数
 
                     if store1 == None or store1 == '':
@@ -223,7 +223,7 @@ class getRank():
                         count5 = int(store5.split(',', 1)[0])
 
                     if int(self.score) < 430:
-                        store_pre = self.DBh.select(['intension_zhuanye_table'] ['block1'], Conditionlist)[0]
+                        store_pre = self.DBh.select(['intension_zhuanye_table'] ['block1'], Conditionlist)
                         if store_pre == None or store_pre == '':
                             rank_current = 1
                         else:
@@ -232,7 +232,7 @@ class getRank():
                                 rank_current = count1 + 1
                             else:
                                 for j in range(len(new_store)):
-                                    if self.score > new_store[j]:
+                                    if self.score >= new_store[j]:
                                         rank_current = j + 1
                                         break
 
@@ -241,7 +241,7 @@ class getRank():
 
 
                     elif int(self.score) < 510:
-                        store_pre = self.DBh.select(['intension_zhuanye_table'], ['block2'], Conditionlist)[0]
+                        store_pre = self.DBh.select(['intension_zhuanye_table'], ['block2'], Conditionlist)
                         if store_pre == None or store_pre == '':
                             rank_current = 1
                         else:
@@ -250,14 +250,14 @@ class getRank():
                                 rank_current = count2 + 1
                             else:
                                 for j in range(len(new_store)):
-                                    if self.score > new_store[j]:
+                                    if self.score >= new_store[j]:
                                         rank_current = j + 1
                                         break
                         self.rank_profession = rank_current + count3 + count4 + count5
 
 
                     elif int(self.score) < 590:
-                        store_pre = self.DBh.select(['intension_zhuanye_table'], ['block3'], Conditionlist)[0]
+                        store_pre = self.DBh.select(['intension_zhuanye_table'], ['block3'], Conditionlist)
                         if store_pre == None or store_pre == '':
                             rank_current = 1
                         else:
@@ -266,14 +266,14 @@ class getRank():
                                 rank_current = count3 + 1
                             else:
                                 for j in range(len(new_store)):
-                                    if self.score > new_store[j]:
+                                    if self.score >= new_store[j]:
                                         rank_current = j + 1
                                         break
                         self.rank_profession = rank_current + count4 + count5
 
 
                     elif int(self.score) < 670:
-                        store_pre = self.DBh.select(['intension_zhuanye_table'], ['block4'], Conditionlist)[0]
+                        store_pre = self.DBh.select(['intension_zhuanye_table'], ['block4'], Conditionlist)
                         if store_pre == None or store_pre == '':
                             rank_current = 1
                         else:
@@ -282,14 +282,14 @@ class getRank():
                                 rank_current = count4 + 1
                             else:
                                 for j in range(len(new_store)):
-                                    if self.score > new_store[j]:
+                                    if self.score >= new_store[j]:
                                         rank_current = j + 1
                                         break
                         self.rank_profession = rank_current + count5
 
 
                     elif int(self.score) < 750:
-                        store_pre = self.DBh.select(['intension_zhuanye_table'], ['block5'], Conditionlist)[0]
+                        store_pre = self.DBh.select(['intension_zhuanye_table'], ['block5'], Conditionlist)
                         if store_pre == None or store_pre == '':
                             rank_current = 1
                         else:
@@ -298,7 +298,7 @@ class getRank():
                                 rank_current = count5 + 1
                             else:
                                 for j in range(len(new_store)):
-                                    if self.score > new_store[j]:
+                                    if self.score >= new_store[j]:
                                         rank_current = j + 1
                                         break
                         self.rank_profession = rank_current + count5
