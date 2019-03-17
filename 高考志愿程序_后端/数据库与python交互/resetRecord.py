@@ -6,18 +6,18 @@ class resetRecords():
         self.DBh = DB_handler()
         self.DBm = DB_methods()
         self.user = user_ID
-        self.score = str(self.DBh.select(['client'], ['score'], ['user_ID =' + user_ID])[0])
-        self.provinceID = str(self.DBh.select(['client'], ['provinceID'], ['user_ID =' + user_ID])[0])
-        self.subject = self.DBh.select(['client'], ['subject'], ['user_ID =' + user_ID])[0]
-        self.year = str(self.DBh.select(['client'], ['year'], ['user_ID =' + user_ID])[0])
-        self.pici = str(self.DBh.select(['client'], ['pici'], ['user_ID =' + user_ID])[0])
+        self.score = str(self.DBh.select(['client'], ['score'], ['user_ID =' + user_ID]))
+        self.provinceID = str(self.DBh.select(['client'], ['provinceID'], ['user_ID =' + user_ID]))
+        self.subject = self.DBh.select(['client'], ['subject'], ['user_ID =' + user_ID])
+        self.year = str(self.DBh.select(['client'], ['year'], ['user_ID =' + user_ID]))
+        self.pici = str(self.DBh.select(['client'], ['pici'], ['user_ID =' + user_ID]))
         self.intension_list = []
-        self.mid_list = self.DBh.select(['client'], ['choose_list'], ['user_ID =' + user_ID])[0][:-1].split(',')
+        self.mid_list = self.DBh.select(['client'], ['choose_list'], ['user_ID =' + user_ID])[:-1].split(',')
         for element in self.mid_list:
             self.intension_list.append(element[:-1].split('.'))
 
         self.intension_list_new = []
-        self.mid_list_new = self.DBh.select(['client'], ['choose_list'], ['user_ID =' + user_ID])[0][:-1].split(',') #可能会有改动client换成记录表名字
+        self.mid_list_new = self.DBh.select(['client'], ['choose_list'], ['user_ID =' + user_ID])[:-1].split(',') #可能会有改动client换成记录表名字
         for element in self.mid_list_new:
             self.intension_list_new.append(element[:-1].split('.'))
 
@@ -31,11 +31,11 @@ class resetRecords():
 
             serial = str(j+1)
             Conditionlist = ['schoolID =' + school_str, 'provinceID =' + self.provinceID,
-                             'subject =' + '\"' + self.subject + '\"', 'pici =' + self.pici,'serialnumber ='+serial]
+                             'subject ='  + self.subject , 'pici =' + self.pici,'serialnumber ='+serial]
 
             #先对学校进行改信息
             if int(self.score) < 430 :
-                store_pre = self.DBh.select(['intension_school_table'], ['block1'], Conditionlist)[0]
+                store_pre = self.DBh.select(['intension_school_table'], ['block1'], Conditionlist)
                 if store_pre == None or store_pre == '':
                     print("value null")
                     break
@@ -51,10 +51,10 @@ class resetRecords():
                         result_str = count+','
                         for element in store:
                             result_str = result_str + element +'.'
-                    self.DBh.update('intension_school_table',['block1 ='+'\"'+result_str+'\"'],Conditionlist)
+                    self.DBh.update('intension_school_table',['block1 ='+result_str],Conditionlist)
 
             elif int(self.score) < 510 :
-                store_pre = self.DBh.select(['intension_school_table'], ['block2'], Conditionlist)[0]
+                store_pre = self.DBh.select(['intension_school_table'], ['block2'], Conditionlist)
                 if store_pre == None or store_pre == '':
                     print("value null")
                     break
@@ -73,7 +73,7 @@ class resetRecords():
                     self.DBh.update('intension_school_table', ['block2 =' + '\"' + result_str + '\"'], Conditionlist)
 
             elif int(self.score) < 590 :
-                store_pre = self.DBh.select(['intension_school_table'], ['block3'], Conditionlist)[0]
+                store_pre = self.DBh.select(['intension_school_table'], ['block3'], Conditionlist)
                 if store_pre == None or store_pre == '':
                     print("value null")
                     break
@@ -92,7 +92,7 @@ class resetRecords():
                     self.DBh.update('intension_school_table', ['block3 =' + '\"' + result_str + '\"'], Conditionlist)
 
             elif int(self.score) < 670 :
-                store_pre = self.DBh.select(['intension_school_table'], ['block4'], Conditionlist)[0]
+                store_pre = self.DBh.select(['intension_school_table'], ['block4'], Conditionlist)
                 if store_pre == None or store_pre == '':
                     print("value null")
                     break
@@ -111,7 +111,7 @@ class resetRecords():
                     self.DBh.update('intension_school_table', ['block4 =' + '\"' + result_str + '\"'], Conditionlist)
 
             elif int(self.score) < 750 :
-                store_pre = self.DBh.select(['intension_school_table'], ['block5'], Conditionlist)[0]
+                store_pre = self.DBh.select(['intension_school_table'], ['block5'], Conditionlist)
                 if store_pre == None or store_pre == '':
                     print("value null")
                     break
@@ -140,12 +140,12 @@ class resetRecords():
                 serial = str(l+1)
                 zhuanye_str = zhuanye_list[l]
                 Conditionlist = ['schoolID =' + school_str, 'provinceID =' + self.provinceID,
-                                 'subject =' + '\"' + self.subject + '\"', 'pici =' + self.pici,
+                                 'subject ='  + self.subject , 'pici =' + self.pici,
                                  'zhuanye='+zhuanye_str,#可能是str，要修改
                                  'serialnumber =' + serial]
 
                 if int(self.score) < 430:
-                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block1'], Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block1'], Conditionlist)
                     if store_pre == None or store_pre == '':
                         print("value null")
                         break
@@ -163,7 +163,7 @@ class resetRecords():
                                 result_str = result_str + element + '.'
 
                 elif int(self.score) < 510:
-                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block2'], Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block2'], Conditionlist)
                     if store_pre == None or store_pre == '':
                         print("value null")
                         break
@@ -183,7 +183,7 @@ class resetRecords():
                                         Conditionlist)
 
                 elif int(self.score) < 590:
-                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block3'], Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block3'], Conditionlist)
                     if store_pre == None or store_pre == '':
                         print("value null")
                         break
@@ -203,7 +203,7 @@ class resetRecords():
                                         Conditionlist)
 
                 elif int(self.score) < 670:
-                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block4'], Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block4'], Conditionlist)
                     if store_pre == None or store_pre == '':
                         print("value null")
                         break
@@ -223,7 +223,7 @@ class resetRecords():
                                         Conditionlist)
 
                 elif int(self.score) < 750:
-                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block5'], Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block5'], Conditionlist)
                     if store_pre == None or store_pre == '':
                         print("value null")
                         break
@@ -251,11 +251,11 @@ class resetRecords():
 
             serial = str(j + 1)
             Conditionlist = ['schoolID =' + school_str, 'provinceID =' + self.provinceID,
-                             'subject =' + '\"' + self.subject + '\"', 'pici =' + self.pici, 'serialnumber =' + serial]
+                             'subject ='  + self.subject , 'pici =' + self.pici, 'serialnumber =' + serial]
 
             # 先对学校进行改信息
             if int(self.score) < 430:
-                store_pre = self.DBh.select(['intension_school_table'], ['block1'], Conditionlist)[0]
+                store_pre = self.DBh.select(['intension_school_table'], ['block1'], Conditionlist)
                 if store_pre == None or store_pre == '':
                     count = '1'
                     result_str = count+','+self.score+'.'
@@ -278,7 +278,7 @@ class resetRecords():
                 self.DBh.update('intension_school_table', ['block1 =' + '\"' + result_str + '\"'], Conditionlist)
 
             elif int(self.score) < 510:
-                store_pre = self.DBh.select(['intension_school_table'], ['block2'], Conditionlist)[0]
+                store_pre = self.DBh.select(['intension_school_table'], ['block2'], Conditionlist)
                 if store_pre == None or store_pre == '':
                     count = '1'
                     result_str = count + ',' + self.score + '.'
@@ -300,7 +300,7 @@ class resetRecords():
                 self.DBh.update('intension_school_table', ['block2 =' + '\"' + result_str + '\"'], Conditionlist)
 
             elif int(self.score) < 590:
-                store_pre = self.DBh.select(['intension_school_table'], ['block3'], Conditionlist)[0]
+                store_pre = self.DBh.select(['intension_school_table'], ['block3'], Conditionlist)
                 if store_pre == None or store_pre == '':
                     count = '1'
                     result_str = count + ',' + self.score + '.'
@@ -322,7 +322,7 @@ class resetRecords():
                 self.DBh.update('intension_school_table', ['block3 =' + '\"' + result_str + '\"'], Conditionlist)
 
             elif int(self.score) < 670:
-                store_pre = self.DBh.select(['intension_school_table'], ['block4'], Conditionlist)[0]
+                store_pre = self.DBh.select(['intension_school_table'], ['block4'], Conditionlist)
                 if store_pre == None or store_pre == '':
                     count = '1'
                     result_str = count + ',' + self.score + '.'
@@ -344,7 +344,7 @@ class resetRecords():
                 self.DBh.update('intension_school_table', ['block4 =' + '\"' + result_str + '\"'], Conditionlist)
 
             elif int(self.score) < 750:
-                store_pre = self.DBh.select(['intension_school_table'], ['block5'], Conditionlist)[0]
+                store_pre = self.DBh.select(['intension_school_table'], ['block5'], Conditionlist)
                 if store_pre == None or store_pre == '':
                     count = '1'
                     result_str = count + ',' + self.score + '.'
@@ -374,12 +374,12 @@ class resetRecords():
                 serial = str(l + 1)
                 zhuanye_str = zhuanye_list[l]
                 Conditionlist = ['schoolID =' + school_str, 'provinceID =' + self.provinceID,
-                                 'subject =' + '\"' + self.subject + '\"', 'pici =' + self.pici,
+                                 'subject ='  + self.subject  ,'pici =' + self.pici,
                                  'zhuanye=' + zhuanye_str,  # 可能是str，要修改
                                  'serialnumber =' + serial]
 
                 if int(self.score) < 430:
-                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block1'], Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block1'], Conditionlist)
                     if store_pre == None or store_pre == '':
                         count = '1'
                         result_str = count + ',' + self.score + '.'
@@ -402,7 +402,7 @@ class resetRecords():
                                     Conditionlist)
 
                 elif int(self.score) < 510:
-                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block2'], Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block2'], Conditionlist)
                     if store_pre == None or store_pre == '':
                         count = '1'
                         result_str = count + ',' + self.score + '.'
@@ -425,7 +425,7 @@ class resetRecords():
                                         Conditionlist)
 
                 elif int(self.score) < 590:
-                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block3'], Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block3'], Conditionlist)
                     if store_pre == None or store_pre == '':
                         count = '1'
                         result_str = count + ',' + self.score + '.'
@@ -448,7 +448,7 @@ class resetRecords():
                                         Conditionlist)
 
                 elif int(self.score) < 670:
-                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block4'], Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block4'], Conditionlist)
                     if store_pre == None or store_pre == '':
                         count = '1'
                         result_str = count + ',' + self.score + '.'
@@ -471,7 +471,7 @@ class resetRecords():
                                         Conditionlist)
 
                 elif int(self.score) < 750:
-                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block5'], Conditionlist)[0]
+                    store_pre = self.DBh.select(['intension_zhuanye_table'], ['block5'], Conditionlist)
                     if store_pre == None or store_pre == '':
                         count = '1'
                         result_str = count + ',' + self.score + '.'
