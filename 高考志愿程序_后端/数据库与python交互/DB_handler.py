@@ -16,6 +16,7 @@ class DB_handler:
         sql="select "
         requests = []
         val = []
+        mid={}
         if para_distinct==True:
             sql+="distinct "
         for result in ResultList:
@@ -28,13 +29,28 @@ class DB_handler:
         if ConditionList!=[]:
             sql+=" where "
             for condition in ConditionList:
-                requests.append(condition.split('=')[0].strip())
-                #print(condition.split('=')[1].strip())
-                val.append(condition.split('=')[1].strip())
-
+                if '=' in condition:
+                     requests.append(condition.split('=')[0].strip())
+                     #print(condition.split('=')[1].strip())
+                     val.append(condition.split('=')[1].strip())
+                else:
+                     condition=condition.strip()    
+                     request=condition.split(' ')[0].strip()
+                     requests.append(request)
+                     #print(condition.split('=')[1].strip())
+                     mid[request]=condition.split(' ')[1].strip()
+                     if mid[request] != 'is':
+                         val.append(condition.split(' ')[2].strip())
+                     
             if para_logic==[]:
                 for request in requests:
-                    sql+=str(request)+'= %s'+" and "
+                    if request not in mid.keys():
+                        sql+=str(request)+'= %s'+" and "
+                    else:
+                        if mid[request] !='is':
+                            sql+=str(request)+' '+mid[request]+' %s'+" and "
+                        else :
+                            sql+=str(request)+" is Null and "
             sql=sql.strip(" and ")
         if para_limitation!=0:
             sql+=" limit "+str(para_limitation)
@@ -108,7 +124,7 @@ class DB_handler:
                 for request in requests:
                     sql+=str(request)+'= %s'+" and "
             sql=sql.strip(" and ")
-        sql = sql+';'
+        #sql = sql+';'
         print(sql)
         print(val)
         self.cursor.execute(sql,val)
