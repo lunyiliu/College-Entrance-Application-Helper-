@@ -1,0 +1,371 @@
+<!--pages/accordion/accordion.wxml-->
+<view class="tui-accordion-content" style="background-color:white">
+  
+  <view class="tui-menu-list {{isShowFrom1 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="1">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[0]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[0]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <view class="content4">
+      <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+    </view>
+    
+    <view class="{{isShowFrom1 ? '' : 'tui-hide'}}">
+      <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+            indicator-color="#777" indicator-active-color="red">
+        <block wx:for-items="{{banner_url1}}">
+          <swiper-item>
+            <block wx:if="{{item}}">
+              <image class="tui-img" src="{{item}}"  mode="aspectFit"/>
+            </block>
+            <block wx:else>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>   
+      <canvas canvas-id='Canvas1' class="canvas"></canvas> 
+      <view class="content3">
+      <text class="textzhiyuan">一志愿专业：{{zhiyuan1[0]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas1_1' class="canvas"></canvas> 
+      <text class="textzhiyuan">二志愿专业：{{zhiyuan1[1]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas1_2' class="canvas"></canvas> 
+      <text class="textzhiyuan">三志愿专业：{{zhiyuan1[2]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas1_3' class="canvas"></canvas> 
+      <text class="textzhiyuan">四志愿专业：{{zhiyuan1[3]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas1_4' class="canvas"></canvas> 
+      <text class="textzhiyuan">五志愿专业：{{zhiyuan1[4]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas1_5' class="canvas"></canvas> >
+      <text class="textzhiyuan">六志愿专业：{{zhiyuan1[5]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas1_6' class="canvas"></canvas> 
+      </view>
+    </view>
+  </view>
+
+  <view class="tui-menu-list {{isShowFrom2 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="2">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[1]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[1]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <view class="content4">
+      <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+    </view>
+    <view class="{{isShowFrom2 ? '' : 'tui-hide'}}">
+      <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+            indicator-color="#777" indicator-active-color="red">
+        <block wx:for-items="{{banner_url2}}">
+          <swiper-item>
+            <block wx:if="{{item}}">
+              <image class="tui-img" src="{{item}}"  mode="aspectFit"/>
+            </block>
+            <block wx:else>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>
+      <canvas canvas-id='Canvas2' class="canvas"></canvas> 
+      <view class="content3">
+      <text class="textzhiyuan">一志愿专业：{{zhiyuan2[0]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas2_1' class="canvas"></canvas> 
+      <text class="textzhiyuan">二志愿专业：{{zhiyuan2[1]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas2_2' class="canvas"></canvas> 
+      <text class="textzhiyuan">三志愿专业：{{zhiyuan2[2]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas2_3' class="canvas"></canvas> 
+      <text class="textzhiyuan">四志愿专业：{{zhiyuan2[3]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas2_4' class="canvas"></canvas> 
+      <text class="textzhiyuan">五志愿专业：{{zhiyuan2[4]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas2_5' class="canvas"></canvas> 
+      <text class="textzhiyuan">六志愿专业：{{zhiyuan2[5]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas2_6' class="canvas"></canvas> 
+      </view>
+    </view>
+  </view>
+ 
+  <view class="tui-menu-list {{isShowFrom3 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="3">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[2]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[2]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <view class="content4">
+      <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+    </view>
+    <view class="{{isShowFrom3 ? '' : 'tui-hide'}}">
+      <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+            indicator-color="#777" indicator-active-color="red">
+        <block wx:for-items="{{banner_url3}}">
+          <swiper-item>
+            <block wx:if="{{item}}">
+              <image class="tui-img" src="{{item}}"  mode="aspectFit"/>
+            </block>
+            <block wx:else>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>
+      <canvas canvas-id='Canvas3' class="canvas"></canvas> 
+      <view class="content3">
+      <text class="textzhiyuan">一志愿专业：{{zhiyuan3[0]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas3_1' class="canvas"></canvas> 
+      <text class="textzhiyuan">二志愿专业：{{zhiyuan3[1]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas3_2' class="canvas"></canvas> 
+      <text class="textzhiyuan">三志愿专业：{{zhiyuan3[2]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas3_3' class="canvas"></canvas> 
+      <text class="textzhiyuan">四志愿专业：{{zhiyuan3[3]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas3_4' class="canvas"></canvas> 
+      <text class="textzhiyuan">五志愿专业：{{zhiyuan3[4]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas3_5' class="canvas"></canvas> 
+      <text class="textzhiyuan">六志愿专业：{{zhiyuan3[5]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas3_6' class="canvas"></canvas> 
+      </view>
+    </view>
+  </view>
+
+  <view class="tui-menu-list {{isShowFrom4 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="4">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[3]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[3]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <view class="content4">
+      <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+    </view>
+    <view class="{{isShowFrom4 ? '' : 'tui-hide'}}">
+      <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+            indicator-color="#777" indicator-active-color="red">
+        <block wx:for-items="{{banner_url4}}">
+          <swiper-item>
+            <block wx:if="{{item}}">
+              <image class="tui-img" src="{{item}}"  mode="aspectFit"/>
+            </block>
+            <block wx:else>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>
+      <canvas canvas-id='Canvas4' class="canvas"></canvas> 
+      <view class="content3">
+      <text class="textzhiyuan">一志愿专业：{{zhiyuan4[0]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas4_1' class="canvas"></canvas> 
+      <text class="textzhiyuan">二志愿专业：{{zhiyuan4[1]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas4_2' class="canvas"></canvas> 
+      <text class="textzhiyuan">三志愿专业：{{zhiyuan4[2]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas4_3' class="canvas"></canvas> 
+      <text class="textzhiyuan">四志愿专业：{{zhiyuan4[3]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas4_4' class="canvas"></canvas> 
+      <text class="textzhiyuan">五志愿专业：{{zhiyuan4[4]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas4_5' class="canvas"></canvas> 
+      <text class="textzhiyuan">六志愿专业：{{zhiyuan4[5]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas4_6' class="canvas"></canvas> 
+      </view>
+    </view>
+  </view>
+
+  <view class="tui-menu-list {{isShowFrom5 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="5">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[4]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[4]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <view class="content4">
+      <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+    </view>
+    <view class="{{isShowFrom5 ? '' : 'tui-hide'}}">
+      <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+            indicator-color="#777" indicator-active-color="red">
+        <block wx:for-items="{{banner_url5}}">
+          <swiper-item>
+            <block wx:if="{{item}}">
+              <image class="tui-img" src="{{item}}"  mode="aspectFit"/>
+            </block>
+            <block wx:else>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>
+      <canvas canvas-id='Canvas5' class="canvas"></canvas> 
+      <view class="content3">
+      <text class="textzhiyuan">一志愿专业：{{zhiyuan5[0]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas5_1' class="canvas"></canvas> 
+      <text class="textzhiyuan">二志愿专业：{{zhiyuan5[1]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas5_2' class="canvas"></canvas> 
+      <text class="textzhiyuan">三志愿专业：{{zhiyuan5[2]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas5_3' class="canvas"></canvas> 
+      <text class="textzhiyuan">四志愿专业：{{zhiyuan5[3]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas5_4' class="canvas"></canvas> 
+      <text class="textzhiyuan">五志愿专业：{{zhiyuan5[4]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas5_5' class="canvas"></canvas> 
+      <text class="textzhiyuan">六志愿专业：{{zhiyuan5[5]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas5_6' class="canvas"></canvas> 
+      </view>
+    </view>
+  </view>
+
+   <view class="tui-menu-list {{isShowFrom6 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="6">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[5]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[5]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <view class="content4">
+      <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+    </view>
+    <view class="{{isShowFrom6 ? '' : 'tui-hide'}}">
+      <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+            indicator-color="#777" indicator-active-color="red">
+        <block wx:for-items="{{banner_url5}}">
+          <swiper-item>
+            <block wx:if="{{item}}">
+              <image class="tui-img" src="{{item}}"  mode="aspectFit"/>
+            </block>
+            <block wx:else>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>
+      <canvas canvas-id='Canvas6' class="canvas"></canvas> 
+      <view class="content3">
+      <text class="textzhiyuan">一志愿专业：{{zhiyuan6[0]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas6_1' class="canvas"></canvas> 
+      <text class="textzhiyuan">二志愿专业：{{zhiyuan6[1]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas6_2' class="canvas"></canvas> 
+      <text class="textzhiyuan">三志愿专业：{{zhiyuan6[2]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas6_3' class="canvas"></canvas> 
+      <text class="textzhiyuan">四志愿专业：{{zhiyuan6[3]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas6_4' class="canvas"></canvas> 
+      <text class="textzhiyuan">五志愿专业：{{zhiyuan6[4]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas6_5' class="canvas"></canvas> 
+      <text class="textzhiyuan">六志愿专业：{{zhiyuan6[5]}}</text>
+      <text class="information">在报考意愿更强的考生中您的排名是：</text>
+      <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+      <canvas canvas-id='Canvas6_6' class="canvas"></canvas> 
+      </view>
+    </view>
+  </view>
+
+</view>
