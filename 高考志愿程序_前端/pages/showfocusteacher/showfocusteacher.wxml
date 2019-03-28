@@ -12,7 +12,11 @@
     <picker mode="multiSelector" bindchange="bindMultiPickerChange1"                            bindcolumnchange="bindMultiPickerColumnChange1"
   wx:if="{{start1[9] != 1}}" value="{{multiIndex1}}" range="{{multiArray1}}"                  disabled='disabled'>
     <view class="picker" style="margin-left: 38rpx">
+<<<<<<< HEAD
       {{multiArray1[0][multiIndex1[2]]}}· {{multiArray1[1][multiIndex1[3]]}}
+=======
+      {{multiArray1[0][multiIndex1[0]]}}· {{multiArray1[1][multiIndex1[1]]}}
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     </view>
   </picker>
   <picker mode="multiSelector" bindchange="bindMultiPickerChange1" bindcolumnchange="bindMultiPickerColumnChange1"
@@ -22,9 +26,14 @@
     </view>
   </picker>
   </view>
+<<<<<<< HEAD
  <view>
  您选择的学校已经报考的人数为：
  </view>
+=======
+  <button bindtap="addfocus1" wx:if="{{start1[9] == 1}}" data-id='9' data-click="start1" style="font-size: 35rpx; left:400rpx;background-color:#43CD80;margin-top: 10rpx; margin-left: 50rpx;width:200rpx; margin-right: 15rpx;border-radius: 15rpx" type="primary">  关注</button>
+    <button bindtap="addfocus1" wx:else data-id='9' data-click="stop" style="font-size:       35rpx;width:200rpx;left:400rpx; margin-top: 10rpx; margin-left: 50rpx; margin-right:      15rpx;border-radius: 15rpx; color: #43CD80; background-color:white">已关注</button>
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
 
 
 </view>
@@ -45,10 +54,15 @@
     </view>
   </picker>
 </view>
+<<<<<<< HEAD
 <view>
  您选择的学校已经报考的人数为：
  </view>
 
+=======
+<button bindtap="addfocus2" wx:if="{{start2[9] == 1}}" data-id='9' data-click="start2" style="font-size: 35rpx; left:400rpx;background-color:#43CD80;margin-top: 10rpx; margin-left: 50rpx;width:200rpx; margin-right: 15rpx;border-radius: 15rpx" type="primary">关注</button>
+    <button bindtap="addfocus2" wx:else data-id='9' data-click="stop" style="font-size: 35rpx;width:200rpx;left:400rpx; margin-top: 10rpx; margin-left: 50rpx; margin-right: 15rpx;border-radius: 15rpx; color: #43CD80; background-color:white">已关注</button>
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
 <view style="height:25rpx"></view>
 <view class="border1">
 <view class="Input" style="margin-top: 30rpx">
@@ -63,9 +77,14 @@
     </view>
   </picker>
 </view>
+<<<<<<< HEAD
 <view>
  您选择的学校已经报考的人数为：
  </view>
+=======
+<button bindtap="addfocus3" wx:if="{{start3[9] == 1}}" data-id='9' data-click="start3" style="font-size: 35rpx; left:400rpx;background-color:#43CD80;margin-top: 10rpx; margin-left: 50rpx;width:200rpx; margin-right: 15rpx;border-radius: 15rpx" type="primary">关注</button>
+    <button bindtap="addfocus3" wx:else data-id='9' data-click="stop" style="font-size: 35rpx;width:200rpx;left:400rpx; margin-top: 10rpx; margin-left: 50rpx; margin-right: 15rpx;border-radius: 15rpx; color: #43CD80; background-color:white">已关注</button>
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
 
 </view>
 
@@ -82,9 +101,14 @@
     </view>
   </picker>
 </view>
+<<<<<<< HEAD
 <view>
  您选择的学校已经报考的人数为：
  </view>
+=======
+<button bindtap="addfocus4" wx:if="{{start4[9] == 1}}" data-id='9' data-click="start4" style="font-size: 35rpx; left:400rpx;background-color:#43CD80;margin-top: 10rpx; margin-left: 50rpx;width:200rpx; margin-right: 15rpx;border-radius: 15rpx" type="primary">关注</button>
+    <button bindtap="addfocus4" wx:else data-id='9' data-click="stop" style="font-size: 35rpx;width:200rpx;left:400rpx; margin-top: 10rpx; margin-left: 50rpx; margin-right: 15rpx;border-radius: 15rpx; color: #43CD80; background-color:white">已关注</button>
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
 
 
 <view style="height:25rpx"></view>
@@ -101,9 +125,14 @@
     </view>
   </picker>
 </view>
+<<<<<<< HEAD
 <view>
  您选择的学校已经报考的人数为：
  </view>
+=======
+<button bindtap="addfocus5" wx:if="{{start5[9] == 1}}" data-id='9' data-click="start5" style="font-size: 35rpx; left:400rpx;background-color:#43CD80;margin-top: 10rpx; margin-left: 50rpx;width:200rpx; margin-right: 15rpx;border-radius: 15rpx" type="primary">关注</button>
+    <button bindtap="addfocus5" wx:else data-id='9' data-click="stop" style="font-size: 35rpx;width:200rpx;left:400rpx; margin-top: 10rpx; margin-left: 50rpx; margin-right: 15rpx;border-radius: 15rpx; color: #43CD80; background-color:white">已关注</button>
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
 </view>
 
 <button class='home_tea'  bindtap='jumptohome_tea'>

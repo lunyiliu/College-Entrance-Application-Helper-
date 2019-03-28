@@ -16,7 +16,10 @@
     <view class="content4">
       <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
       <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     </view>
     
     <view class="{{isShowFrom1 ? '' : 'tui-hide'}}">
@@ -39,32 +42,50 @@
       <text class="textzhiyuan">一志愿专业：{{zhiyuan1[0]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas1_1' class="canvas"></canvas> 
       <text class="textzhiyuan">二志愿专业：{{zhiyuan1[1]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas1_2' class="canvas"></canvas> 
       <text class="textzhiyuan">三志愿专业：{{zhiyuan1[2]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas1_3' class="canvas"></canvas> 
       <text class="textzhiyuan">四志愿专业：{{zhiyuan1[3]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas1_4' class="canvas"></canvas> 
       <text class="textzhiyuan">五志愿专业：{{zhiyuan1[4]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas1_5' class="canvas"></canvas> >
       <text class="textzhiyuan">六志愿专业：{{zhiyuan1[5]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas1_6' class="canvas"></canvas> 
       </view>
     </view>
@@ -85,7 +106,10 @@
     <view class="content4">
       <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
       <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     </view>
     <view class="{{isShowFrom2 ? '' : 'tui-hide'}}">
       <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
@@ -107,32 +131,50 @@
       <text class="textzhiyuan">一志愿专业：{{zhiyuan2[0]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas2_1' class="canvas"></canvas> 
       <text class="textzhiyuan">二志愿专业：{{zhiyuan2[1]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas2_2' class="canvas"></canvas> 
       <text class="textzhiyuan">三志愿专业：{{zhiyuan2[2]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas2_3' class="canvas"></canvas> 
       <text class="textzhiyuan">四志愿专业：{{zhiyuan2[3]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas2_4' class="canvas"></canvas> 
       <text class="textzhiyuan">五志愿专业：{{zhiyuan2[4]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas2_5' class="canvas"></canvas> 
       <text class="textzhiyuan">六志愿专业：{{zhiyuan2[5]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas2_6' class="canvas"></canvas> 
       </view>
     </view>
@@ -153,7 +195,10 @@
     <view class="content4">
       <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
       <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     </view>
     <view class="{{isShowFrom3 ? '' : 'tui-hide'}}">
       <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
@@ -175,32 +220,50 @@
       <text class="textzhiyuan">一志愿专业：{{zhiyuan3[0]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas3_1' class="canvas"></canvas> 
       <text class="textzhiyuan">二志愿专业：{{zhiyuan3[1]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas3_2' class="canvas"></canvas> 
       <text class="textzhiyuan">三志愿专业：{{zhiyuan3[2]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas3_3' class="canvas"></canvas> 
       <text class="textzhiyuan">四志愿专业：{{zhiyuan3[3]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas3_4' class="canvas"></canvas> 
       <text class="textzhiyuan">五志愿专业：{{zhiyuan3[4]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas3_5' class="canvas"></canvas> 
       <text class="textzhiyuan">六志愿专业：{{zhiyuan3[5]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas3_6' class="canvas"></canvas> 
       </view>
     </view>
@@ -221,7 +284,10 @@
     <view class="content4">
       <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
       <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     </view>
     <view class="{{isShowFrom4 ? '' : 'tui-hide'}}">
       <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
@@ -243,32 +309,50 @@
       <text class="textzhiyuan">一志愿专业：{{zhiyuan4[0]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas4_1' class="canvas"></canvas> 
       <text class="textzhiyuan">二志愿专业：{{zhiyuan4[1]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas4_2' class="canvas"></canvas> 
       <text class="textzhiyuan">三志愿专业：{{zhiyuan4[2]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas4_3' class="canvas"></canvas> 
       <text class="textzhiyuan">四志愿专业：{{zhiyuan4[3]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas4_4' class="canvas"></canvas> 
       <text class="textzhiyuan">五志愿专业：{{zhiyuan4[4]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas4_5' class="canvas"></canvas> 
       <text class="textzhiyuan">六志愿专业：{{zhiyuan4[5]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas4_6' class="canvas"></canvas> 
       </view>
     </view>
@@ -289,7 +373,10 @@
     <view class="content4">
       <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
       <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     </view>
     <view class="{{isShowFrom5 ? '' : 'tui-hide'}}">
       <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
@@ -311,32 +398,50 @@
       <text class="textzhiyuan">一志愿专业：{{zhiyuan5[0]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas5_1' class="canvas"></canvas> 
       <text class="textzhiyuan">二志愿专业：{{zhiyuan5[1]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas5_2' class="canvas"></canvas> 
       <text class="textzhiyuan">三志愿专业：{{zhiyuan5[2]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas5_3' class="canvas"></canvas> 
       <text class="textzhiyuan">四志愿专业：{{zhiyuan5[3]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas5_4' class="canvas"></canvas> 
       <text class="textzhiyuan">五志愿专业：{{zhiyuan5[4]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas5_5' class="canvas"></canvas> 
       <text class="textzhiyuan">六志愿专业：{{zhiyuan5[5]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas5_6' class="canvas"></canvas> 
       </view>
     </view>
@@ -357,7 +462,10 @@
     <view class="content4">
       <text class="information">在报考此学校意愿更强的考生中您的排名是：</text>
       <text class="information">在报考此学校意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     </view>
     <view class="{{isShowFrom6 ? '' : 'tui-hide'}}">
       <swiper class="tui-swiper" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
@@ -379,32 +487,50 @@
       <text class="textzhiyuan">一志愿专业：{{zhiyuan6[0]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas6_1' class="canvas"></canvas> 
       <text class="textzhiyuan">二志愿专业：{{zhiyuan6[1]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas6_2' class="canvas"></canvas> 
       <text class="textzhiyuan">三志愿专业：{{zhiyuan6[2]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas6_3' class="canvas"></canvas> 
       <text class="textzhiyuan">四志愿专业：{{zhiyuan6[3]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas6_4' class="canvas"></canvas> 
       <text class="textzhiyuan">五志愿专业：{{zhiyuan6[4]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas6_5' class="canvas"></canvas> 
       <text class="textzhiyuan">六志愿专业：{{zhiyuan6[5]}}</text>
       <text class="information">在报考意愿更强的考生中您的排名是：</text>
       <text class="information">在报考意愿较弱的考生中您的排名是：</text>
+<<<<<<< HEAD
       <text class="information">您的报考成功率是：</text>
+=======
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       <canvas canvas-id='Canvas6_6' class="canvas"></canvas> 
       </view>
     </view>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <view class="tui-accordion-content" style="background-color:white">
     <view class="tui-menu-list {{isShowFrom1 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
     <view class="content" bindtap="showFrom" data-param="1">
@@ -520,4 +521,528 @@
 </view>
 
 
+=======
+<view class="tui-accordion-content" style="background-color:white">
+    <view class="tui-menu-list {{isShowFrom1 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="1">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[0]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[0]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <text class="textstyle">特色专业:</text>
+    <view class="{{isShowFrom1 ? '' : 'tui-hide'}}">
+
+      <text class="information">一志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange1_1" value="{{index1_1}}" range="{{selectData1}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData1[index1_1]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">二志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange1_2" value="{{index1_2}}" range="{{selectData1}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData1[index1_2]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">三志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange1_3" value="{{index1_3}}" range="{{selectData1}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData1[index1_3]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">四志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange1_4" value="{{index1_4}}" range="{{selectData1}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData1[index1_4]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">五志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange1_5" value="{{index1_5}}" range="{{selectData1}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData1[index1_5]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">六志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange1_6" value="{{index1_6}}" range="{{selectData1}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData1[index1_6]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+
+<view class="tui-accordion-content" style="background-color:white">
+    <view class="tui-menu-list {{isShowFrom2 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="2">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[1]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[1]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <text class="textstyle">特色专业:</text>
+    <view class="{{isShowFrom2 ? '' : 'tui-hide'}}">
+      
+      <text class="information">一志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange2_1" value="{{index2_1}}" range="{{selectData2}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData2[index2_1]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">二志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange2_2" value="{{index2_2}}" range="{{selectData2}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData1[index2_2]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">三志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange2_3" value="{{index2_3}}" range="{{selectData2}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData2[index2_3]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">四志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange2_4" value="{{index2_4}}" range="{{selectData2}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData2[index2_4]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">五志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange2_5" value="{{index2_5}}" range="{{selectData2}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData2[index2_5]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">六志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange2_6" value="{{index2_6}}" range="{{selectData2}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData2[index2_6]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+
+<view class="tui-accordion-content" style="background-color:white">
+    <view class="tui-menu-list {{isShowFrom3 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="3">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[2]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[2]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <text class="textstyle">特色专业:</text>
+    <view class="{{isShowFrom3 ? '' : 'tui-hide'}}">
+ 
+      <text class="information">一志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange3_1" value="{{index3_1}}" range="{{selectData3}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData3[index3_1]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">二志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange3_2" value="{{index3_2}}" range="{{selectData3}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData3[index3_2]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">三志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange3_3" value="{{index3_3}}" range="{{selectData3}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData3[index3_3]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">四志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange3_4" value="{{index3_4}}" range="{{selectData3}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData3[index3_4]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">五志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange3_5" value="{{index3_5}}" range="{{selectData3}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData3[index3_5]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">六志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange3_6" value="{{index3_6}}" range="{{selectData3}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData3[index3_6]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+
+<view class="tui-accordion-content" style="background-color:white">
+    <view class="tui-menu-list {{isShowFrom4 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="4">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[3]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[3]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <text class="textstyle">特色专业:</text>
+    <view class="{{isShowFrom4 ? '' : 'tui-hide'}}">
+      
+      <text class="information">一志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange4_1" value="{{index4_1}}" range="{{selectData4}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData4[index4_1]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">二志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange4_2" value="{{index4_2}}" range="{{selectData4}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData4[index4_2]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">三志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange4_3" value="{{index4_3}}" range="{{selectData4}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData4[index4_3]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">四志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange4_4" value="{{index4_4}}" range="{{selectData4}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData4[index4_4]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">五志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange4_5" value="{{index4_5}}" range="{{selectData4}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData4[index4_5]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">六志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange4_6" value="{{index4_6}}" range="{{selectData4}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData4[index4_6]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+
+<view class="tui-accordion-content" style="background-color:white">
+    <view class="tui-menu-list {{isShowFrom5 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="5">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[4]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[4]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <text class="textstyle">特色专业:</text>
+    <view class="{{isShowFrom5 ? '' : 'tui-hide'}}">
+      
+      <text class="information">一志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange5_1" value="{{index5_1}}" range="{{selectData5}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData5[index5_1]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">二志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange5_2" value="{{index5_2}}" range="{{selectData5}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData5[index5_2]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">三志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange5_3" value="{{index5_3}}" range="{{selectData5}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData5[index5_3]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">四志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange5_4" value="{{index5_4}}" range="{{selectData5}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData5[index5_4]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">五志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange5_5" value="{{index5_5}}" range="{{selectData5}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData5[index5_5]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">六志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange5_6" value="{{index5_6}}" range="{{selectData5}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData5[index5_6]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+
+<view class="tui-accordion-content" style="background-color:white">
+    <view class="tui-menu-list {{isShowFrom6 ? 'tui-shangjiantou' : 'tui-xiajiantou'}}">    
+    <view class="content" bindtap="showFrom" data-param="6">
+      <view class="content1">
+        <image class="image_frame" src="http://college.gaokao.com/style/college/images/icon/{{img[5]}}.png" mode="aspectFit"> </image>
+        <text class="text">{{selected_school[5]}}</text>
+      </view>
+      <view class="content2">
+        <text class="information">高校类型：</text>
+        <text class="information">高校隶属于：</text>
+        <text class="information">高校所在地：</text>
+      </view>
+    </view>
+    <text class="textstyle">特色专业:</text>
+    <view class="{{isShowFrom6 ? '' : 'tui-hide'}}">
+      
+      <text class="information">一志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange6_1" value="{{index6_1}}" range="{{selectData6}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData6[index6_1]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">二志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange6_2" value="{{index6_2}}" range="{{selectData6}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData6[index6_2]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">三志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange6_3" value="{{index6_3}}" range="{{selectData6}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData6[index6_3]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">四志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange6_4" value="{{index6_4}}" range="{{selectData6}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData6[index6_4]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">五志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange6_5" value="{{index6_5}}" range="{{selectData6}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData6[index6_5]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class="information">六志愿专业</text>
+      <view class='box'>
+        <view class='Input'>
+          <picker class="input" bindchange="bindPickerChange6_6" value="{{index6_6}}" range="{{selectData6}}">
+            <view class="picker">
+              <text class='select_text' style="margin-left: 30rpx;">{{selectData6[index6_6]}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+
+>>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
 <button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 30rpx;  margin-bottom: 80rpx; border-radius: 40rpx" type="primary" bindtap="ToRecommend">查看分析结果</button>
