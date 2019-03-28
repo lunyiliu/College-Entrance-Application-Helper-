@@ -46,5 +46,5 @@
 </view>
 </view>
 
-<button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 250rpx; border-radius: 40rpx" type="primary" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="listenerLogin">授权登录</button>
+<button style="margin-left: 15rpx; margin-right: 15rpx; margin-top: 250rpx; border-radius: 40rpx" type="primary" wx:if="{{canIUse}}" open-type="getUserInfo"  bindgetuserinfo="bindGetUserInfo" bindtap="listenerLogin">授权登录</button>
 <view wx:else>请升级微信版本</view>

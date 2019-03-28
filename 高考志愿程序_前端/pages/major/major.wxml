@@ -1,41 +1,69 @@
+<view class="border1" >
+<view>第一专业</view>
 <view class="Input" style="margin-top: 30rpx">
-  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange1" bindcolumnchange="bindMultiPickerColumnChange1" value="{{multiIndex1}}" range="{{multiArray1}}">
     <view class="picker" style="margin-left: 38rpx">
-      {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
+      {{multiArray1[0][multiIndex1[0]]}},{{multiArray1[1][multiIndex1[1]]}}
     </view>
   </picker>
 </view>
+</view>
 
-
-<view class='history-table-wrap'>
-    <view class="table">
-      <view class="tr">
-          <view class="th th1">大学名称</view>
-          <view class="th th2">专业名称</view>
-          <view class="th th3">分数</view>
-          <view class="th th4">学科评级</view>
-          <view class="th th5">风险评定</view>
-      </view>
-      <view class="tr" >
-          <view class="td td1">北京工业大学</view>
-          <view class="td td2">控制工程</view>
-          <view class="td td3">635</view>
-          <view class="td td4">A</view>
-          <view class="td td5">中</view>
-      </view>
-       <view class="tr" >
-          <view class="td td1">北京大学</view>
-          <view class="td td2">自动化</view>
-          <view class="td td3">675</view>
-          <view class="td td4">A</view>
-          <view class="td td5">高</view>
-      </view>
-       <view class="tr" >
-          <view class="td td1">内蒙古大学</view>
-          <view class="td td2">自动化</view>
-          <view class="td td3">628</view>
-          <view class="td td4">B</view>
-          <view class="td td5">低</view>
-      </view>
+<view class="border1" >
+<view>第二专业</view>
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange2" bindcolumnchange="bindMultiPickerColumnChange2" value="{{multiIndex2}}" range="{{multiArray2}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray2[0][multiIndex2[0]]}},{{multiArray2[1][multiIndex2[1]]}}
     </view>
- </view>
+  </picker>
+</view>
+</view>
+
+<view class="border1" >
+<view>第三专业</view>
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange3" bindcolumnchange="bindMultiPickerColumnChange3" value="{{multiIndex3}}" range="{{multiArray3}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray3[0][multiIndex3[0]]}},{{multiArray3[1][multiIndex3[1]]}}
+    </view>
+  </picker>
+</view>
+</view>
+
+<view class="border1" >
+<view>第四专业</view>
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange4" bindcolumnchange="bindMultiPickerColumnChange4" value="{{multiIndex4}}" range="{{multiArray4}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray4[0][multiIndex4[0]]}},{{multiArray4[1][multiIndex4[1]]}}
+    </view>
+  </picker>
+</view>
+</view>
+
+<view class="border1" >
+<view>第五专业</view>
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange5" bindcolumnchange="bindMultiPickerColumnChange5" value="{{multiIndex5}}" range="{{multiArray5}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray5[0][multiIndex5[0]]}},{{multiArray5[1][multiIndex5[1]]}}
+    </view>
+  </picker>
+</view>
+</view>
+
+<view class="border1" >
+<view>第六专业</view>
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange6" bindcolumnchange="bindMultiPickerColumnChange6" value="{{multiIndex6}}" range="{{multiArray6}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray6[0][multiIndex6[0]]}},{{multiArray6[1][multiIndex6[1]]}}
+    </view>
+  </picker>
+</view>
+</view>
+
+<button class='tuijian' bindtap='jumptotuijianyuanxiao'>
+查看推荐院校
+</button>

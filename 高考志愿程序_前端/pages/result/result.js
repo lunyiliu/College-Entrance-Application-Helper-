@@ -58,7 +58,7 @@ Page({
   },
 
   ToRecommend: function () {
-    if (this.sum(this.data.zhiyuan1) && this.sum(this.data.zhiyuan2) && this.sum(this.data.zhiyuan3) && this.sum(this.data.zhiyuan4) && this.sum(this.data.zhiyuan5) && this.sum(this.data.zhiyuan6)){
+    // if (this.sum(this.data.zhiyuan1) && this.sum(this.data.zhiyuan2) && this.sum(this.data.zhiyuan3) && this.sum(this.data.zhiyuan4) && this.sum(this.data.zhiyuan5) && this.sum(this.data.zhiyuan6)){
       for (var i = 0; i < 6; i++){
         app.globalData.School1Major[i] = this.data.selectData1[this.data.zhiyuan1[i]];
       }
@@ -77,6 +77,7 @@ Page({
       for (var i = 0; i < 6; i++) {
         app.globalData.School6Major[i] = this.data.selectData6[this.data.zhiyuan6[i]];
       }
+      
       console.log(app.globalData.School1Major)
       console.log(app.globalData.School2Major)
       console.log(app.globalData.School3Major)
@@ -87,68 +88,68 @@ Page({
     wx.navigateTo({
       url: '../recommend/recommend'
     })
-    }
-    else {
-      console.log(this.data.zhiyuan1)
-      console.log(this.sum(this.data.zhiyuan1))
-      if (this.sum(this.data.zhiyuan1) == 0) {
-        console.log(this.data.zhiyuan1)
-        console.log(this.sum(this.data.zhiyuan1))
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '请填写所有一志愿学校专业!',
-          success: function (res) {
-            console.log('用户点击确定')
-          }
-        })
-      } else if (this.sum(this.data.zhiyuan2) == 0) {
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '请填写所有二志愿学校专业!',
-          success: function (res) {
-            console.log('用户点击确定')
-          }
-        })
-      } else if (this.sum(this.data.zhiyuan3) == 0) {
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '请填写所有三志愿学校专业!',
-          success: function (res) {
-            console.log('用户点击确定')
-          }
-        })
-      } else if (this.sum(this.data.zhiyuan4) == 0) {
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '请填写所有四志愿学校专业!',
-          success: function (res) {
-            console.log('用户点击确定')
-          }
-        })
-      } else if (this.sum(this.data.zhiyuan5) == 0) {
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '请填写所有五志愿学校专业!',
-          success: function (res) {
-            console.log('用户点击确定')
-          }
-        })
-      } else if (this.sum(this.data.zhiyuan6) == 0) {
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '请填写所有六志愿学校专业!',
-          success: function (res) {
-            console.log('用户点击确定')
-          }
-        })
-      }
-    }
+    //}
+    // else {
+    //   console.log(this.data.zhiyuan1)
+    //   console.log(this.sum(this.data.zhiyuan1))
+    //   if (this.sum(this.data.zhiyuan1) == 0) {
+    //     console.log(this.data.zhiyuan1)
+    //     console.log(this.sum(this.data.zhiyuan1))
+    //     wx.showModal({
+    //       title: '提示',
+    //       showCancel: false,
+    //       content: '请填写所有一志愿学校专业!',
+    //       success: function (res) {
+    //         console.log('用户点击确定')
+    //       }
+    //     })
+    //   } else if (this.sum(this.data.zhiyuan2) == 0) {
+    //     wx.showModal({
+    //       title: '提示',
+    //       showCancel: false,
+    //       content: '请填写所有二志愿学校专业!',
+    //       success: function (res) {
+    //         console.log('用户点击确定')
+    //       }
+    //     })
+    //   } else if (this.sum(this.data.zhiyuan3) == 0) {
+    //     wx.showModal({
+    //       title: '提示',
+    //       showCancel: false,
+    //       content: '请填写所有三志愿学校专业!',
+    //       success: function (res) {
+    //         console.log('用户点击确定')
+    //       }
+    //     })
+    //   } else if (this.sum(this.data.zhiyuan4) == 0) {
+    //     wx.showModal({
+    //       title: '提示',
+    //       showCancel: false,
+    //       content: '请填写所有四志愿学校专业!',
+    //       success: function (res) {
+    //         console.log('用户点击确定')
+    //       }
+    //     })
+    //   } else if (this.sum(this.data.zhiyuan5) == 0) {
+    //     wx.showModal({
+    //       title: '提示',
+    //       showCancel: false,
+    //       content: '请填写所有五志愿学校专业!',
+    //       success: function (res) {
+    //         console.log('用户点击确定')
+    //       }
+    //     })
+    //   } else if (this.sum(this.data.zhiyuan6) == 0) {
+    //     wx.showModal({
+    //       title: '提示',
+    //       showCancel: false,
+    //       content: '请填写所有六志愿学校专业!',
+    //       success: function (res) {
+    //         console.log('用户点击确定')
+    //       }
+    //     })
+    //   }
+    // }
 
   },
   bindPickerChange1_1: function (e) {

@@ -1,0 +1,108 @@
+<view>
+  <text class="textstyle">尊敬的老师您好，请您选择您希望关注的学校
+  </text>
+  <text class="textstyle">我们将把您关注学校的报名信息展示在关注院校中
+   </text>
+</view>
+
+<view class="border1">
+
+
+  <view class="Input" style="margin-top: 30rpx">
+    <picker mode="multiSelector" bindchange="bindMultiPickerChange1"                            bindcolumnchange="bindMultiPickerColumnChange1"
+  wx:if="{{start1[9] != 1}}" value="{{multiIndex1}}" range="{{multiArray1}}"                  disabled='disabled'>
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray1[0][multiIndex1[0]]}}· {{multiArray1[1][multiIndex1[1]]}}
+    </view>
+  </picker>
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange1" bindcolumnchange="bindMultiPickerColumnChange1"
+  wx:else value="{{multiIndex1}}" range="{{multiArray1}}"   >
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray1[0][multiIndex1[0]]}}· {{multiArray1[1][multiIndex1[1]]}}
+    </view>
+  </picker>
+  </view>
+  <button bindtap="addfocus1" wx:if="{{start1[9] == 1}}" data-id='9' data-click="start1" style="font-size: 35rpx; left:400rpx;background-color:#43CD80;margin-top: 10rpx; margin-left: 50rpx;width:200rpx; margin-right: 15rpx;border-radius: 15rpx" type="primary">  关注</button>
+    <button bindtap="addfocus1" wx:else data-id='9' data-click="stop" style="font-size:       35rpx;width:200rpx;left:400rpx; margin-top: 10rpx; margin-left: 50rpx; margin-right:      15rpx;border-radius: 15rpx; color: #43CD80; background-color:white">已关注</button>
+
+
+</view>
+
+
+
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange2" bindcolumnchange="bindMultiPickerColumnChange2"
+  wx:if="{{start2[9] != 1}}" value="{{multiIndex2}}" range="{{multiArray2}}"   disabled='disabled'>
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray2[0][multiIndex2[0]]}}· {{multiArray2[1][multiIndex2[1]]}}
+    </view>
+  </picker>
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange2" bindcolumnchange="bindMultiPickerColumnChange2"
+  wx:else value="{{multiIndex2}}" range="{{multiArray2}}"   >
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray2[0][multiIndex2[0]]}}· {{multiArray2[1][multiIndex2[1]]}}
+    </view>
+  </picker>
+</view>
+<button bindtap="addfocus2" wx:if="{{start2[9] == 1}}" data-id='9' data-click="start2" style="font-size: 35rpx; left:400rpx;background-color:#43CD80;margin-top: 10rpx; margin-left: 50rpx;width:200rpx; margin-right: 15rpx;border-radius: 15rpx" type="primary">关注</button>
+    <button bindtap="addfocus2" wx:else data-id='9' data-click="stop" style="font-size: 35rpx;width:200rpx;left:400rpx; margin-top: 10rpx; margin-left: 50rpx; margin-right: 15rpx;border-radius: 15rpx; color: #43CD80; background-color:white">已关注</button>
+<view style="height:25rpx"></view>
+<view class="border1">
+<view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange3" bindcolumnchange="bindMultiPickerColumnChange3" wx:if="{{start3[9] != 1}}" disabled='disabled' value="{{multiIndex3}}" range="{{multiArray3}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray3[0][multiIndex3[0]]}}· {{multiArray3[1][multiIndex3[1]]}}
+    </view>
+  </picker>
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange3" bindcolumnchange="bindMultiPickerColumnChange3" wx:else value="{{multiIndex3}}" range="{{multiArray3}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray3[0][multiIndex3[0]]}}· {{multiArray3[1][multiIndex3[1]]}}
+    </view>
+  </picker>
+</view>
+<button bindtap="addfocus3" wx:if="{{start3[9] == 1}}" data-id='9' data-click="start3" style="font-size: 35rpx; left:400rpx;background-color:#43CD80;margin-top: 10rpx; margin-left: 50rpx;width:200rpx; margin-right: 15rpx;border-radius: 15rpx" type="primary">关注</button>
+    <button bindtap="addfocus3" wx:else data-id='9' data-click="stop" style="font-size: 35rpx;width:200rpx;left:400rpx; margin-top: 10rpx; margin-left: 50rpx; margin-right: 15rpx;border-radius: 15rpx; color: #43CD80; background-color:white">已关注</button>
+
+</view>
+
+
+   <view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange4" bindcolumnchange="bindMultiPickerColumnChange4"wx:if="{{start4[9] != 1}}" disabled='disabled' value="{{multiIndex4}}" range="{{multiArray4}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray4[0][multiIndex4[0]]}}· {{multiArray4[1][multiIndex4[1]]}}
+    </view>
+  </picker>
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange4" bindcolumnchange="bindMultiPickerColumnChange4"wx:else  value="{{multiIndex4}}" range="{{multiArray4}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray4[0][multiIndex4[0]]}}· {{multiArray4[1][multiIndex4[1]]}}
+    </view>
+  </picker>
+</view>
+<button bindtap="addfocus4" wx:if="{{start4[9] == 1}}" data-id='9' data-click="start4" style="font-size: 35rpx; left:400rpx;background-color:#43CD80;margin-top: 10rpx; margin-left: 50rpx;width:200rpx; margin-right: 15rpx;border-radius: 15rpx" type="primary">关注</button>
+    <button bindtap="addfocus4" wx:else data-id='9' data-click="stop" style="font-size: 35rpx;width:200rpx;left:400rpx; margin-top: 10rpx; margin-left: 50rpx; margin-right: 15rpx;border-radius: 15rpx; color: #43CD80; background-color:white">已关注</button>
+
+
+<view style="height:25rpx"></view>
+<view class="border1">
+    <view class="Input" style="margin-top: 30rpx">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange5" bindcolumnchange="bindMultiPickerColumnChange5"wx:if="{{start5[9] != 1}}"disabled='disabled' value="{{multiIndex5}}" range="{{multiArray5}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray5[0][multiIndex5[0]]}}· {{multiArray5[1][multiIndex5[1]]}}
+    </view>
+  </picker>
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange5" bindcolumnchange="bindMultiPickerColumnChange5"wx:else value="{{multiIndex5}}" range="{{multiArray5}}">
+    <view class="picker" style="margin-left: 38rpx">
+      {{multiArray5[0][multiIndex5[0]]}}· {{multiArray5[1][multiIndex5[1]]}}
+    </view>
+  </picker>
+</view>
+<button bindtap="addfocus5" wx:if="{{start5[9] == 1}}" data-id='9' data-click="start5" style="font-size: 35rpx; left:400rpx;background-color:#43CD80;margin-top: 10rpx; margin-left: 50rpx;width:200rpx; margin-right: 15rpx;border-radius: 15rpx" type="primary">关注</button>
+    <button bindtap="addfocus5" wx:else data-id='9' data-click="stop" style="font-size: 35rpx;width:200rpx;left:400rpx; margin-top: 10rpx; margin-left: 50rpx; margin-right: 15rpx;border-radius: 15rpx; color: #43CD80; background-color:white">已关注</button>
+</view>
+
+<button class='home_tea'  bindtap='jumptohome_tea'>
+  <text style='color:#fff'>确定</text>
+</button>
+
+<view class="bblack">
+</view>

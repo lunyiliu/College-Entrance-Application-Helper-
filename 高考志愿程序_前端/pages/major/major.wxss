@@ -1,3 +1,11 @@
+.border1
+{
+  border: 1px gainsboro solid;
+ height: 210rpx;
+  border-left: 0;
+  border-right: 0;
+
+}
 .input {
   font-size: 35rpx;
   padding-left: 10px;
@@ -26,7 +34,12 @@
 page {
   background: #f3f7f7;
 }
-
+.tuijian
+{
+  width: 650rpx;
+  height: 110rpx;
+  background-color: #43cd81c5
+}
 .select_box {
   z-index: 9;
   background: #fff;

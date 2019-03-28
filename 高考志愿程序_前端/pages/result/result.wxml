@@ -11,6 +11,7 @@
         <text class="information">高校所在地：</text>
       </view>
     </view>
+    <text class="textstyle">特色专业:</text>
     <view class="{{isShowFrom1 ? '' : 'tui-hide'}}">
 
       <text class="information">一志愿专业</text>
@@ -97,6 +98,7 @@
         <text class="information">高校所在地：</text>
       </view>
     </view>
+    <text class="textstyle">特色专业:</text>
     <view class="{{isShowFrom2 ? '' : 'tui-hide'}}">
       
       <text class="information">一志愿专业</text>
@@ -183,6 +185,7 @@
         <text class="information">高校所在地：</text>
       </view>
     </view>
+    <text class="textstyle">特色专业:</text>
     <view class="{{isShowFrom3 ? '' : 'tui-hide'}}">
  
       <text class="information">一志愿专业</text>
@@ -269,6 +272,7 @@
         <text class="information">高校所在地：</text>
       </view>
     </view>
+    <text class="textstyle">特色专业:</text>
     <view class="{{isShowFrom4 ? '' : 'tui-hide'}}">
       
       <text class="information">一志愿专业</text>
@@ -355,6 +359,7 @@
         <text class="information">高校所在地：</text>
       </view>
     </view>
+    <text class="textstyle">特色专业:</text>
     <view class="{{isShowFrom5 ? '' : 'tui-hide'}}">
       
       <text class="information">一志愿专业</text>
@@ -441,6 +446,7 @@
         <text class="information">高校所在地：</text>
       </view>
     </view>
+    <text class="textstyle">特色专业:</text>
     <view class="{{isShowFrom6 ? '' : 'tui-hide'}}">
       
       <text class="information">一志愿专业</text>

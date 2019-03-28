@@ -46,6 +46,31 @@ page {
   width:50%;
 }
 
+.content3{
+  margin-top:50rpx;
+  margin-left:20rpx;
+  margin-right:20rpx;
+  margin-bottom:50rpx;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.canvas {
+    width: 400px;
+    height: 220px;
+}
+
+
+.content4{
+  margin-top:20rpx;
+  margin-left:20rpx;
+  margin-right:20rpx;
+  margin-bottom:50rpx;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .text{
   font-weight: bold;
   line-height: 50rpx;
@@ -57,4 +82,11 @@ page {
 .information{
   line-height: 60rpx;
   font-size:30rpx;
+}
+
+.textzhiyuan{
+  color:grey;
+  font-weight: bold;
+  line-height: 60rpx;
+  font-size:40rpx;
 }

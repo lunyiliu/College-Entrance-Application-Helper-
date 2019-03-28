@@ -8,7 +8,7 @@ Page({
   },
   jumptohome: function(e) {
     wx.redirectTo({
-      url: '../home/home',
+      url: '../focus_teacher/focus_teacher',
     })
   },
   /** * 监听姓名输入 */

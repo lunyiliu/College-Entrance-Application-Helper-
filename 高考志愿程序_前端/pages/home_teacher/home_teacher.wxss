@@ -1,0 +1,260 @@
+page {
+  background: #f3f7f7;
+}
+.nav{
+  display: flex;
+  flex-direction: row;
+  background-color: #43CD80;
+  height: 160rpx;
+}
+.divLine{
+ background: #E0E3DA;
+ margin-left:3%;
+ width: 100%;
+ height: 1rpx;
+}
+.box{
+  z-index: 9;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100rpx;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+}
+.box_ {
+  background:white;
+  z-index: 9;
+  box-sizing: border-box;
+  width: 100%;
+  height: 410rpx;
+  border: 1px solid #efefef;
+  align-items: center;
+  padding: 0 20rpx;
+  margin-top: 30rpx
+}
+.top{
+  width: 250rpx;
+  height: 250rpx;
+  margin: 0 auto;
+}
+.nickname{
+  margin-bottom: 10rpx;
+  text-align: center;
+}
+.left{
+  display: flex;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+.right{
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  color: rgb(136, 133, 133);
+  margin-right: 0rpx;
+  font-size: 32rpx;
+}
+.right1{
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  margin-right: 0rpx;
+  font-size: 38rpx;
+}
+.tr
+{
+  margin-top: 0rpx;
+  display: flex;
+  flex-direction:row;
+  justify-content:flex-end;
+}
+.tr2
+{
+  background-color: #ffffff;
+  margin-top: 0rpx;
+  display: flex;
+  flex-direction:row;
+  justify-content:flex-end;
+}
+.tr3
+{
+  background-color: #ffffff;
+  margin-top: 0rpx;
+  display: flex;
+  flex-direction:row;
+  justify-content:flex-start;
+}
+.td
+{
+  background-color: #ffffff;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-bottom: 0px solid #dadada;
+  border-right: 0px solid #dadada;
+  text-align: center;
+  width: 100%;
+  height: 90rpx;
+}
+.type
+{
+  width: 50px;
+  height: 50px;    
+  border-radius: 0px; 
+  border: none;   
+  font-size:0;
+  background-color: #fff;
+}
+button[class="type"]::after{border: 0}
+.image
+{
+  background-color: #fff;
+  top: -120rpx;
+  margin-left: -105rpx;
+  margin-top: -20rpx;
+  display: flex;
+  width: 265rpx;
+  height: 230rpx;
+}
+.image2
+{
+  background-color: #fff;
+  top: -127rpx;
+  margin-left: -75rpx;
+  margin-top: -27rpx;
+  display: flex;
+  width: 220rpx;
+  height: 190rpx;
+}
+.image3
+{
+  background-color: #fff;
+  top: -120rpx;
+  margin-left: -75rpx;
+  margin-top: -20rpx;
+  display: flex;
+  width: 210rpx;
+  height: 180rpx;
+}
+.viewclass
+{ 
+  width: 250rpx;  
+  font-size: 33rpx;
+  display: flex;  
+  flex-direction: row;  
+  justify-content: center;
+}
+.textls
+{  
+  background-color: #fff;
+  display: flex;  
+  flex-direction:row;  
+  justify-content: center;
+}
+.history-table-wrap{
+  position: absolute;
+  width: 668rpx;
+  height: 578rpx;
+  left: 50%;
+  margin-left: -334rpx;
+  top:500rpx;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+/* 表格代码   */
+.table{
+  border:0px solid #dadada;
+  border-right:0;
+  border-bottom: 0;
+  width: 100%;
+  margin-left: 0%;
+}
+.tr1{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty
+{
+  display: flex;
+  height: 80rpx;
+  font-size: 37rpx;
+  font-weight: 1000rpx;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dadada;
+}
+.centerself
+{
+  margin-top: 13rpx;
+  margin-left: 25rpx;
+  display: flex;
+  font-size: 35rpx;
+  font-weight: bold;
+  width: 100%;
+}
+.white1
+{
+  height:16rpx;
+  background-color: rgb(245, 239, 239)
+}
+.white2
+{
+  background-color: #ffffff;
+  height:30rpx;
+}
+.white3
+{
+  background-color: #ffffff;
+  height:15rpx;
+}
+.th1,.th2,.td1,.td2{
+  width: 100%;
+}
+.th{
+  padding: 10px;
+  border-bottom: 0px solid #dadada;
+  border-right: 0px solid #dadada;
+  text-align: center;
+  width: 100%;
+}
+.th{
+  font-weight: 800;
+  background-color: #ffffff;
+  font-size: 40rpx;
+  color: #330e0e;
+}
+.td{
+  font-size: 25rpx;
+  color:  #330e0e;
+}
+.ty
+{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;  
+  font-size: 50rpx;
+  color:  #330e0e;
+}
+.help
+{
+  background-color: #fff;
+  color: rgb(10, 9, 9);
+  margin-left: 5rpx;
+  margin-right: 5rpx; 
+  margin-top: 0rpx; 
+  border-radius: 0rpx;
+  border-bottom: 1rpx,#ecebeb;
+}
+.help2
+{
+  background-color: #fff;
+  color: rgb(10, 9, 9);
+  margin-left: 5rpx;
+  margin-right: 5rpx; 
+  margin-top: 0rpx; 
+  border-radius: 0rpx;
+  border-bottom: 1rpx,#ecebeb;
+}

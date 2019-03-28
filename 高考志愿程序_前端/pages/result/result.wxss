@@ -37,10 +37,12 @@ page {
 
 .textstyle {
   color: grey;
+  font-weight: bold;
   font-size: 30rpx;
-  margin-left: 15px;
+  line-height: 40rpx;
+  margin-left: 5px;
   margin-right: 15px;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 .textstyle_black {
   color: black;

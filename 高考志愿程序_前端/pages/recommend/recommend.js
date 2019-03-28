@@ -16,6 +16,12 @@ Page({
     duration: 800,
     selected_school: app.globalData.SelectedSchool,
     img: app.globalData.SelectedSchoolID,
+    zhiyuan1: app.globalData.School1Major,
+    zhiyuan2: app.globalData.School2Major,
+    zhiyuan3: app.globalData.School3Major,
+    zhiyuan4: app.globalData.School4Major,
+    zhiyuan5: app.globalData.School5Major,
+    zhiyuan6: app.globalData.School6Major,
     banner_url1: ['../../SchoolPic/' + app.globalData.SelectedSchool[0] + '/1.jpg', '../../SchoolPic/' + app.globalData.SelectedSchool[0] + '/2.jpg', '../../SchoolPic/' + app.globalData.SelectedSchool[0] + '/3.jpg', '../../SchoolPic/' + app.globalData.SelectedSchool[0] + '/4.jpg'],
     banner_url2: ['../../SchoolPic/' + app.globalData.SelectedSchool[1] + '/1.jpg', '../../SchoolPic/' + app.globalData.SelectedSchool[1] + '/2.jpg', '../../SchoolPic/' + app.globalData.SelectedSchool[1] + '/3.jpg', '../../SchoolPic/' + app.globalData.SelectedSchool[1] + '/4.jpg'],
     banner_url3: ['../../SchoolPic/' + app.globalData.SelectedSchool[2] + '/1.jpg', '../../SchoolPic/' + app.globalData.SelectedSchool[2] + '/2.jpg', '../../SchoolPic/' + app.globalData.SelectedSchool[2] + '/3.jpg', '../../SchoolPic/' + app.globalData.SelectedSchool[2] + '/4.jpg'],
@@ -39,7 +45,7 @@ Page({
         title: '历年分数线',
         min: 0
       },
-      width: 330,
+      width: 280,
       height: 200
         });
     new Charts({
@@ -57,7 +63,7 @@ Page({
         title: '历年分数线',
         min: 0
       },
-      width: 330,
+      width: 280,
       height: 200
     });
     new Charts({
@@ -75,7 +81,7 @@ Page({
         title: '历年分数线',
         min: 0
       },
-      width: 330,
+      width: 280,
       height: 200
     });
     new Charts({
@@ -93,7 +99,7 @@ Page({
         title: '历年分数线',
         min: 0
       },
-      width: 330,
+      width: 280,
       height: 200
     });
     new Charts({
@@ -111,7 +117,7 @@ Page({
         title: '历年分数线',
         min: 0
       },
-      width: 330,
+      width: 280,
       height: 200
     });
     new Charts({
@@ -129,10 +135,335 @@ Page({
         title: '历年分数线',
         min: 0
       },
-      width: 330,
+      width: 280,
       height: 200
     });
+    new Charts({
+      canvasId: 'Canvas1_1',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas1_2',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas1_3',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas1_4',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas1_5',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas1_6',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas2_1',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas2_2',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas2_3',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas2_4',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas2_5',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas2_6',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas3_1',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas3_2',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas3_3',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas3_4',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas3_5',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas3_6',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas4_1',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas4_2',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas4_3',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas4_4',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas4_5',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas4_6',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas5_1',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas5_2',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas5_3',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas5_4',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas5_5',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas5_6',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas6_1',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas6_2',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas6_3',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas6_4',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas6_5',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
+    new Charts({
+      canvasId: 'Canvas6_6',
+      type: 'radar',
+      categories: ['一志愿考生中', '二志愿考生中', '三志愿考生中', '四志愿考生中', '五志愿考生中', '六志愿考生中'],
+      series: [{
+        name: '超过的考生所占百分比',
+        data: [90, 110, 125, 95, 87, 122]
+      }], width: 280, height: 200, dataLabel: true,
+    });
   },
+  
   showFrom(e) {
     var param = e.target.dataset.param;
     this.setData({
