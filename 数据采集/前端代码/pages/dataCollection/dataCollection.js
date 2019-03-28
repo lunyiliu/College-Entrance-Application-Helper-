@@ -29,6 +29,8 @@ Page({
     Avg: '',
     Highest: '',
     Rank: 0, //学科评估结果
+    url:'',
+    isurl:0,
     kelei: ['未选择科类', '文科', '理科', '不分文理'],
     area: ['未选择省份', '北京', '天津', '河北', '山西', '山东', '河南', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '福建', '上海', '浙江', '安徽', '江西', '湖南', '湖北', '广东', '广西', '海南', '重庆', '四川', '贵州', '云南', '陕西', '西藏', '甘肃', '青海', '宁夏', '新疆'],
     areaIndex: 0, //用于记录所选省份为第几项
@@ -170,6 +172,9 @@ Page({
     //获取专业输入
     this.data.Major = e.detail.value;
   },
+  listenerurlInput: function (e) {
+    this.data.url = e.detail.value;
+  },
   listenerLowestInput: function(e) {
     this.data.Lowest = e.detail.value;
   },
@@ -204,6 +209,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res);
         wx.hideLoading();
         if (res.data.length>1){
           var major = res.data[0];
@@ -218,8 +224,8 @@ Page({
             title: '警告',
             showCancel: true,
             content: '请尽可能寻找更多的该学校的专业，确定要开始下一所学校？',
-            success: function (res) {
-              if (res.confirm) {
+            success: function (res_) {
+              if (res_.confirm) {
                 app.globalData.School = res.data[0];
                 that.setData({
                   'School': app.globalData.School
@@ -276,8 +282,10 @@ Page({
       success: function(res) {
         console.log(res);
         app.globalData.School = res.data[0];
+        app.globalData.url = res.data[1];
         that.setData({
-          'School': app.globalData.School
+          'School': app.globalData.School,
+          'url': app.globalData.url
         })
         console.log(that.data.School);
         wx.hideLoading();
@@ -470,7 +478,8 @@ Page({
           trans_category: app.globalData.Class,
           trans_upper_major: app.globalData.Subject,
           trans_major_rank: app.globalData.Rank,
-          trans_lowest: app.globalData.Lowest
+          trans_lowest: app.globalData.Lowest,
+          url: app.globalData.url,
         },
         method: 'GET',
         header: {
@@ -512,7 +521,8 @@ Page({
           trans_category: app.globalData.Class,
           trans_upper_major: app.globalData.Subject,
           trans_major_rank: app.globalData.Rank,
-          trans_lowest: app.globalData.Lowest
+          trans_lowest: app.globalData.Lowest,
+          url: app.globalData.url,
         },
         method: 'GET',
         header: {
@@ -535,7 +545,7 @@ Page({
   listenerLogin: function() {
     //点击提交时判断各项输入是否合法
     //确认年份、专业名称已输入，科类、省份、学科门类等已选择，分数输入合法
-    if (this.data.PiciIndex && this.data.areaIndex && this.data.School && this.data.Year && this.data.Major && this.data.Lowest <= 750 && this.data.Avg <= 750 && this.data.Highest <= 750 && this.data.keleiIndex  && this.data.multiIndex[0] !=0) {
+    if (this.data.PiciIndex && this.data.areaIndex && this.data.School && this.data.Year && this.data.Major && this.data.Lowest <= 900 && this.data.Avg <= 900 && this.data.Highest <= 900 && this.data.keleiIndex && this.data.multiIndex[0] != 0 && this.data.url) {
       //将所有结果返回全局变量
       app.globalData.Province = this.data.area[parseInt(this.data.areaIndex)];
       app.globalData.Rank = this.data.selectData1[parseInt(this.data.Rank)];
@@ -553,6 +563,7 @@ Page({
       app.globalData.Avg = this.data.Avg;
       app.globalData.Highest = this.data.Highest;
       app.globalData.Pici = this.data.pici[this.data.PiciIndex];
+      app.globalData.url = this.data.url;
       //打印信息 
       console.log('学校: ', app.globalData.School);
       console.log('年份: ', app.globalData.Year);
@@ -566,6 +577,7 @@ Page({
       console.log('平均分: ', app.globalData.Avg);
       console.log('最高分: ', app.globalData.Highest);
       console.log('评级: ', app.globalData.Rank);
+      console.log('官网: ', app.globalData.url);
       wx.showToast({
         title: '提交成功！',
         icon: 'succes',
@@ -606,7 +618,7 @@ Page({
             console.log('用户点击确定')
           }
         })
-      } else if (this.data.Lowest > 750 || this.data.Avg > 750 || this.data.Highest > 750) {
+      } else if (this.data.Lowest > 900 || this.data.Avg > 900 || this.data.Highest > 900) {
         wx.showModal({
           title: '提示',
           showCancel: false,
@@ -639,6 +651,16 @@ Page({
           title: '提示',
           showCancel: false,
           content: '请正确选择门类及一级学科!',
+          success: function (res) {
+            console.log('用户点击确定')
+          }
+        })
+      }
+      else if (!this.data.url) {
+        wx.showModal({
+          title: '提示',
+          showCancel: false,
+          content: '请正确填写学校官网!',
           success: function (res) {
             console.log('用户点击确定')
           }
@@ -954,6 +976,7 @@ Page({
       Avg: '',
       Highest: '',
       Rank: '',
+      url:'',
       areaIndex: 0,
       index: 0,
       multiIndex: [0, 0]

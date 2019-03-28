@@ -72,9 +72,11 @@ Page({
             getApp().globalData.userID = res.data.openid;
             console.log(getApp().globalData.userID);
             wx.hideLoading();
+            
             wx.navigateTo({
               url: '../dataCollection/dataCollection'
             })
+            
           },
           fail: function(error) {
             console.log(error);
@@ -95,6 +97,9 @@ Page({
     //此处授权得到user NickName
     console.log(e.detail.userInfo);
     getApp().globalData.nickName = e.detail.userInfo.nickName;
+      if (getApp().globalData.nickName.match(/\ud83c[\udf00-\udfff]|\ud83d[\udc00-\ude4f]|\ud83d[\ude80-\udeff]/g) != null) {
+        getApp().globalData.nickName = 'vip用户';
+      }
     wx.setStorage({
       key: '123456',
       data: getApp().globalData.nickName

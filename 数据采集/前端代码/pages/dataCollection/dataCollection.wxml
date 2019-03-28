@@ -75,10 +75,16 @@
   </picker>
 </view>
 
+<view class="Input" style="margin-top: 30rpx">
+  <input class="input" style="margin-left: 15rpx;"  disabled='{{isurl}}' placeholder="学校官网"  value='{{url}}' placeholder-style="color: black" bindinput="listenerurlInput" />
+</view>
+
 <view style="display: flex;flex-direction: row;margin-top: 20rpx">
   <button style="font-size:35rpx;width:50%;margin-left: 15rpx; margin-right: 15rpx; margin-top: 40rpx; border-radius: 40rpx;margin-bottom: 50rpx;" type="primary" bindtap="listenerLogin">提交</button>
   <button style="font-size:35rpx;width:50%;margin-left: 15rpx; margin-right: 15rpx; margin-top: 40rpx; border-radius: 40rpx;margin-bottom: 50rpx;" type="primary" bindtap="NextSchool">进入下一所学校</button>
 </view>
+
+
 
 
 </movable-area>
