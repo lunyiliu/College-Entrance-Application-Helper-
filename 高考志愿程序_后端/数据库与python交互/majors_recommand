@@ -9,7 +9,7 @@ with open ('school2ID.txt','r',encoding='utf-8') as f:
     for line in f.readlines():
         line=line.strip('\n')
         schoolID_dictionary[line.split(',')[0]]=line.split(',')[1]
-conn = pymysql.connect(host='39.97.100.184', user='root', passwd='8612260', db='gaokao', charset='utf8')
+conn = pymysql.connect()
 cursor = conn.cursor()
 
 class recommand():
