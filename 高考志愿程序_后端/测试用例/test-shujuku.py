@@ -7,7 +7,7 @@ from resetRecords import resetRecords
 import random
 import time
 
-conn = pymysql.connect(host='39.97.100.184', user='root', passwd='8612260', db='gaokao', charset='utf8')
+conn = pymysql.connect()
 cursor = conn.cursor()
 
 DBm = DB_methods()
