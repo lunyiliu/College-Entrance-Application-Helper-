@@ -10,7 +10,7 @@ with open ('provinceid.txt','r',encoding='utf-8') as f:
         line=line.strip('\n')
         provinceID_dictionary[line.split(',')[0]]=line.split(',')[1]
 #数据库连接
-conn = pymysql.connect(host='39.97.100.184', user='root', passwd='8612260', db='gaokao', charset='utf8')
+conn = pymysql.connect()
 cursor = conn.cursor()
 
 class recommand():
@@ -31,6 +31,7 @@ class recommand():
         pici = str(self.DBh.select(['client'], ['pici'], ['user_ID =' + user_ID]))
 
 
+
     def schools_recommand(self):
         # 对所有专业
 
@@ -42,6 +43,7 @@ class recommand():
 
         school_list = []
         temp = []
+
 
         val = [self.province,self.subject,'sci-li']
         for year in range(int(self.year)-5,int(self.year)):
