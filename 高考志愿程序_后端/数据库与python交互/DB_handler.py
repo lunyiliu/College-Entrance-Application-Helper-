@@ -8,7 +8,7 @@ import pymysql
 class DB_handler:
     #数据库基础操作
     def __init__(self):
-        self.conn = pymysql.connect(host='39.97.100.184', user='root', passwd='8612260', db='gaokao', charset='utf8')
+        self.conn = pymysql.connect()
         self.cursor=self.conn.cursor()
     def select(self,FormList:"list，从哪几个表中选",ResultList:"list，需要返回哪几个字段的结果",ConditionList:"列表，查询的条件，列表元素格式：XX=XX",para_logic:"哪些条件需要或逻辑,[[xx,value1,value2,...]],[xx,[]]]"=[],para_OrderBy:"第一个元素，排序的字段，第二个元素，true为降序，无为升序"=[],para_dict:"这个参数是true的话，返回的结果是pymysql默认的字典"=False,para_distinct=False,para_limitation:"限制返回的参数个数"=0,para_debug:'此参数开启将打印出sql语句'=False)->"返回的结果是这样的：[[字段1的所有结果],[字段2的所有结果]]，如果字段i只有一条结果的时候，列表将没有嵌套，如果只有一个字段且该字段只有一条结果，则输出一个值":
         #必须由condiyionlist才有para——logic 有点蠢后续在该
