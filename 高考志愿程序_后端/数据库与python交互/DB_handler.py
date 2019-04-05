@@ -45,7 +45,13 @@ class DB_handler:
 
             if para_logic==[]:
                 for request in requests:
-                    sql+=str(request)+'= %s'+" and "
+                    if request not in mid.keys():
+                        sql+=str(request)+'= %s'+" and "
+                    else:
+                        if mid[request] !='is':
+                            sql+=str(request)+' '+mid[request]+' %s'+" and "
+                        else :
+                            sql+=str(request)+" is Null and "
                 sql = sql.strip(" and ")
             else:
                 for request in requests:
@@ -62,17 +68,16 @@ class DB_handler:
                 sql = sql.strip(' and ')
         print(val)
         #print(type(val[1]))
-
+        if para_OrderBy!=[]:
+            sql+=" order by "
+            for col in para_OrderBy:
+                sql+=col+","
+            sql=sql.strip(",")
 
 
         if para_limitation!=0:
             sql+=" limit "+str(para_limitation)
-        if para_OrderBy!=[]:
-            for result in ResultList:
-                if result==para_OrderBy[0]:
-                    sql+=" order by "+result
-                if len(para_OrderBy)==2 and para_OrderBy[1]==True :
-                    sql += " desc"
+
         if para_debug==True:
             print(sql)
 
