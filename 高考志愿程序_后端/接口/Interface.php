@@ -1,4 +1,6 @@
 <?php
+//插入乱码一定要检查数据库编码！！！
+//现在数据库表utf8m64是可以用的
 //PHP字符串拼接是用点号！
 header("content-type:text/html;charset=utf-8");
 function _error_handler($errno, $errstr ,$errfile, $errline)
@@ -50,6 +52,39 @@ switch($command){
 		break;
 		*/
 	case 'insert_data':
+	/*
+		$userID=$_GET['userID'];
+		$user_nickname=$_GET['user_nickname'];
+		$score=$_GET['score'];
+		$province=$_GET['province'];
+		$subject=$_GET['subject'];
+		$year=$_GET['year'];
+		$pici=$_GET['pici'];
+		$choose_list=$_GET['choose_list'];
+		$focus=$_GET['focus'];
+		$rank=$_GET['rank'];
+		$history=$_GET['history'];	
+		$mysqli = new mysqli('39.97.100.184','root','8612260','gaokao','3306');
+		$mysqli -> query('set names utf8');
+		//$sql_major = "insert into majors values('$major','$school',$avg,$lowest,$highest,'$province','$subject',$year,'$pici','$category','$upper_major','$major_rank',1)";
+		$sql_major = "insert into majors values(?,?,?,?,?,?,?,?,?,?,?,?,1)";
+		$mysqli_stmt =$mysqli->prepare($sql_major);
+		$a='安徽中国语大学';
+		$b=3;
+		$mysqli_stmt-> bind_param('ssiiississss',$userID,$a,$score,$b,$b,$subject,$pici,$b,$focus,$rank,$history,$a);
+		$b=$mysqli_stmt -> execute();
+		
+		if(!$b){
+		die("failed".$mysqli_stmt->error);
+		exit();
+	}else{
+		echo "success<br/>";
+	}
+		//$mysqli -> query($sql_major);
+		$mysqli -> close();
+		break;
+		*/
+		//echo $_GET['user_nickname'];
 		$mysqli = new mysqli('39.97.100.184','root','8612260','gaokao','3306');
 		$sql = "insert into ";
 		$format="";
@@ -59,19 +94,19 @@ switch($command){
 		$param=array_slice($_GET,1,-1);
 		$para_ref=array();
 		foreach($param as $key => $value){
-			
 			//echo gettype($value);
 			//echo '<br>';
 				$sql=$sql."?,";
 				if(is_int($value)){
 					$format=$format."i";
 				}else{
-				if(is_string($value)){
 					$format=$format."s";
-				}else{
-					$format=$format."b";//传入NULL可能还会出毛病
-				}}	
+				}	
+			if ($value=='null'){
+				$param[$key]=null;
+			}
 		}
+		//null似乎只需要直接写null
 		//echo $format;
 		//这里一定要注意! 传入 mysqli_stmt的参数一定要是引用，而foreach的过程是para3=para1[para2].
 		foreach($param as $key => &$value){
@@ -91,12 +126,13 @@ switch($command){
 		$method = $ref->getMethod("bind_param"); 
 		$method->invokeArgs($mysqli_stmt,$para_ref); 
 		
-		$mysqli -> query('set names utf8');
+		//print_r($para_ref);
 		$mysqli_stmt -> execute();
 		if ($mysqli_stmt->errno!=0){
 		printf("Error: %s.\n", $mysqli_stmt->error);}
 		//去重
 		$mysqli_stmt->close();
+		
 		$mysqli -> close();
 		break;
 	case 'handle_data':
@@ -114,19 +150,22 @@ switch($command){
 		array_unshift($values_ref,$format);
 		$mysqli -> query('set names utf8');
 		$mysqli_stmt =$mysqli->prepare($sql);
-		if (is_integer($mysqli_stmt)){
+		if (is_bool($mysqli_stmt)){
 			echo "sql 语句似乎出现了问题，sql:";
 			echo '<br>';
-			echo $mysql;
+			echo $sql;
 			break;
 		}
 		$ref= new ReflectionClass('mysqli_stmt');
 		$method = $ref->getMethod("bind_param"); 
 		$method->invokeArgs($mysqli_stmt,$values_ref); 
 		if ($mode=="update"){
+			//echo '即将执行';
 			$mysqli_stmt -> execute();
-		if ($mysqli_stmt->errno!=0){
-		printf("Error: %s.\n", $mysqli_stmt->error);}
+			//echo '已执行';
+		//if ($mysqli_stmt->errno!=0){
+		printf("Error: %s.\n", $mysqli_stmt->error);
+		//}
 		}
 		else{
 			
@@ -135,9 +174,15 @@ switch($command){
 			if ($mysqli_stmt->errno!=0){
 				printf("Error: %s.\n", $mysqli_stmt->error);}
 				$result = $mysqli_stmt->get_result();
-				$res=$result->fetch_array(MYSQLI_ASSOC);
+				$res=$result->fetch_all(MYSQLI_NUM);
 				//print_r($res);
 				//echo is_array($res);
+				foreach($res as $key =>$value){
+					if (count($value)==1){
+						$res[$key]=$value[0];
+					}
+				}
+				//echo $res[7];
 				
 				$json = json_encode(
 				//gbk2utf8( $res)
@@ -160,7 +205,7 @@ switch($command){
 		$arg=$_GET['user_ID'];
 		$arg2=$_GET['user_nickname'];
 		$arg2 = iconv("UTF-8","GB2312",$arg2);
-		exec("python C:/DataInsert.py $command $arg $arg2 2>&1",$res);
+		exec("python C:/Interface.py $command $arg $arg2 2>&1",$res);
 		$json = json_encode(
 		gbk2utf8( $res)
 		);
@@ -170,7 +215,8 @@ switch($command){
 		$arg=$_GET['user_ID'];
 		$arg2=$_GET['user_nickname'];
 		$arg2 = iconv("UTF-8","GB2312",$arg2);
-		exec("python C:/DataInsert.py $command $arg $arg2 2>&1",$res);
+		//echo '六六六';
+		exec("python C:/Interface.py $command $arg $arg2 2>&1",$res);
 		$json = json_encode(
 		gbk2utf8( $res)
 		);
@@ -182,7 +228,7 @@ switch($command){
 		$arg=$_GET['user_ID'];
 		$arg2=$_GET['user_nickname'];
 		//echo $arg2;
-		exec("python C:/DataInsert.py $command $arg $arg2 2>&1",$res);
+		exec("python C:/Interface.py $command $arg $arg2 2>&1",$res);
 		//返回的参数里有216个排名，36个成功率，6个学校的近五年最低分，（所在省市一本线）
 		//$res_array = explode(",", $res);
 		$json = json_encode(
