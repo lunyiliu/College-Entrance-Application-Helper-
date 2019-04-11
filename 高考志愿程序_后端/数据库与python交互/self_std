@@ -1,0 +1,8 @@
+from math import sqrt
+def std(l):  # 平方-期望的平方的期望
+    ex = float(sum(l)) / len(l)
+    s = 0
+    for i in l:
+       s += (i - ex) ** 2
+    s = float(s) / len(l)
+    return sqrt(s);
