@@ -32,7 +32,7 @@ class recommand():
         self.subject = store[4]
 
 
-        pici = str(store[5])
+        #self.pici = str(store[5])
 
 
 
@@ -110,7 +110,11 @@ class recommand():
             else:
                 if avg_score_avg[i] - 15 <= int(self.score) <= avg_score_avg[i] + 20:
                     school_list.append(i)
+
+        #print('school_list:')
+        #print(school_list)
         e2 = time.clock()
+
         #print(school_list)
         '''
         #原来的方案，发现效率实在太低了
@@ -284,13 +288,13 @@ class recommand():
                         best_rank = self.getRisk.risk_rank(line_rank[school_list.index(normal_risk_school[best])])
                         if int(normal_school_rank_list[j]) > 0 and 0.2 * r + 10 * int(
                                 normal_school_rank_list[j]) < \
-                                0.2 * best_rank + 10 * int(normal_school_rank_list[best][0]['school_rank']):
+                                0.2 * best_rank + 10 * int(normal_school_rank_list[best]):
                             best = j
                         if int(normal_school_rank_list[j]) == 0 and r < best_rank:
                             best = j
                     if int(normal_school_rank_list[best]) != 100000:
                         result_low_risk_school.append(normal_risk_school[best])
-                        normal_school_rank_list[best][0]['school_rank'] = 100000
+                        normal_school_rank_list[best] = 100000
                         N += 1
             if N < 3 and len(high_risk_school) > 0:
                 for i in range(3 - N):
@@ -326,9 +330,9 @@ class recommand():
         elif len(normal_risk_school) < 4:
             N = 0
             for i in range(len(normal_risk_school)):
-                if normal_school_rank_list[i][0]['school_rank'] != 100000:
-                    select_school_list.append(normal_risk_school[i])
-                    normal_school_rank_list[i][0]['school_rank'] = 100000
+                if normal_school_rank_list[i]!= 100000:
+                    result_mid_risk_school.append(normal_risk_school[i])
+                    normal_school_rank_list[i] = 100000
                     N += 1
             if len(high_risk_school) > 0:
                 for i in range(4 - N):
@@ -356,7 +360,7 @@ class recommand():
                             best = j
                     if int(low_school_rank_list[best]) != 100000:
                         result_mid_risk_school.append(low_risk_school[best])
-                        low_school_rank_list[best][0]['school_rank'] = 100000
+                        low_school_rank_list[best] = 100000
         else:
             for i in range(4):
                 best = 0
@@ -434,28 +438,34 @@ class recommand():
                         high_school_rank_list[best]) != 0:
                     result_high_risk_school.append(high_risk_school[best])
                     high_school_rank_list[best] = 100000
-        list = result_high_risk_school + result_mid_risk_school +result_low_risk_school
+        list_add = result_high_risk_school + result_mid_risk_school +result_low_risk_school
         school_score = []
-        for i in list:
-            a = [] #记录该学校的近三年最低分
-            current = temp_list[i]
-            #print(current)
-            for year in range(int(self.year)-3,int(self.year)):
-                #print(year)
-                for j in current:
-                    if int(j[0]) == year:
-                        #print('year get')
-                        if j[3] is None or j[3] == 0:
-                            a.append([year,None])
-                        else:
-                            a.append([year,j[3]])
-            school_score.append(a)
-            e5 = time.clock()
 
-        print(e5-e4)#
-        print(e4-e3)
-        print(e3-e2)
-        print(e2-e1)
-        print(e1-s)
+        if list_add is not None or list_add != []:
+            for i in list_add:
+                a = [] #记录该学校的近三年最低分
+                current = temp_list[school_list.index(i)]
+                #print(current)
+                for year in range(int(self.year)-3,int(self.year)):
+                    #print(year)
+                    year_store = [year,None]
+                    for j in current:
+                        if int(j[0]) == year:
+                            #print(year)
+                            if j[3] is None or j[3] == 0:
+                                year_store = [year,None]
+                            else:
+                                year_store = [year,j[3]]
+                    a.append(year_store)
+                school_score.append(a)
+        else:
+            school_score = []
+        e5 = time.clock()
+
+        #print(e5-e4)#
+        #print(e4-e3)
+        #print(e3-e2)
+        #print(e2-e1)
+        #print(e1-s)
 
         return result_high_risk_school, result_mid_risk_school, result_low_risk_school,school_score
