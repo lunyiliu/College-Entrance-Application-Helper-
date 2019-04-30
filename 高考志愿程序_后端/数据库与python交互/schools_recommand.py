@@ -5,8 +5,9 @@ import pymysql
 import random
 import time
 #加载本地
+pici_dict = {'提前批':'tiqianpi','第一批':'diyipi','第二批':'dierpi','其他':'other'}
 provinceID_dictionary={}
-with open ('provinceid.txt','r',encoding='utf-8') as f:
+with open ('C:\\provinceid.txt','r',encoding='utf-8') as f:
     for line in f.readlines():
         line=line.strip('\n')
         provinceID_dictionary[line.split(',')[0]]=line.split(',')[1]
@@ -32,7 +33,9 @@ class recommand():
         self.subject = store[4]
 
 
-        #self.pici = str(store[5])
+        self.pici = str(store[5])
+        self.pici = pici_dict[self.pici]
+        #self.pici = 'diyipi'
 
 
 
@@ -49,12 +52,17 @@ class recommand():
         temp = []
 
 
-        val = [self.province,self.subject,'sci-li']
+        val = [self.province,self.pici,self.subject,'sci-li']
         for year in range(int(self.year)-5,int(self.year)):
             val.append(year)
+
         db_school_list = "select schoolID, year, pici, lowest_score, avg_score, highest_score " \
-                         "from school" + " where provinceID= %s"  + " and (subject=" + ' %s '+'or ' +'subject=%s )'+' and (year= %s or year=%s or year=%s or year=%s or year=%s)'
+                         "from school" + " where provinceID= %sand pici =%s and (subject=" + ' %s '+'or ' +'subject=%s )'+' and (year= %s or year=%s or year=%s or year=%s or year=%s) order by schoolID'
         #print(db_school_list)
+        '''
+        db_school_list = "select schoolName, year, pici, lowest_score, avg_score, highest_score " \
+                         "from school" + " where provinceName= %sand pici =%s and (subject=" + ' %s ' + 'or ' + 'subject=%s )' + ' and (year= %s or year=%s or year=%s or year=%s or year=%s) order by schoolID'
+        '''
         #print(val)
         cursor.execute(db_school_list,val)
         conn.commit()
@@ -62,17 +70,21 @@ class recommand():
         temp.append(cursor.fetchall()) #temp = [((schoolID,year,pici,ls,as,hs),()...)]
         #搜索分数线在考生附近的学校
         #print(temp)
+        #print(temp[0][0])
+        #print(len(temp))
+
         e1 = time.clock()
 
         N = 1601
         avg_score_avg = [0 for i in range(N)]
         lowest_score_avg = [0 for i in range(N)]
-        highest_score_avg = [0 for i in range(N)]
+        highest_score_avg \
+            = [0 for i in range(N)]
         n = 1  # 计数，学校
         j = 0  # 计数，最低分数据个数
         k = 0  # 计数，最高分数据个数
         m = 0  # 计数，平均分数据个数
-        for i in range(len(temp[0])):
+        for i in range(len(temp[0])): #同一个i代表一个年份
             # 因许多省份改革，只取2014以后数据
             if int(temp[0][i][1]) == int(self.year)-1 or int(temp[0][i][1]) == int(self.year)-2 or int(temp[0][i][1]) == int(self.year)-3 or \
                     int(temp[0][i][1]) == int(self.year)-4 or int(temp[0][i][1]) == int(self.year)-5:
@@ -101,20 +113,62 @@ class recommand():
                     m = 0
                     # 下一所学校
                     n = temp[0][i][0]
+        #print(highest_score_avg)
+        #print(avg_score_avg)
+        #print(avg_score_avg)
+        up_line = 10
+        down_line = 20
+        while (len(school_list)<10):
+            for i in range(len(lowest_score_avg)):  # 取上下十分
+                if lowest_score_avg[i] and highest_score_avg[i]:
+                    if min(avg_score_avg[i], lowest_score_avg[i]) - down_line <= int(self.score) <= max(avg_score_avg[i],
+                                                                                            highest_score_avg[i]) + up_line:
+                        school_list.append(i)
+                else:
+                    if avg_score_avg[i] - 15 <= int(self.score) <= avg_score_avg[i] + 20:
+                        school_list.append(i)
+                if len(school_list) >30:
+                    break
+            up_line += 5
+            down_line += 20
 
-        for i in range(len(lowest_score_avg)):  # 取上下十分
-            if lowest_score_avg[i] and highest_score_avg[i]:
-                if min(avg_score_avg[i], lowest_score_avg[i]) - 15 <= int(self.score) <= max(avg_score_avg[i],
-                                                                                        highest_score_avg[i]) + 20:
-                    school_list.append(i)
-            else:
-                if avg_score_avg[i] - 15 <= int(self.score) <= avg_score_avg[i] + 20:
-                    school_list.append(i)
+        '''
+        if len(school_list) < 10:
+            print('used1')
+            school_list = []
+            for i in range(len(lowest_score_avg)):  # 取上下十分
+                if lowest_score_avg[i] and highest_score_avg[i]:
+                    if min(avg_score_avg[i], lowest_score_avg[i]) - 40 <= int(self.score) <= max(avg_score_avg[i],
+                                                                                                 highest_score_avg[
+                                                                                                     i]) + 40:
+                        school_list.append(i)
+                else:
+                    if avg_score_avg[i] - 40 <= int(self.score) <= avg_score_avg[i] + 40:
+                        school_list.append(i)
+                if len(school_list) > 30:
+                    break
+            print(school_list)
 
+        if len(school_list) < 10:
+            print('used2')
+            school_list = []
+            for i in range(len(lowest_score_avg)):  # 取上下十分
+                if lowest_score_avg[i] and highest_score_avg[i]:
+                    if min(avg_score_avg[i], lowest_score_avg[i]) - 120 <= int(self.score) <= max(avg_score_avg[i],
+                                                                                                 highest_score_avg[
+                                                                                                     i]) + 40:
+                        school_list.append(i)
+                else:
+                    if avg_score_avg[i] - 150 <= int(self.score) <= avg_score_avg[i] + 40:
+                        school_list.append(i)
+                if len(school_list) > 30:
+                    break
+            print(school_list)
+        '''
         #print('school_list:')
         #print(school_list)
         e2 = time.clock()
-
+        
         #print(school_list)
         '''
         #原来的方案，发现效率实在太低了
@@ -308,7 +362,10 @@ class recommand():
                     result_low_risk_school.append(high_risk_school[best])
                     high_school_rank_list[best]= 100000
         else:
-            for i in range(3):
+            #print('yes')
+            #for i in range(3):
+            while len(result_low_risk_school) <3:
+                #print(i)
                 best = 0
                 for j in range(len(low_risk_school)):
                     t = school_list.index(low_risk_school[j])
@@ -362,7 +419,7 @@ class recommand():
                         result_mid_risk_school.append(low_risk_school[best])
                         low_school_rank_list[best] = 100000
         else:
-            for i in range(4):
+            while len(result_mid_risk_school)<4:
                 best = 0
                 for j in range(len(normal_risk_school)):
                     t = school_list.index(normal_risk_school[j])
@@ -423,7 +480,8 @@ class recommand():
                         result_high_risk_school.append(low_risk_school[best])
                         low_school_rank_list[best] = 100000
         else:
-            for i in range(3):
+            #for i in range(3):
+            while len(result_high_risk_school) <3:
                 best = 0
                 for j in range(len(high_risk_school)):
                     t = school_list.index(high_risk_school[j])
