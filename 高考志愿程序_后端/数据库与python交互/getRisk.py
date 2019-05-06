@@ -1,6 +1,7 @@
 from DB_handler import DB_handler
 from DB_methods import DB_methods
-import numpy
+
+from self_std import std
 import pymysql
 import random
 from getRank import getRank
@@ -10,6 +11,7 @@ with open ('provinceid.txt','r',encoding='utf-8') as f:
     for line in f.readlines():
         line=line.strip('\n')
         provinceID_dictionary[line.split(',')[0]]=line.split(',')[1]
+#print(provinceID_dictionary)
 
 class getRisk():
 
@@ -18,19 +20,21 @@ class getRisk():
         self.DBm = DB_methods()
         self.user = user_ID
         store = self.DBh.select(['client'], ['score','province','subject','year','pici','choose_list','self_rank'], ['user_ID =' + user_ID])
-        #print(store[0])
+        #print(store)
         self.score = str(store[0])
-        province = store[1]
-
-        self.provinceID = str(provinceID_dictionary[province])
-        print(self.provinceID)
+        self.province = store[1]
+        #print(self.province)
+        self.provinceID = str(provinceID_dictionary[self.province])
+        #print(self.provinceID)
         self.subject = store[2]
         self.year = str(store[3])
         self.pici = str(store[4])
         self.intension_list = []
-        self.mid_list = store[5][:-1].split(',')
-        for element in self.mid_list:
-            self.intension_list.append(element[:-1].split('.'))
+        #print(store[5] is None)
+        if store[5] is not None and store[5] != '' and store[5] !='None':
+            self.mid_list = store[5][:-1].split(',')
+            for element in self.mid_list:
+                self.intension_list.append(element[:-1].split('.'))
         self.rank = store[6]
         self.getRank = getRank(user_ID)
 
@@ -45,7 +49,7 @@ class getRisk():
                              'year='+str(year),
                              'subject ='+self.subject,
                              'pici='+self.pici]
-            avgrank = self.DBh.select(['school'],['lowest_rank'],conditionlist)
+            avgrank = self.DBh.select(['school'],['avg_rank'],conditionlist)
             #print(avgrank)
             if avgrank is not None:
                 if type(avgrank) is list:
@@ -67,16 +71,20 @@ class getRisk():
             else:
                 r = 100
         #print(line_rank)
-        last1 = self.rank - line_rank[-1]
-        last2 = self.rank - line_rank[-2]
-        avg = self.rank - sum(line_rank) / len(line_rank)
-        if (line_rank[-1] >= line_rank[-2]) and (line_rank[-2] >= sum(line_rank) / len(line_rank)):  # 若有下降趋势
-            Risk = 0.3 * (0.2 * last1 + 0.2 * last2 + 0.4 / 3 * avg) + r  # 近两年各占0.3权值，其余年份共占0.4
+        #print('come')
+        if line_rank == []:
+            Risk = 0
         else:
-            if (numpy.std(line_rank) / (sum(line_rank) / len(line_rank))) <= 0.2:  # 以差异系数来确定稳定程度
-                Risk = 0.3 * avg + r
+            last1 = self.rank - line_rank[-1]
+            last2 = self.rank - line_rank[-2]
+            avg = self.rank - sum(line_rank) / len(line_rank)
+            if (line_rank[-1] >= line_rank[-2]) and (line_rank[-2] >= sum(line_rank) / len(line_rank)):  # 若有下降趋势
+                Risk = 0.3 * (0.2 * last1 + 0.2 * last2 + 0.4 / 3 * avg) + r  # 近两年各占0.3权值，其余年份共占0.4
             else:
-                Risk = 0.3 * max(avg, last1, last2) + r
+                if (std(line_rank) / (sum(line_rank) / len(line_rank))) <= 0.2:  # 以差异系数来确定稳定程度
+                    Risk = 0.3 * avg + r
+                else:
+                    Risk = 0.3 * max(avg, last1, last2) + r
         return Risk
 
     def get_success_school(self):
@@ -87,7 +95,7 @@ class getRisk():
         for i in range(len(self.intension_list)):
             #s = time.clock()
             N = self.get_risk_level_school(i) #N代表风险数
-            #print(N)
+            #print('N:'+str(N))
             e1 = time.clock()
 
             rank = rank_list[i]#对一个学校的6个排名
@@ -108,10 +116,10 @@ class getRisk():
             #e2 = time.clock()
             # 人数影响权重
             if sum(count) >200:
-                beta = 0.3
+                beta = 0.5
             else:
-                beta = 1-0.3*(200-sum(count))
-            success += beta*N
+                beta = 1-0.5*(200-sum(count))/200
+            success += beta*N*1/2
             success_result.append(success)
             #print(e2-e1)
             #print(e1-s)
@@ -141,10 +149,10 @@ class getRisk():
                         success += 0.1 * (1 - rank[k] / count[k])
                 # 人数影响权重
                 if sum(count) > 200:
-                    beta = 0.3
+                    beta = 0.5
                 else:
-                    beta = 1 - 0.3 * (200 - sum(count))
-                success += beta * N
+                    beta = 1 - 0.5 * (200 - sum(count))/200
+                success += beta * N/2
                 success_of_profession.append(success)
             success_result.append(success_of_profession)
         return success_result
@@ -161,9 +169,11 @@ class getRisk():
     '''
     def risk_rank_profession(self,i,j):#i代表学校，j代表专业
         profession_ID = self.intension_list[i][j]
+        #print(profession_ID)
         current_year = int(self.year)
         line_rank = []
-        majors_province = self.DBh.select(['provinceid'],['省份'],['ID = '+self.provinceID])
+        majors_province = self.province
+
         if self.pici == '0':
             pici = '提前批'
         elif self.pici == '1':
@@ -173,7 +183,9 @@ class getRisk():
         else:
             pici = '第三批'
         school,profession = self.DBh.select(['majors_ID'],['学校名称','专业名称'],['id='+profession_ID])
-
+        #print(i)
+        #print(j)
+        #print(profession)
         if self.subject == 'science':
             subject = '理科'
         elif self.subject == 'literature':
@@ -183,13 +195,22 @@ class getRisk():
 
 
         for year in range(current_year - 5, current_year):
-            conditionlist = ['专业名称 ='+profession,
-                             '学校名称=' + school,
+            '''
+            conditionlist = ['`专业名称` ='+profession,
+                             '`学校名称`=' + school,
                              '省份=' + majors_province,
                              '年份=' + str(year),
                              '批次=' + pici] #
-            avgrank = self.DBh.select(['majors_copy'], ['rank'], conditionlist,[['科类','文理不分',subject]],para_debug=True) #修改这里。主要是要 majors里有rank栏
-            print(avgrank)
+            '''
+            if profession == []:
+                break
+            conditionlist = ['`专业名称` =' + profession,
+                             '`学校名称`=' + school,
+                             '省份=' + majors_province,
+                             '年份=' + str(year),
+                            '批次 = 第一批']
+            avgrank = self.DBh.select(['majors_copy'], ['major_rank'], conditionlist,[['科类','文理不分',subject]]) #修改这里。主要是要 majors里有rank栏
+            #print(avgrank)
             if avgrank is not None:
                 if type(avgrank) is list:
                     for avg in avgrank:
@@ -208,16 +229,19 @@ class getRisk():
                 r = 0
             else:
                 r = 100
-        last1 = self.rank - line_rank[-1]
-        last2 = self.rank - line_rank[-2]
-        avg = self.rank - sum(line_rank) / len(line_rank)
-        if (line_rank[-1] >= line_rank[-2]) and (line_rank[-2] >= sum(line_rank) / len(line_rank)):  # 若有下降趋势
-            Risk = 0.3 * (0.2 * last1 + 0.2 * last2 + 0.4 / 3 * avg) + r  # 近两年各占0.3权值，其余年份共占0.4
+        if line_rank == []:
+            Risk = 0
         else:
-            if (numpy.std(line_rank) / (sum(line_rank) / len(line_rank))) <= 0.2:  # 以差异系数来确定稳定程度
-                Risk = 0.3 * avg + r
+            last1 = self.rank - line_rank[-1]
+            last2 = self.rank - line_rank[-2]
+            avg = self.rank - sum(line_rank) / len(line_rank)
+            if (line_rank[-1] >= line_rank[-2]) and (line_rank[-2] >= sum(line_rank) / len(line_rank)):  # 若有下降趋势
+                Risk = 0.3 * (0.2 * last1 + 0.2 * last2 + 0.4 / 3 * avg) + r  # 近两年各占0.3权值，其余年份共占0.4
             else:
-                Risk = 0.3 * max(avg, last1, last2) + r
+                if (std(line_rank) / (sum(line_rank) / len(line_rank))) <= 0.2:  # 以差异系数来确定稳定程度
+                    Risk = 0.3 * avg + r
+                else:
+                    Risk = 0.3 * max(avg, last1, last2) + r
         return Risk
 
     def get_risk_level_school(self,i):
@@ -239,7 +263,7 @@ class getRisk():
                 return 0
             else:
                 return 1
-
+    '''
     def risk_rank(self, line_rank):
         N = 0  # 超过分数线排名年数
         # last1为最近一年，last2为last1前一年
@@ -263,12 +287,13 @@ class getRisk():
         if len(line_rank)==1 or ((line_rank[0] >= line_rank[1]) and (line_rank[1] >= sum(line_rank) / len(line_rank))):  # 若有下降趋势
             Risk = 0.3 * (0.2 * last1 + 0.2 * last2 + 0.4 / 3 * avg) + r  # 近两年各占0.3权值，其余年份共占0.4
         else:
-            if (numpy.std(line_rank) / (sum(line_rank) / len(line_rank))) <= 0.2:  # 以差异系数来确定稳定程度
+            if (std(line_rank) / (sum(line_rank) / len(line_rank))) <= 0.2:  # 以差异系数来确定稳定程度
                 Risk = 0.3 * avg + r
             else:
                 Risk = 0.3 * max(avg, last1, last2) + r
         return Risk
-
+    '''
+    '''
     def risk_level(self, line_rank):
         r = self.risk_rank(line_rank)
         if r >= 500:
@@ -278,4 +303,4 @@ class getRisk():
                 return 0
             else:
                 return 1
-
+    '''
