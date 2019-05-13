@@ -1,11 +1,12 @@
-from getRisk import getRisk
+from getRisk_for_test import risk_rank,risk_level
 from DB_handler import DB_handler
 from DB_methods import DB_methods
+from get_dict_yifenyidang import get_dict_yifenyidang
 import pymysql
 import random
 #导入学校id转化表
 schoolID_dictionary={}
-with open ('C:\\school2ID.txt','r',encoding='utf-8') as f:
+with open ('school2ID.txt','r',encoding='utf-8') as f:
     for line in f.readlines():
         line=line.strip('\n')
         schoolID_dictionary[line.split(',')[0]]=line.split(',')[1]
@@ -18,11 +19,22 @@ class recommand():
         self.DBm = DB_methods()
         store = self.DBh.select(['client'], ['score', 'year', 'self_rank', 'province', 'subject','pici','major'],
                                 ['user_ID = ' + user_ID])
-        self.getRisk = getRisk(user_ID)
+
         self.user = user_ID
         self.score = str(store[0])
         self.year = str(store[1])
         self.rank = store[2]
+        if self.rank is None or self.rank == 0:
+            rank_dict = get_dict_yifenyidang('天津', '2018',self.subject)
+            if self.score < list(rank_dict.keys())[-1]:
+                # print("year1")
+                # print()
+                self.rank = list(rank_dict.values())[-1]
+            elif self.score > list(rank_dict.keys())[0]:
+                self.rank = list(rank_dict.values())[0]
+            else:
+                self.rank = rank_dict[self.score]
+
         self.province = str(store[3])
         self.subject = store[4]
         self.pici = store[5]
@@ -36,7 +48,7 @@ class recommand():
         elif subject == 'literature':
             self.subject= '文科'
         elif subject == 'sci-li':
-            self.subject = '文理不分'
+            self.subject = '综合'
         '''
         pici = str(self.DBh.select(['client'], ['pici'], ['user_ID =' + user_ID]))
         if pici == '0':
@@ -49,8 +61,12 @@ class recommand():
             self.pici = '第三批'
         '''
 
-    def major_recommand(self,major):#一级学科
+    def major_recommand(self,major_in):#一级学科
         #对所有专业
+        #print(major_in)
+        major = major_in.split(' ')[1]
+        major = major+'类'
+        print(major)
 
         result_low_risk_school = []
 
@@ -66,11 +82,19 @@ class recommand():
         highest_score = []
         avg_score = []
         temp = []
-        val = [self.province,self.pici,major, self.subject, 'sci-li']
-        for year in range(int(self.year)-5,int(self.year)):
-            val.append(year)
-        db_school_list = "select 学校名称, 年份, 批次, 录取最低分, 录取平均分, 录取最高分 " \
-                         "from majors_copy where 省份= %s and 批次 = %s and 一级学科=%s and (科类= %s or 科类=%s )  "+' and (年份= %s or 年份=%s or 年份=%s or 年份=%s or 年份=%s) order by 学校名称'
+
+        if self.pici == 'tiqianpi':
+            val = [self.province, self.pici, major, self.subject, '综合']
+            for year in range(int(self.year) - 5, int(self.year)):
+                val.append(year)
+            db_school_list = "select 学校名称, 年份, 批次, 录取最低分, 录取平均分, 录取最高分 " \
+                             "from ecol_majors where 省份= %s and 批次 = %s and 一级学科=%s and (科类= %s or 科类=%s )  " + ' and (年份= %s or 年份=%s or 年份=%s or 年份=%s or 年份=%s) order by 学校名称'
+        else:
+            val = [self.province, self.pici,'其他', major, self.subject, '综合']
+            for year in range(int(self.year) - 5, int(self.year)):
+                val.append(year)
+            db_school_list = "select 学校名称, 年份, 批次, 录取最低分, 录取平均分, 录取最高分 " \
+                         "from ecol_majors where 省份= %s and (批次 = %s or 批次 = %s)  and 一级学科=%s and (科类= %s or 科类=%s )  "+' and (年份= %s or 年份=%s or 年份=%s or 年份=%s or 年份=%s) order by 学校名称'
         #print(db_school_list)
         #print(val)
         cursor.execute(db_school_list, val)
@@ -78,7 +102,10 @@ class recommand():
 
         temp.append(cursor.fetchall())  # temp = [((schoolID,year,pici,ls,as,hs),()...)]
         print(temp)
-        N = 1601
+        print(temp == [()])
+        if temp == [] or temp == [()]:
+            return [],[],[]
+        N = 3000
         avg_score_avg = [0 for i in range(N)]
         lowest_score_avg = [0 for i in range(N)]
         highest_score_avg = [0 for i in range(N)]
@@ -88,7 +115,7 @@ class recommand():
         m = 0  # 计数，平均分数据个数
         for i in range(len(temp[0])):
             # 因许多省份改革，只取2014以后数据
-            if int(temp[0][i][1]) == int(self.year) - 1 or int(temp[0][i][1]) == int(self.year) - 2 or int(temp[0][i][1]) == int(
+            if i!=N+1 and int(float(temp[0][i][1])) == int(self.year) - 1 or int(temp[0][i][1]) == int(self.year) - 2 or int(temp[0][i][1]) == int(
                     self.year) - 3 or \
                     int(temp[0][i][1]) == int(self.year) - 4 or int(temp[0][i][1]) == int(self.year) - 5:
                 # 若是同一所学校
@@ -96,13 +123,13 @@ class recommand():
                 if int(schoolID_dictionary[temp[0][i][0]]) == n:
                     #print('school ok')
                     if temp[0][i][3]:  # 若存在最低分数据
-                        lowest_score_avg[n] += int(temp[0][i][3])  # 该学校最低分的平均分中加入此数据
+                        lowest_score_avg[n] += int(float(temp[0][i][3]) ) # 该学校最低分的平均分中加入此数据
                         j += 1  # 最低分数量加一
                     if temp[0][i][5]:  # 同上
-                        highest_score_avg[n] += int(temp[0][i][5])
+                        highest_score_avg[n] += int(float(temp[0][i][5]))
                         k += 1
                     if temp[0][i][4]:  # 同上
-                        avg_score_avg[n] += int(temp[0][i][4])
+                        avg_score_avg[n] += int(float(temp[0][i][4]))
                         m += 1
                 else:
                     # 如果存在相应数据则除以对应数据数目求平均
@@ -121,39 +148,80 @@ class recommand():
                     n = int(schoolID_dictionary[temp[0][i][0]])
 
                     if temp[0][i][3]:  # 若存在最低分数据
-                        lowest_score_avg[n] += int(temp[0][i][3])  # 该学校最低分的平均分中加入此数据
+                        lowest_score_avg[n] += int(float(temp[0][i][3])) # 该学校最低分的平均分中加入此数据
                         j += 1  # 最低分数量加一
                     if temp[0][i][5]:  # 同上
-                        highest_score_avg[n] += int(temp[0][i][5])
+                        highest_score_avg[n] += int(float(temp[0][i][5]))
                         k += 1
                     if temp[0][i][4]:  # 同上
-                        avg_score_avg[n] += int(temp[0][i][4])
+                        avg_score_avg[n] += int(float(temp[0][i][4]))
                         m += 1
 
         #print(avg_score_avg)
-        for i in range(len(lowest_score_avg)):  # 取上下十分
-            if lowest_score_avg[i] and highest_score_avg[i]:
-                if min(avg_score_avg[i], lowest_score_avg[i]) - 15 <= int(self.score) <= max(avg_score_avg[i],
-                                                                                             highest_score_avg[i]) + 20:
-                    school_list.append(i)
+        temp_dict = {}
+        for i in range(len(lowest_score_avg)):
+            if avg_score_avg[i]:
+                value = int(avg_score_avg[i])
+            elif lowest_score_avg[i] and highest_score_avg[i]:
+                value = int((int(lowest_score_avg[i]) + int(highest_score_avg[i])) / 2)
             else:
-                if avg_score_avg[i] - 15 <= int(self.score) <= avg_score_avg[i] + 20:
-                    school_list.append(i)
-            if len(school_list) > 30:
+                value = 0
+            if value != 0:
+                temp_dict[i] = value
+        # print(temp_dict)
+        sorted_temp_dict = sorted(temp_dict.items(), key=lambda e: e[1], reverse=True)
+        # print(len(sorted_temp_dict))
+        for i in range(len(sorted_temp_dict)):
+            if int(self.score) >= int(sorted_temp_dict[i][1]):
+                index = i
                 break
-            # 搜索分数线在考生附近的学校
-        if len(school_list) < 10:
-            for i in range(len(lowest_score_avg)):  # 取上下十分
-                if lowest_score_avg[i] and highest_score_avg[i]:
-                    if min(avg_score_avg[i], lowest_score_avg[i]) - 40 <= int(self.score) <= max(avg_score_avg[i],
-                                                                                                 highest_score_avg[
-                                                                                                     i]) + 20:
-                        school_list.append(i)
-                else:
-                    if avg_score_avg[i] - 40 <= int(self.score) <= avg_score_avg[i] + 20:
-                        school_list.append(i)
-                if len(school_list) > 30:
-                    break
+            if i == len(sorted_temp_dict) - 1:
+                index = len(sorted_temp_dict) - 1
+        # print(type(index))
+
+        if index == 0:
+            pass
+
+        elif index < 10:
+            # print('yes1')
+            for i in range(0, index):
+                school_list.append(sorted_temp_dict[i][0])
+
+        else:
+            if int(sorted_temp_dict[index - 10][1]) >= int(self.score) + 20:
+                # print('yes')
+                for i in range(index - 10, index):
+                    school_list.append(sorted_temp_dict[i][0])
+            else:
+                # print('yes2')
+                for i in range(index - 10, index):
+                    school_list.append(sorted_temp_dict[i][0])
+
+                up_line = 15
+                down_line = 5
+                for i in range(len(sorted_temp_dict)):
+                    if int(sorted_temp_dict[index][1]) + down_line <= sorted_temp_dict[i][1] <= int(
+                            sorted_temp_dict[index][1]) + up_line:
+                        school_list.append(sorted_temp_dict[i][0])
+
+        if index == len(sorted_temp_dict) - 1:
+            pass
+        elif index > len(sorted_temp_dict) - 7:
+            for i in range(index, len(sorted_temp_dict)):
+                school_list.append(sorted_temp_dict[i][0])
+        else:
+            # print('yes')
+            for i in range(index, index + 7):
+                school_list.append(sorted_temp_dict[i][0])
+            '''
+            up_line = -5
+            down_line = -10
+            for i in range(len(sorted_temp_dict)):
+                if int(sorted_temp_dict[index][1]) + down_line <= sorted_temp_dict[i][1] <= int(
+                        sorted_temp_dict[index][1]) + up_line:
+                    school_list.append(sorted_temp_dict[i][0])
+                    '''
+        school_list = list(set(school_list))
         #****************************************************************************************************************
         #原方案：
         high_risk_school = []
@@ -163,34 +231,144 @@ class recommand():
         low_school_rank_list = []
         normal_school_rank_list = []
         high_school_rank_list = []
-        print('school_list:')
-        print(school_list)
+        #print('school_list:')
+        #print(school_list)
         #print(list(schoolID_dictionary.keys())[list(schoolID_dictionary.values()).index('51')])
         for i in school_list:
-            db_list = "select 年份, 批次, 录取最低分, 录取平均分, 录取最高分, rank " \
-                      "from major_copy where 学校名称= %s and 省份 = %s and (科类= %s or 科类 = %s) and 一级学科 = %s "
+            db_list = "select 年份, 批次, 录取最低分, 录取平均分, 录取最高分 " \
+                      "from ecol_majors where 学校名称= %s and 省份 = %s and (科类= %s or 科类 = %s) and 一级学科 = %s "
             #school = self.DBh.select(['gaokaowang_schoolname'],['学校名称'],['ID = '+str(i)])
             #print(list(schoolID_dictionary.keys())['51'])
             school = list(schoolID_dictionary.keys())[list(schoolID_dictionary.values()).index(str(i))] #反向查找keys
-            val = [school, self.province, self.subject, 'sci-li',major]
+            val = [school, self.province, self.subject, '综合',major]
             cursor.execute(db_list, val)
             conn.commit()
             temp_list.append(cursor.fetchall()) #形式为[((年份,批次....),),] 第一个元祖是对应学校
 
+        rank_dict_1 = get_dict_yifenyidang(self.province, int(self.year) - 1, self.subject)
+        rank_dict_2 = get_dict_yifenyidang(self.province, int(self.year) - 2, self.subject)
+        rank_dict_3 = get_dict_yifenyidang(self.province, int(self.year) - 3, self.subject)
+        rank_dict_4 = get_dict_yifenyidang(self.province, int(self.year) - 4, self.subject)
+        rank_dict_5 = get_dict_yifenyidang(self.province, int(self.year) - 5, self.subject)
+
         line_rank = [[] for i in range(len(school_list))]
 
+        #rank_dict = get_dict_yifenyidang(self.province, self.year, self.subject)
         for i in range(len(school_list)):
             for j in range(len(temp_list[i])):
-                if temp_list[i][j][5]:
-                    line_rank[i].append(temp_list[i][j][5])
+                if temp_list[i][j][2]:
+                    n = int(self.year) - int(temp_list[i][j][0])
+                    if n == 1:
+                        current_score = int(float(temp_list[i][j][2]))
+                        if current_score < list(rank_dict_1.keys())[-1]:
+                            line_rank[i].append(list(rank_dict_1.values())[-1])
+                        elif current_score > list(rank_dict_1.keys())[0]:
+                            line_rank[i].append(list(rank_dict_1.values())[0])
+                        else:
+                            line_rank[i].append(rank_dict_1[current_score])
+                    if n == 2:
+                        current_score = int(float(temp_list[i][j][2]))
+                        if current_score < list(rank_dict_2.keys())[-1]:
+
+                            line_rank[i].append(list(rank_dict_2.values())[-1])
+                        elif current_score > list(rank_dict_2.keys())[0]:
+                            line_rank[i].append(list(rank_dict_2.values())[0])
+                        else:
+                            line_rank[i].append(rank_dict_2[current_score])
+                    if n == 3:
+                        current_score = int(float(temp_list[i][j][2]))
+                        if current_score < list(rank_dict_3.keys())[-1]:
+
+                            line_rank[i].append(list(rank_dict_3.values())[-1])
+                        elif current_score > list(rank_dict_3.keys())[0]:
+                            line_rank[i].append(list(rank_dict_3.values())[0])
+                        else:
+                            line_rank[i].append(rank_dict_3[current_score])
+                    if n == 4:
+                        current_score = int(float(temp_list[i][j][2]))
+                        if current_score < list(rank_dict_4.keys())[-1]:
+
+                            line_rank[i].append(list(rank_dict_4.values())[-1])
+                        elif current_score > list(rank_dict_4.keys())[0]:
+                            line_rank[i].append(list(rank_dict_4.values())[0])
+                        else:
+                            line_rank[i].append(rank_dict_4[current_score])
+                    if n == 5:
+                        current_score = int(float(temp_list[i][j][2]))
+                        if current_score < list(rank_dict_5.keys())[-1]:
+
+                            line_rank[i].append(list(rank_dict_5.values())[-1])
+                        elif current_score > list(rank_dict_5.keys())[0]:
+                            line_rank[i].append(list(rank_dict_5.values())[0])
+                        else:
+                            line_rank[i].append(rank_dict_5[current_score])
+
+                elif temp_list[i][j][3]:
+
+                    n = int(self.year) - int(temp_list[i][j][0])
+                    # print('n:')
+                    # print(n)
+                    if n == 1:
+                        # print(temp_list[i][j][3])
+                        # print(type(temp_list[i][j][3]))
+
+                        current_score = int(float(temp_list[i][j][3]))
+
+                        # print(list(rank_dict_1.keys())[-1])
+                        # print(list(rank_dict_1.keys())[0])
+                        if current_score < list(rank_dict_1.keys())[-1]:
+                            # print("year1")
+                            # print()
+                            line_rank[i].append(list(rank_dict_1.values())[-1])
+                        elif current_score > list(rank_dict_1.keys())[0]:
+                            line_rank[i].append(list(rank_dict_1.values())[0])
+                        else:
+                            line_rank[i].append(rank_dict_1[current_score])
+                    if n == 2:
+                        current_score = int(float(temp_list[i][j][3]))
+                        if current_score < list(rank_dict_2.keys())[-1]:
+
+                            line_rank[i].append(list(rank_dict_2.values())[-1])
+                        elif current_score > list(rank_dict_2.keys())[0]:
+                            line_rank[i].append(list(rank_dict_2.values())[0])
+                        else:
+                            line_rank[i].append(rank_dict_2[current_score])
+                    if n == 3:
+                        current_score = int(float(temp_list[i][j][3]))
+                        if current_score < list(rank_dict_3.keys())[-1]:
+
+                            line_rank[i].append(list(rank_dict_3.values())[-1])
+                        elif current_score > list(rank_dict_3.keys())[0]:
+                            line_rank[i].append(list(rank_dict_3.values())[0])
+                        else:
+                            line_rank[i].append(rank_dict_3[current_score])
+                    if n == 4:
+                        current_score = int(float(temp_list[i][j][3]))
+                        if current_score < list(rank_dict_4.keys())[-1]:
+
+                            line_rank[i].append(list(rank_dict_4.values())[-1])
+                        elif current_score > list(rank_dict_4.keys())[0]:
+                            line_rank[i].append(list(rank_dict_4.values())[0])
+                        else:
+                            line_rank[i].append(rank_dict_4[current_score])
+                    if n == 5:
+                        current_score = int(float(temp_list[i][j][3]))
+                        if current_score < list(rank_dict_5.keys())[-1]:
+
+                            line_rank[i].append(list(rank_dict_5.values())[-1])
+                        elif current_score > list(rank_dict_5.keys())[0]:
+                            line_rank[i].append(list(rank_dict_5.values())[0])
+                        else:
+                            line_rank[i].append(rank_dict_5[current_score])
+
         #print(line_rank)
         #print(len(line_rank))
         for i in range(len(school_list)):
-            if self.getRisk.risk_level(line_rank[i]) == 0:
+            if risk_level(self.rank,line_rank[i]) == 0:
                 low_risk_school.append(school_list[i])
-            if self.getRisk.risk_level(line_rank[i]) == 1:
+            if risk_level(self.rank,line_rank[i]) == 1:
                 normal_risk_school.append(school_list[i])
-            if self.getRisk.risk_level(line_rank[i]) == 2:
+            if risk_level(self.rank,line_rank[i]) == 2:
                 high_risk_school.append(school_list[i])
         #print('low:')
         #print(low_risk_school)
@@ -200,28 +378,30 @@ class recommand():
         #print(high_risk_school)
         # 分三个表存储高中低风险。school_and_rank存储的是每个学校对应的近几年平均分数对应的排名。
         for i in range(len(low_risk_school)):
-            school = list(schoolID_dictionary.keys())[list(schoolID_dictionary.values()).index(i)]
-            low_school_rank = self.DBh.select(['majors_copy'],['rank'],['学校名称='+school,'一级学科='+major])
+            #school = list(schoolID_dictionary.keys())[list(schoolID_dictionary.values()).index(i)]
+            low_school_rank = self.DBh.select(['ecol_schoolnames'], ['school_rank'], ['ID=' + str(low_risk_school[i])])
             #print(low_school_rank)
 
             low_school_rank_list.append(low_school_rank)
         #print(low_school_rank_list)
         for i in range(len(normal_risk_school)):
-
-
-            school = list(schoolID_dictionary.keys())[list(schoolID_dictionary.values()).index(i)]
-            normal_school_rank = self.DBh.select(['majors_copy'],['rank'],['学校名称='+school,'一级学科='+major])
+            #school = list(schoolID_dictionary.keys())[list(schoolID_dictionary.values()).index(i)]
+            normal_school_rank = self.DBh.select(['ecol_schoolnames'], ['school_rank'],
+                                                 ['ID=' + str(normal_risk_school[i])])
 
             normal_school_rank_list.append(normal_school_rank)
         for i in range(len(high_risk_school)):
-            school = list(schoolID_dictionary.keys())[list(schoolID_dictionary.values()).index(i)]
-            high_school_rank = self.DBh.select(['majors_copy'],['rank'],['学校名称='+school,'一级学科='+major])
+            #school = list(schoolID_dictionary.keys())[list(schoolID_dictionary.values()).index(i)]
+            high_school_rank = self.DBh.select(['ecol_schoolnames'], ['school_rank'],
+                                               ['ID=' + str(high_risk_school[i])])
+            #high_school_rank = self.DBh.select(['majors_copy'],['rank'],['学校名称='+school,'一级学科='+major])
 
             high_school_rank_list.append(high_school_rank)
 
         #主义是从哪里读取的排名
 
         # 分三个表存储高中低风险。school_and_rank存储的是每个学校对应的近几年平均分数对应的排名。
+        '''
         for i in range(len(low_risk_school)):
             low_school_rank = self.DBh.select(['gaokaowang_schoolname'],['school_rank'],['ID='+str(low_risk_school[i])])
             #print(low_school_rank)
@@ -236,10 +416,11 @@ class recommand():
             high_school_rank = self.DBh.select(['gaokaowang_schoolname'],['school_rank'],['ID='+str(high_risk_school[i])])
 
             high_school_rank_list.append(high_school_rank)
-
+        '''
         #主义是从哪里读取的排名
 
         # 分三个表存储高中低风险。school_and_rank存储的是每个学校对应的近几年平均分数对应的排名。
+        '''
         if len(low_risk_school) == 3:
             for i in range(len(low_risk_school)):
                 if low_school_rank_list[i]!= 100000:
@@ -414,10 +595,699 @@ class recommand():
 
 
         #e5 = time.clock()
+        '''
+        if len(high_risk_school) == 3:
+            for i in range(len(high_risk_school)):
+                if high_school_rank_list[i] != 100000:
+                    result_high_risk_school.append(high_risk_school[i])
+                    high_school_rank_list[i] = 100000
+            if len(result_high_risk_school) < 3:
+                N = len(result_high_risk_school)
+                if len(normal_risk_school) > 0:
+                    for i in range(3 - N):
+                        best = 0
+
+                        for j in range(len(normal_risk_school)):
+                            if int(normal_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+                        # 如果都被使用了，则换下一个
+                        if best == 0 and int(normal_school_rank_list[best]) == 100000:
+                            break
+
+                        for j in range(len(normal_risk_school)):
+                            if int(normal_school_rank_list[j]) != 100000:
+                                t = school_list.index(normal_risk_school[j])
+                                r = risk_rank(self.rank,line_rank[t])
+                                best_rank = risk_rank(self.rank,line_rank[school_list.index(normal_risk_school[best])])
+                                if int(normal_school_rank_list[j]) > 0 and 0.2 * r + 10 * int(
+                                        normal_school_rank_list[j]) > \
+                                        0.2 * best_rank + 10 * int(normal_school_rank_list[best]) and random.random()>0.3:
+                                    best = j
+                                if int(normal_school_rank_list[j]) == 0 and r > best_rank and random.random() > 0.5:
+                                    best = j
+                        if int(normal_school_rank_list[best]) != 100000:
+                            result_high_risk_school.append(normal_risk_school[best])
+                            normal_school_rank_list[best] = 100000
+                            N += 1
+                if N < 3 and len(low_risk_school) > 0:
+                    for i in range(3 - N):
+                        best = 0
+
+                        for j in range(len(low_risk_school)):
+                            if int(low_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+
+                        for j in range(len(low_risk_school)):
+                            if int(low_school_rank_list[j]) != 100000:
+                                t = school_list.index(low_risk_school[j])
+                                r = risk_rank(self.rank,line_rank[t])
+                                best_rank = risk_rank(self.rank,line_rank[school_list.index(low_risk_school[best])])
+                                if  int(low_school_rank_list[j]) > int(
+                                        low_school_rank_list[best]) and random.random() > 0.3:
+                                    best = j
+                                if int(low_school_rank_list[j]) == 0 and r > best_rank and random.random() > 0.5:
+                                    best = j
+                        if int(low_school_rank_list[best]) != 100000:
+                            result_high_risk_school.append(low_risk_school[best])
+                            low_school_rank_list[best] = 100000
+
+        elif len(high_risk_school) < 3:
+            N = 0
+            for i in range(len(high_risk_school)):
+                if high_school_rank_list[i] != 100000:
+                    result_high_risk_school.append(high_risk_school[i])
+                    high_school_rank_list[i] = 100000
+                    N += 1
+            if len(normal_risk_school) > 0:
+                for i in range(3 - N):
+                    best = 0
+
+                    for j in range(len(normal_risk_school)):
+                        if int(normal_school_rank_list[j]) != 100000:
+                            best = j
+                            break
+                    # 如果都被使用了，则换下一个
+                    if best == 0 and int(normal_school_rank_list[best]) == 100000:
+                        break
+
+                    for j in range(len(normal_risk_school)):
+                        if int(normal_school_rank_list[j]) != 100000:
+                            t = school_list.index(normal_risk_school[j])
+                            r = risk_rank(self.rank, line_rank[t])
+                            best_rank = risk_rank(self.rank, line_rank[school_list.index(normal_risk_school[best])])
+                            if int(normal_school_rank_list[j]) > 0 and 0.2 * r + 10 * int(
+                                    normal_school_rank_list[j]) > \
+                                    0.2 * best_rank + 10 * int(normal_school_rank_list[best]) and random.random() > 0.3:
+                                best = j
+                            if int(normal_school_rank_list[j]) == 0 and r > best_rank and random.random() > 0.5:
+                                best = j
+                    if int(normal_school_rank_list[best]) != 100000:
+                        result_high_risk_school.append(normal_risk_school[best])
+                        normal_school_rank_list[best] = 100000
+                        N += 1
+            if N < 3 and len(low_risk_school) > 0:
+                for i in range(3 - N):
+                    best = 0
+
+                    for j in range(len(low_risk_school)):
+                        if int(low_school_rank_list[j]) != 100000:
+                            best = j
+                            break
+
+                    for j in range(len(low_risk_school)):
+                        if int(low_school_rank_list[j]) != 100000:
+                            t = school_list.index(low_risk_school[j])
+                            r = risk_rank(self.rank, line_rank[t])
+                            best_rank = risk_rank(self.rank, line_rank[school_list.index(low_risk_school[best])])
+                            if    int(low_school_rank_list[j]) > int(
+                                    low_school_rank_list[best]) >= 0 and random.random() >0.3:
+                                best = j
+                            if int(low_school_rank_list[j]) == 0 and r > best_rank and random.random() > 0.5:
+                                best = j
+                    if int(low_school_rank_list[best]) != 100000:
+                        result_high_risk_school.append(low_risk_school[best])
+                        low_school_rank_list[best] = 100000
+            '''
+            if len(normal_risk_school) > 0:
+                for i in range(3 - N):
+                    best = 0
+                    for j in range(len(normal_risk_school)):
+                        t = school_list.index(normal_risk_school[j])
+                        r = risk_rank(self.rank,line_rank[t])
+                        best_rank = risk_rank(self.rank,line_rank[school_list.index(normal_risk_school[best])])
+                        if int(normal_school_rank_list[j]) > 0 and 0.2 * r + 10 * int(
+                                normal_school_rank_list[j]) < \
+                                0.2 * best_rank + 10 * int(normal_school_rank_list[best]):
+                            best = j
+                        #print(type(r))
+                        #print(type(best_rank))
+                        if int(normal_school_rank_list[j]) == 0 and (r < best_rank) or random.random() > 0.7:
+                            best = j
+                    if int(normal_school_rank_list[best]) != 100000:
+                        result_high_risk_school.append(normal_risk_school[best])
+                        normal_school_rank_list[best] = 100000
+                        N += 1
+            if N < 3 and len(low_risk_school) > 0:
+                for i in range(3 - N):
+                    best = 0
+                    for j in range(len(low_risk_school)):
+                        t = school_list.index(low_risk_school[j])
+                        r = risk_rank(self.rank,line_rank[t])
+                        best_rank = risk_rank(self.rank,line_rank[school_list.index(low_risk_school[best])])
+                        if 0 < int(low_school_rank_list[j]) < int(
+                                low_school_rank_list[best]):
+                            best = j
+                        if int(low_school_rank_list[j]) == 0 and r < best_rank:
+                            best = j
+                    if int(low_school_rank_list[best]) != 100000:
+                        result_high_risk_school.append(low_risk_school[best])
+                        low_school_rank_list[best] = 100000
+                        '''
+        else:
+            # for i in range(3):
+            a = 0 #记录有几个学校没被用到
+            for i in range(len(high_school_rank_list)):
+                if high_school_rank_list[i] != 100000:
+                    a += 1
+            if  a >=3:
+                while len(result_high_risk_school) < 3:
+                    best = 0
+                    #print(high_school_rank_list)
+                    for j in range(len(high_risk_school)):
+                        if int(high_school_rank_list[j]) != 100000:
+                            best = j
+                            break
+                    for j in range(len(high_risk_school)):
+                        if int(high_school_rank_list[j]) != 100000:
+                            t = school_list.index(high_risk_school[j])
+                            r = risk_rank(self.rank, line_rank[t])
+                            if r > risk_rank(self.rank, line_rank[school_list.index(high_risk_school[best])]) and random.random()>0.3:
+                                best = j
+                    result_high_risk_school.append(high_risk_school[best])
+                    high_school_rank_list[best] = 100000
+            else:
+                N = 0
+                for i in range(len(high_risk_school)):
+                    if high_school_rank_list[i] != 100000:
+                        result_high_risk_school.append(high_risk_school[i])
+                        high_school_rank_list[i] = 100000
+                        N += 1
+                if len(normal_risk_school) > 0:
+                    for i in range(3 - N):
+                        best = 0
+
+                        for j in range(len(normal_risk_school)):
+                            if int(normal_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+                        # 如果都被使用了，则换下一个
+                        if best == 0 and int(normal_school_rank_list[best]) == 100000:
+                            break
+
+                        for j in range(len(normal_risk_school)):
+                            if int(normal_school_rank_list[j]) != 100000:
+                                t = school_list.index(normal_risk_school[j])
+                                r = risk_rank(self.rank, line_rank[t])
+                                best_rank = risk_rank(self.rank, line_rank[school_list.index(normal_risk_school[best])])
+                                if int(normal_school_rank_list[j]) > 0 and 0.2 * r + 10 * int(
+                                        normal_school_rank_list[j]) > \
+                                        0.2 * best_rank + 10 * int(normal_school_rank_list[best]) and random.random() > 0.3:
+                                    best = j
+                                if int(normal_school_rank_list[j]) == 0 and r > best_rank and random.random() > 0.5:
+                                    best = j
+                        if int(normal_school_rank_list[best]) != 100000:
+                            result_high_risk_school.append(normal_risk_school[best])
+                            normal_school_rank_list[best] = 100000
+                            N += 1
+                if N < 3 and len(low_risk_school) > 0:
+                    for i in range(3 - N):
+                        best = 0
+
+                        for j in range(len(low_risk_school)):
+                            if int(low_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+
+                        for j in range(len(low_risk_school)):
+                            if int(low_school_rank_list[j]) != 100000:
+                                t = school_list.index(low_risk_school[j])
+                                r = risk_rank(self.rank, line_rank[t])
+                                best_rank = risk_rank(self.rank, line_rank[school_list.index(low_risk_school[best])])
+                                if int(low_school_rank_list[j]) > int(
+                                        low_school_rank_list[best]) >= 0 and random.random() > 0.4:
+                                    best = j
+                                if int(low_school_rank_list[j]) == 0 and r > best_rank and random.random() > 0.5:
+                                    best = j
+                        if int(low_school_rank_list[best]) != 100000:
+                            result_high_risk_school.append(low_risk_school[best])
+                            low_school_rank_list[best] = 100000
 
 
 
+        if len(low_risk_school) == 3:
+            for i in range(len(low_risk_school)):
+                if low_school_rank_list[i] != 100000:
+                    result_low_risk_school.append(low_risk_school[i])
+                    low_school_rank_list[i] = 100000
+
+            if len(result_low_risk_school) < 3:
+                N = len(result_low_risk_school)
+                if len(normal_risk_school) > 0:
+                    for i in range(3 - N):
+                        best = 0
+                        #先取一个没有被选中的作为起始best
+                        for j in range(len(normal_risk_school)):
+                            if int(normal_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+                        #如果都被使用了，则换下一个
+                        if best == 0 and int(normal_school_rank_list[best]) == 100000:
+                            break
+                        #筛选最佳
+                        for j in range(len(normal_risk_school)):
+                            if int(normal_school_rank_list[j]) != 100000:
+                                t = school_list.index(normal_risk_school[j])
+                                r = risk_rank(self.rank,line_rank[t])
+                                best_rank = risk_rank(self.rank,line_rank[school_list.index(normal_risk_school[best])])
+                                if int(normal_school_rank_list[j]) > 0 and 0.2 * r + 10 * int(
+                                        normal_school_rank_list[j]) < \
+                                        0.2 * best_rank + 10 * int(normal_school_rank_list[best]) and random.random() > 0.3:
+                                    best = j
+                                if int(normal_school_rank_list[j]) == 0 and r < best_rank and random.random() > 0.5:
+                                    best = j
+
+                        if int(normal_school_rank_list[best]) != 100000:
+                            result_low_risk_school.append(normal_risk_school[best])
+                            normal_school_rank_list[best] = 100000
+                            N += 1
+
+                if N < 3 and len(high_risk_school) > 0:
+                    for i in range(3 - N):
+                        best = 0
+
+                        for j in range(len(high_risk_school)):
+                            if int(high_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+
+                        for j in range(len(high_risk_school)):
+                            if int(high_school_rank_list[j]) != 100000:
+                                t = school_list.index(high_risk_school[j])
+                                r = risk_rank(self.rank,line_rank[t])
+                                best_rank = risk_rank(self.rank,line_rank[school_list.index(high_risk_school[best])])
+                                if r < best_rank and int(high_school_rank_list[j]) != 100000 and random.random() > 0.5:
+                                    best = j
+                        result_low_risk_school.append(high_risk_school[best])
+                        high_school_rank_list[best] = 100000
+
+        elif len(low_risk_school) < 3:
+
+            N = 0
+            for i in range(len(low_risk_school)):
+                if low_school_rank_list[i] != 100000:
+                    result_low_risk_school.append(low_risk_school[i])
+                    low_school_rank_list[i] = 100000
+                    N += 1
+
+            #print(N)
+
+            if len(normal_risk_school) > 0:
+                for i in range(3 - N):
+
+                    #print(normal_school_rank_list)
+
+                    best = 0
+                    # 先取一个没有被选中的作为起始best
+                    for j in range(len(normal_risk_school)):
+                        if int(normal_school_rank_list[j]) != 100000:
+                            best = j
+                            break
+                    # 如果都被使用了，则换下一个
+                    if best == 0 and int(normal_school_rank_list[best]) == 100000:
+                        break
+                    # 筛选最佳
+                    for j in range(len(normal_risk_school)):
+                        if int(normal_school_rank_list[j]) != 100000:
+                            t = school_list.index(normal_risk_school[j])
+                            r = risk_rank(self.rank, line_rank[t])
+                            best_rank = risk_rank(self.rank, line_rank[school_list.index(normal_risk_school[best])])
+                            if int(normal_school_rank_list[j]) > 0 and 0.2 * r + 10 * int(
+                                    normal_school_rank_list[j]) < \
+                                    0.2 * best_rank + 10 * int(normal_school_rank_list[best]) and random.random() > 0.2:
+                                best = j
+                            if int(normal_school_rank_list[j]) == 0 and r < best_rank and random.random() > 0.4:
+                                best = j
+
+                    if int(normal_school_rank_list[best]) != 100000:
+                        result_low_risk_school.append(normal_risk_school[best])
+                        normal_school_rank_list[best] = 100000
+                        N += 1
+                    #print(normal_school_rank_list)
+
+            if N < 3 and len(high_risk_school) > 0:
+                for i in range(3 - N):
+                    best = 0
+
+                    for j in range(len(high_risk_school)):
+                        if int(high_school_rank_list[j]) != 100000:
+                            best = j
+                            break
+
+                    for j in range(len(high_risk_school)):
+                        if int(high_school_rank_list[j]) != 100000:
+                            t = school_list.index(high_risk_school[j])
+                            r = risk_rank(self.rank, line_rank[t])
+                            best_rank = risk_rank(self.rank, line_rank[school_list.index(high_risk_school[best])])
+                            if r < best_rank and int(high_school_rank_list[j]) != 100000 and random.random() > 0.2:
+                                best = j
+                    result_low_risk_school.append(high_risk_school[best])
+                    high_school_rank_list[best] = 100000
+            '''
+            if len(normal_risk_school) > 0:
+                for i in range(3 - N):
+                    best = 0
+                    for j in range(len(normal_risk_school)):
+                        t = school_list.index(normal_risk_school[j])
+                        r = risk_rank(self.rank,line_rank[t])
+                        best_rank = risk_rank(self.rank,line_rank[school_list.index(normal_risk_school[best])])
+                        if int(normal_school_rank_list[j]) != 100000 and int(normal_school_rank_list[j]) > 0 and 0.2 * r + 10 * int(
+                                normal_school_rank_list[j]) < \
+                                0.2 * best_rank + 10 * int(normal_school_rank_list[best]) or random.random()>0.7:
+                            best = j
+                        if int(normal_school_rank_list[j]) == 0 and r < best_rank:
+                            best = j
+                    if int(normal_school_rank_list[best]) != 100000:
+                        result_low_risk_school.append(normal_risk_school[best])
+                        normal_school_rank_list[best] = 100000
+                        N += 1
+            if N < 3 and len(high_risk_school) > 0:
+                for i in range(3 - N):
+                    best = 0
+                    for j in range(len(high_risk_school)):
+                        t = school_list.index(high_risk_school[j])
+                        r = risk_rank(self.rank,line_rank[t])
+                        best_rank =risk_rank(self.rank,line_rank[school_list.index(high_risk_school[best])])
+                        if r < best_rank and int(high_school_rank_list[j]) != 100000:
+                            best = j
+                    result_low_risk_school.append(high_risk_school[best])
+                    high_school_rank_list[best] = 100000
+                    '''
+        else:
+            #print('yes')
+            # for i in range(3):
+            a = 0
+            for i in range(len(low_risk_school)):
+                if low_school_rank_list[i] != 100000:
+                    a+=1
+            if a >= 3:
+                while len(result_low_risk_school) < 3:
+                    best = 0
+                    for j in range(len(low_risk_school)):
+                        if int(low_school_rank_list[j]) != 100000:
+                            best = j
+                            break
+                    #print(best)
+                    for j in range(len(low_risk_school)):
+                        if int(low_school_rank_list[j]) != 100000:
+                            t = school_list.index(low_risk_school[j])
+                            r = risk_rank(self.rank, line_rank[t])
+                            if r > risk_rank(self.rank, line_rank[school_list.index(low_risk_school[best])]) and random.random() > 0.4:
+                                best = j
+                    if int(low_school_rank_list[best]) != 100000:
+                        result_low_risk_school.append(low_risk_school[best])
+                        low_school_rank_list[best] = 100000
+            else:
+                N = 0
+                for i in range(len(low_risk_school)):
+                    if low_school_rank_list[i] != 100000:
+                        result_low_risk_school.append(low_risk_school[i])
+                        low_school_rank_list[i] = 100000
+                        N += 1
+
+                # print(N)
+
+                if len(normal_risk_school) > 0:
+                    for i in range(3 - N):
+
+                        # print(normal_school_rank_list)
+
+                        best = 0
+                        # 先取一个没有被选中的作为起始best
+                        for j in range(len(normal_risk_school)):
+                            if int(normal_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+                        # 如果都被使用了，则换下一个
+                        if best == 0 and int(normal_school_rank_list[best]) == 100000:
+                            break
+                        # 筛选最佳
+                        for j in range(len(normal_risk_school)):
+                            if int(normal_school_rank_list[j]) != 100000:
+                                t = school_list.index(normal_risk_school[j])
+                                r = risk_rank(self.rank, line_rank[t])
+                                best_rank = risk_rank(self.rank, line_rank[school_list.index(normal_risk_school[best])])
+                                if int(normal_school_rank_list[j]) > 0 and 0.2 * r + 10 * int(
+                                        normal_school_rank_list[j]) < \
+                                        0.2 * best_rank + 10 * int(normal_school_rank_list[best]) and random.random() > 0.2:
+                                    best = j
+                                if int(normal_school_rank_list[j]) == 0 and r < best_rank and random.random()>0.5:
+                                    best = j
+
+                        if int(normal_school_rank_list[best]) != 100000:
+                            result_low_risk_school.append(normal_risk_school[best])
+                            normal_school_rank_list[best] = 100000
+                            N += 1
+                        # print(normal_school_rank_list)
+
+                if N < 3 and len(high_risk_school) > 0:
+                    for i in range(3 - N):
+                        best = 0
+
+                        for j in range(len(high_risk_school)):
+                            if int(high_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+
+                        for j in range(len(high_risk_school)):
+                            if int(high_school_rank_list[j]) != 100000:
+                                t = school_list.index(high_risk_school[j])
+                                r = risk_rank(self.rank, line_rank[t])
+                                best_rank = risk_rank(self.rank, line_rank[school_list.index(high_risk_school[best])])
+                                if r < best_rank and int(high_school_rank_list[j]) != 100000 and random.random() > 0.2:
+                                    best = j
+                        result_low_risk_school.append(high_risk_school[best])
+                        high_school_rank_list[best] = 100000
+
+        #print(result_low_risk_school)
+        # 中等风险学校
+        if len(normal_risk_school) == 4:  # 中风险度
+            for i in range(len(normal_risk_school)):
+                if normal_school_rank_list[i] != 100000:
+                    result_mid_risk_school.append(normal_risk_school[i])
+                    normal_school_rank_list[i] = 100000
+
+            if len(result_mid_risk_school) < 4:
+                N = len(result_mid_risk_school)
+                if len(high_risk_school) > 0:
+                    for i in range(4 - N):
+                        best = 0
+
+                        for j in range(len(high_risk_school)):
+                            if int(high_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+                        # 如果都被使用了，则换下一个
+                        if best == 0 and int(high_school_rank_list[best]) == 100000:
+                            break
+
+                        for j in range(len(high_risk_school)):
+                            if int(high_school_rank_list[j]) != 100000:
+                                t = school_list.index(high_risk_school[j])
+                                r = risk_rank(self.rank,line_rank[t])
+                                best_rank = risk_rank(self.rank,line_rank[school_list.index(high_risk_school[best])])
+                                if r > best_rank and int(high_school_rank_list[j]) != 100000 and random.random() > 0.2:
+                                    best = j
+                        result_mid_risk_school.append(high_risk_school[best])
+                        high_school_rank_list[best] = 100000
+                        N += 1
+
+                if N < 4 and len(low_risk_school) > 0:
+                    for i in range(4 - N):
+                        best = 0
+
+                        for j in range(len(low_risk_school)):
+                            if int(low_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+
+                        for j in range(len(low_risk_school)):
+                            if int(low_school_rank_list[j]) !=100000:
+                                t = school_list.index(low_risk_school[j])
+                                r = risk_rank(self.rank,line_rank[t])
+                                best_rank = risk_rank(self.rank,line_rank[school_list.index(low_risk_school[best])])
+                                if 0 < int(low_school_rank_list[j]) < int(
+                                        low_school_rank_list[best]):
+                                    best = j
+                                if int(low_school_rank_list[j]) == 0 and r > best_rank and random.random() > 0.3:
+                                    best = j
+
+                        if int(low_school_rank_list[best]) != 100000:
+                            result_mid_risk_school.append(low_risk_school[best])
+                            low_school_rank_list[best] = 100000
+
+        elif len(normal_risk_school) < 4:
+            #print('yes')
+            N = 0
+            for i in range(len(normal_risk_school)):
+                if normal_school_rank_list[i] != 100000:
+                    result_mid_risk_school.append(normal_risk_school[i])
+                    normal_school_rank_list[i] = 100000
+                    N += 1
+
+            if len(high_risk_school) > 0:
+                for i in range(4 - N):
+                    best = 0
+
+                    for j in range(len(high_risk_school)):
+                        if int(high_school_rank_list[j]) != 100000:
+                            best = j
+                            break
+                    # 如果都被使用了，则换下一个
+                    if best == 0 and int(high_school_rank_list[best]) == 100000:
+                        break
+
+                    for j in range(len(high_risk_school)):
+                        if int(high_school_rank_list[j]) != 100000:
+                            t = school_list.index(high_risk_school[j])
+                            r = risk_rank(self.rank, line_rank[t])
+                            best_rank = risk_rank(self.rank, line_rank[school_list.index(high_risk_school[best])])
+                            if r < best_rank and int(high_school_rank_list[j]) != 100000 and random.random() > 0.2:
+                                best = j
+                    result_mid_risk_school.append(high_risk_school[best])
+                    high_school_rank_list[best] = 100000
+                    N += 1
+
+            if N < 4 and len(low_risk_school) > 0:
+                for i in range(4 - N):
+                    best = 0
+
+                    for j in range(len(low_risk_school)):
+                        if int(low_school_rank_list[j]) != 100000:
+                            best = j
+                            break
+
+                    for j in range(len(low_risk_school)):
+                        if int(low_school_rank_list[j]) != 100000:
+                            t = school_list.index(low_risk_school[j])
+                            r = risk_rank(self.rank, line_rank[t])
+                            best_rank = risk_rank(self.rank, line_rank[school_list.index(low_risk_school[best])])
+                            if 0 < int(low_school_rank_list[j]) < int(
+                                    low_school_rank_list[best]) and random.random() > 0.2:
+                                best = j
+                            if int(low_school_rank_list[j]) == 0 and r > best_rank and random.random() > 0.3:
+                                best = j
+
+                    if int(low_school_rank_list[best]) != 100000:
+                        result_mid_risk_school.append(low_risk_school[best])
+                        low_school_rank_list[best] = 100000
+
+            '''
+            if len(high_risk_school) > 0:
+                for i in range(4 - N):
+                    best = 0
+                    for j in range(len(high_risk_school)):
+                        t = school_list.index(high_risk_school[j])
+                        r = risk_rank(self.rank,line_rank[t])
+                        best_rank = risk_rank(self.rank,line_rank[school_list.index(high_risk_school[best])])
+                        if (r < best_rank or random.random() > 0.7) and int(high_school_rank_list[j]) != 100000  :
+                            best = j
+                    result_mid_risk_school.append(high_risk_school[best])
+                    high_school_rank_list[best] = 100000
+                    N += 1
+            if N < 4 and len(low_risk_school) > 0:
+                for i in range(4 - N):
+                    best = 0
+                    for j in range(len(low_risk_school)):
+                        t = school_list.index(low_risk_school[j])
+                        r = risk_rank(self.rank,line_rank[t])
+                        best_rank = risk_rank(self.rank,line_rank[school_list.index(low_risk_school[best])])
+                        if 0 < int(low_school_rank_list[j]) < int(
+                                low_school_rank_list[best]):
+                            best = j
+                        if int(low_school_rank_list[j]) == 0 and r < best_rank or random.random() >0.7:
+                            best = j
+                    if int(low_school_rank_list[best]) != 100000:
+                        result_mid_risk_school.append(low_risk_school[best])
+                        low_school_rank_list[best] = 100000
+                        '''
+        else:
+            #print(normal_school_rank_list)
+            #print('yes')
+            # for i in range(3):
+            a = 0
+            for i in range(len(normal_school_rank_list)):
+                if normal_school_rank_list[i] != 100000:
+                    a += 1
+            if a >= 4:
+                while len(result_mid_risk_school) < 4:
+                    #print(normal_school_rank_list)
+                    best = 0
+                    for j in range(len(normal_risk_school)):
+                        if int(normal_school_rank_list[j]) != 100000:
+                            best = j
+                            break
+                    #print(best)
+
+
+                    for j in range(len(normal_risk_school)):
+                        if int(normal_school_rank_list[j]) != 100000:
+                            t = school_list.index(normal_risk_school[j])
+                            r = risk_rank(self.rank, line_rank[t])
+                            if r > risk_rank(self.rank, line_rank[school_list.index(normal_risk_school[best])]) and random.random() > 0.2:
+                                best = j
+                    if int(normal_school_rank_list[best]) != 100000:
+                        result_mid_risk_school.append(normal_risk_school[best])
+                        normal_school_rank_list[best] = 100000
+            else:
+                N = 0
+                for i in range(len(normal_risk_school)):
+                    if normal_school_rank_list[i] != 100000:
+                        result_mid_risk_school.append(normal_risk_school[i])
+                        normal_school_rank_list[i] = 100000
+                        N += 1
+
+                if len(high_risk_school) > 0:
+                    for i in range(4 - N):
+                        best = 0
+
+                        for j in range(len(high_risk_school)):
+                            if int(high_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+                        # 如果都被使用了，则换下一个
+                        if best == 0 and int(high_school_rank_list[best]) == 100000:
+                            break
+
+                        for j in range(len(high_risk_school)):
+                            if int(high_school_rank_list[j]) != 100000:
+                                t = school_list.index(high_risk_school[j])
+                                r = risk_rank(self.rank, line_rank[t])
+                                best_rank = risk_rank(self.rank, line_rank[school_list.index(high_risk_school[best])])
+                                if r < best_rank and int(high_school_rank_list[j]) != 100000:
+                                    best = j
+                        result_mid_risk_school.append(high_risk_school[best])
+                        high_school_rank_list[best] = 100000
+                        N += 1
+
+                if N < 4 and len(low_risk_school) > 0:
+                    for i in range(4 - N):
+                        best = 0
+
+                        for j in range(len(low_risk_school)):
+                            if int(low_school_rank_list[j]) != 100000:
+                                best = j
+                                break
+
+                        for j in range(len(low_risk_school)):
+                            if int(low_school_rank_list[j]) != 100000:
+                                t = school_list.index(low_risk_school[j])
+                                r = risk_rank(self.rank, line_rank[t])
+                                best_rank = risk_rank(self.rank, line_rank[school_list.index(low_risk_school[best])])
+                                if 0 < int(low_school_rank_list[j]) < int(
+                                        low_school_rank_list[best]):
+                                    best = j
+                                if int(low_school_rank_list[j]) == 0 and r > best_rank:
+                                    best = j
+
+                        if int(low_school_rank_list[best]) != 100000:
+                            result_mid_risk_school.append(low_risk_school[best])
+                            low_school_rank_list[best] = 100000
+
+        #print(result_high_risk_school, result_mid_risk_school, result_low_risk_school)
         return result_high_risk_school, result_mid_risk_school, result_low_risk_school
+
 
     def majors_recommand(self):
         store_low_school_all = []
@@ -425,13 +1295,14 @@ class recommand():
         store_high_school_all = []
         #把每个学校的顺序排入
         for i in range(len(self.majors)):
-            print('majors')
-            print(i)
+            #print('majors')
+            #print(i)
             store_high_school,store_mid_school,store_low_school = self.major_recommand(self.majors[i])
             store_high_school_all +=store_high_school
             store_low_school_all += store_low_school
             store_mid_school_all += store_mid_school
         #返回出现频率最高的学校
+        #print(store_high_school_all,store_mid_school_all,store_low_school_all)
         high_school_dict = {}
         mid_school_dict = {}
         low_school_dict ={}
@@ -442,6 +1313,10 @@ class recommand():
         for school in store_high_school_all:
             high_school_dict[school] = store_high_school_all.count(school)
         high_school_dict = sorted(high_school_dict.items(),key = lambda item:item[0])
+        #print(high_school_dict)
+        for i in range(len(high_school_dict)):
+            if i < 3:
+                result_high_school.append(high_school_dict[i][0])
         '''
         for i in range(3):
             result_high_school.append(list(high_school_dict.keys())[i])
@@ -449,6 +1324,9 @@ class recommand():
         for school in store_mid_school_all:
             mid_school_dict[school] = store_mid_school_all.count(school)
         mid_school_dict = sorted(mid_school_dict.items(),key = lambda item:item[0])
+        for i in range(len(mid_school_dict)):
+            if i < 4:
+                result_mid_school.append(mid_school_dict[i][0])
         '''
         for i in range(3):
             result_mid_school.append(list(mid_school_dict.keys())[i])
@@ -456,6 +1334,10 @@ class recommand():
         for school in store_low_school_all:
             low_school_dict[school] = store_low_school_all.count(school)
         low_school_dict = sorted(low_school_dict.items(),key = lambda item:item[0])
+        for i in range(len(low_school_dict)):
+            if i < 3:
+                result_low_school.append(low_school_dict[i][0])
+
         '''
         for i in range(3):
             result_low_school.append(list(low_school_dict.keys())[i])
