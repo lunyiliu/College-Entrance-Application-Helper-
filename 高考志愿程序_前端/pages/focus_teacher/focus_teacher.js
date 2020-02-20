@@ -40,13 +40,8 @@ Page({
     objectmultiArray1: [
     ],
     
-<<<<<<< HEAD
     multiIndex1: [0,0],
     multiIndex2: [0,0],
-=======
-    multiIndex1: app.globalData.multiindex1,
-    multiIndex2: app.globalData.multiindex2,
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     multiIndex3: app.globalData.multiindex3,
     multiIndex4: app.globalData.multiindex4,
     multiIndex5: app.globalData.multiindex5,
@@ -2060,7 +2055,6 @@ Page({
     //添加、取消关注
     var i = parseInt(e.currentTarget.dataset.id)
     console.log(this.data.multiIndex1)
-<<<<<<< HEAD
     if (this.data.multiIndex1[0]==0)
     {
       wx.showModal({
@@ -2102,38 +2096,6 @@ Page({
       }
     }
      
-=======
-    if (e.currentTarget.dataset.click == 'start1')
-     {
-      var up = "start1[" + i + "]";
-      this.setData
-      ({
-        [up]: '0'
-      })
-      app.globalData.FocusSchool.push(this.data.multiArray1[1][this.data.multiIndex1[1]])
-      app.globalData.multiindex1.push(this.data.multiIndex1[0])
-      app.globalData.multiindex1.push(this.data.multiIndex1[1])
-      console.log(this.data.multiArray1[1],app.globalData.multiindex1[2])
-   //   console.log(app.globalData.FocusSchoolID)
-    } 
-    else
-     {
-      var up = "start1[" + i + "]";
-      this.setData({
-        [up]: '1'
-      })
-      for (var index in app.globalData.FocusSchool) 
-      {
-        if (this.data.SchoolName[i] == app.globalData.FocusSchool[index]) 
-        {
-          app.globalData.FocusSchool.splice(index, 1)
-          app.globalData.FocusSchoolID.splice(index, 1)
-          console.log(app.globalData.FocusSchool)
-          console.log(app.globalData.FocusSchoolID)
-        }
-      }
-    }
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
   },
 
 
@@ -2141,7 +2103,6 @@ Page({
     //添加、取消关注
     var i = parseInt(e.currentTarget.dataset.id)
     console.log(this.data.multiIndex2)
-<<<<<<< HEAD
      if (this.data.multiIndex2[0] == 0) {
        wx.showModal({
          title: '提示',
@@ -2154,9 +2115,6 @@ Page({
      }
      else
     {if (e.currentTarget.dataset.click == 'start2') {
-=======
-    if (e.currentTarget.dataset.click == 'start2') {
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       var up = "start2[" + i + "]";
       this.setData({
         [up]: '0'
@@ -2179,18 +2137,13 @@ Page({
           console.log(app.globalData.FocusSchoolID)
         }
       }
-<<<<<<< HEAD
     }}
-=======
-    }
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
   },
  
   addfocus3: function (e) {
     //添加、取消关注
     var i = parseInt(e.currentTarget.dataset.id)
     console.log(this.data.multiIndex3)
-<<<<<<< HEAD
     if (this.data.multiIndex3[0] == 0) {
       wx.showModal({
         title: '提示',
@@ -2203,9 +2156,6 @@ Page({
     }
     else
     {if (e.currentTarget.dataset.click == 'start3') {
-=======
-    if (e.currentTarget.dataset.click == 'start3') {
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       var up = "start3[" + i + "]";
       this.setData({
         [up]: '0'
@@ -2227,11 +2177,7 @@ Page({
           console.log(app.globalData.FocusSchool)
           console.log(app.globalData.FocusSchoolID)
         }
-<<<<<<< HEAD
       }}
-=======
-      }
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     }
   },
 
@@ -2239,7 +2185,6 @@ Page({
     //添加、取消关注
     var i = parseInt(e.currentTarget.dataset.id)
     console.log(this.data.multiIndex4)
-<<<<<<< HEAD
     if (this.data.multiIndex4[0] == 0) {
       wx.showModal({
         title: '提示',
@@ -2252,9 +2197,6 @@ Page({
     }
     else
     {if (e.currentTarget.dataset.click == 'start4') {
-=======
-    if (e.currentTarget.dataset.click == 'start4') {
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       var up = "start4[" + i + "]";
       this.setData({
         [up]: '0'
@@ -2277,18 +2219,13 @@ Page({
           console.log(app.globalData.FocusSchoolID)
         }
       }
-<<<<<<< HEAD
     }}
-=======
-    }
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
   },
 
   addfocus5: function (e) {
     //添加、取消关注
     var i = parseInt(e.currentTarget.dataset.id)
     console.log(this.data.multiIndex5)
-<<<<<<< HEAD
     if (this.data.multiIndex5[0] == 0) {
       wx.showModal({
         title: '提示',
@@ -2301,9 +2238,6 @@ Page({
     }
     else
     {if (e.currentTarget.dataset.click == 'start5') {
-=======
-    if (e.currentTarget.dataset.click == 'start5') {
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       var up = "start5[" + i + "]";
       this.setData({
         [up]: '0'
@@ -2326,7 +2260,6 @@ Page({
           console.log(app.globalData.FocusSchoolID)
         }
       }
-<<<<<<< HEAD
     }}
   },
   jumptohome_tea:function()
@@ -2347,14 +2280,5 @@ Page({
         url: '../home_teacher/home_teacher',
       })}
     
-=======
-    }
-  },
-  jumptohome_tea:function()
-  {
-    wx.redirectTo({
-      url: '../home_teacher/home_teacher',
-    })
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
   }
 })

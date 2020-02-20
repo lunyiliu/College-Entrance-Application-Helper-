@@ -52,7 +52,7 @@ for year in range(2014,2018):
             ('page', page),
             ('year', year),
             ('type', ''),
-            ('local_type_id', '2'),
+            ('local_type_id', ''),
             ('f211', ''),
             ('f985', ''),
             ('dual_class', ''),

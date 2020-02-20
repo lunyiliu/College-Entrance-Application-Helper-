@@ -55,7 +55,7 @@ for provinceID in range(flag_province,32):
                 flag_page=1
             page=flag_page
             while 1:
-                url="http://college.gaokao.com/spepoint/a"+str(provinceID)+"/s"+str(keleiID)+"/y"+str(year)+"/p"+str(page)+"/" 
+                url="http://college.gaokao.com/spepoint/a"+str(provinceID)+"/s"+str(keleiID)+"/y"+str(year)+"/o"+shcool_name+"/p"+str(page)+"/" 
                 page=page+1
                 while 1: 
                     try:

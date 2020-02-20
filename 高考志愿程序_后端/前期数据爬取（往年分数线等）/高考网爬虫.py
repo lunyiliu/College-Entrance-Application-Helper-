@@ -62,7 +62,7 @@ for i in range(1,1601):
 for i in range(1,32):
     provinceID_set.append(i)
 provinceID_set+=[33,38,39]
-for schoolID in schoolID_set[708:1602]:
+for schoolID in schoolID_set[3:5]:
     print("学校ID"+str(schoolID))
     for provinceID in provinceID_set:
         print("第"+str(provinceID_set.index(provinceID))+"个省")
@@ -70,8 +70,8 @@ for schoolID in schoolID_set[708:1602]:
             if kelei==1:
                 subject='science'
             else:
-				subject='literacy'
-			url="http://college.gaokao.com/school/tinfo/"+str(schoolID)+"/result/"+str(provinceID)+"/"+str(kelei)+"/"        
+                subject='literature'
+            url="http://college.gaokao.com/school/tinfo/"+str(schoolID)+"/result/"+str(provinceID)+"/"+str(kelei)+"/"        
             while 1: 
                 try:
                     r=requests.get(url,timeout=3.05)

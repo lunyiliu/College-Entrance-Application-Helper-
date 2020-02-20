@@ -32,7 +32,7 @@ for j in range(50, 55):
     provinceset.append(str(j))
 for j in range(61, 66):
     provinceset.append(str(j))
-for k in range(2014, 2018):
+for k in range(2013, 2018):
     yearset.append(str(k))
 
 keleiset = [str(1), str(5)]
@@ -85,19 +85,19 @@ for schoolID in schoolIDset[17:1872]:
                     #对数据进行筛选
                 for m in b:
                     if (m == "本科提前批" or m == "本专科提前批") :
-                        b_correct.append("benke_tiqianpi")
+                        b_correct.append("提前批")
                         b_correct.append(b[b.index(m) + 2])
                     if (m == "本科第一批" or m == "本科一批" or m == "本科第一批（A/B）" or 
                         m == "本科一批（A、B段）" or m == "本科一批（A、A1、B类)" or 
                         m == "本科一批（AB)" or m == "本科第一批(A/B)" or 
                         m == "本科一批、本科一批B" or m == "本科一批（A、B段)"  ):
-                        b_correct.append("benke_diyipi")
+                        b_correct.append("第一批")
                         b_correct.append(b[b.index(m) + 2])
                     if (m == "本科批" or m == "本科A批" or m == "普通类" or m == "本科普通批"):
-                        b_correct.append("benke_putongpi")
+                        b_correct.append("普通批")
                         b_correct.append(b[b.index(m) + 2])
                     if (m == "本科第二批" or m == "本科二批"):
-                        b_correct.append("benke_dierpi")
+                        b_correct.append("第二批")
                         b_correct.append(b[b.index(m) + 2])
                 if b_correct != []:
                     bset_kelei.append(b_correct)

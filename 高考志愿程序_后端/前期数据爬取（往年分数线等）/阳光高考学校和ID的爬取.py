@@ -7,8 +7,8 @@ Created on Tue Jul 31 09:36:10 2018
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-school_set=range(1,10)
-school_name=[]
+school_set=range(1,1600)
+school_name={}
 for school in school_set:
     url_school="https://gaokao.chsi.com.cn/sch/schoolInfoMain--schId-"+str(school)+".dhtml"
     html1 = urlopen(url_school)
@@ -16,5 +16,6 @@ for school in school_set:
     info = bs.findAll("a", {"href" : "/sch/schoolInfoMain--schId-"+str(school)+".dhtml"})
     if info!=[]:
         info_name=info[0].get_text()
-        school_name.append(info_name[:-1])
-    
+        school_name[school]=info_name[:-1]
+        print(school)
+

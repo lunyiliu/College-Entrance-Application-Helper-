@@ -19,11 +19,7 @@ Page({
     multiArray1:
       [
         ['省份', '北京', '上海', '天津', '重庆', '河北', '山东', '辽宁', '黑龙江', '甘肃', '吉林', '青海', '河南', '江苏', '湖北', '湖南', '浙江', '江西', '广东', '云南', '福建', '台湾', '海南', '山西', '四川', '陕西', '贵州', '安徽', '内蒙古', '广西', '西藏', '新疆', '宁夏'],
-<<<<<<< HEAD
         ['',],
-=======
-        ['',]
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
       ],
     multiArray2:
       [
@@ -45,16 +41,10 @@ Page({
         ['省份', '北京', '上海', '天津', '重庆', '河北', '山东', '辽宁', '黑龙江', '甘肃', '吉林', '青海', '河南', '江苏', '湖北', '湖南', '浙江', '江西', '广东', '云南', '福建', '台湾', '海南', '山西', '四川', '陕西', '贵州', '安徽', '内蒙古', '广西', '西藏', '新疆', '宁夏'],
         ['',]
       ],
-<<<<<<< HEAD
 
     objectmultiArray1: [
     ],
     multiIndex1: [0, 0], //表示多列选择器中两列所选项位置（门类，一级学科）
-=======
-    objectmultiArray1: [
-    ],
-    multiIndex1: [app.globalData.multiindex1[2], app.globalData.multiindex1[3]], //表示多列选择器中两列所选项位置（门类，一级学科）
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     multiIndex2: [0, 0],
     multiIndex3: [0, 0],
     multiIndex4: [0, 0],
@@ -2074,11 +2064,7 @@ Page({
       app.globalData.FocusSchool.push(this.data.multiArray1[1][this.data.multiIndex1[1]])
       //app.globalData.FocusSchoolID.push(this.data.SchoolID[i])
       console.log(this.data.multiArray1[1][this.data.multiIndex1[1]])
-<<<<<<< HEAD
          console.log(app.globalData.multiindex1)
-=======
-      //   console.log(app.globalData.FocusSchoolID)
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
     }
     else {
       var up = "start1[" + i + "]";
@@ -2212,7 +2198,6 @@ Page({
       }
     }
   },
-<<<<<<< HEAD
   jumptohome_tea:function()
   {
     wx.redirectTo({
@@ -2220,7 +2205,4 @@ Page({
       
     })
   }
-=======
-
->>>>>>> f7bb7a417ce6508384e0ede9a0931d52613a471d
 })

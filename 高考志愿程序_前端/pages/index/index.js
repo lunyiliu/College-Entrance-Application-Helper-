@@ -8,7 +8,8 @@ Page({
     Grade: 0,
     Rank: 0,
     show: false, //控制下拉列表的显示隐藏，false隐藏、true显示
-    selectData1: ['未选择省份', '北京', '天津', '河北', '山西', '山东', '河南', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '福建', '上海', '浙江', '安徽', '江西', '湖南', '湖北', '广东', '广西', '海南', '重庆', '四川', '贵州', '云南', '陕西', '西藏', '甘肃', '青海', '宁夏', '新疆'],
+    selectData1: ['未选择省份', '北京', '天津', '河北', '山西', '山东', '河南', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '福建', '上海', '浙江', '安徽', '江西', '湖南', '湖北', '广东', '广西', '海南', '重庆', '四川', '贵州', '云南', '陕西', '西藏', '甘肃', '青海', '宁夏', '新疆', '香港', '澳门', '台湾'],
+    provinceid: [0, 1, 2, 19, 20, 11, 22, 21, 3, 4, 5, 7, 10, 6, 8, 9, 31, 13, 12, 14, 24, 23, 15, 16, 25, 26, 17, 27, 18, 28, 29, 30,33,38,39],
     area: ['未选择科类', '文史', '理工', '不分文理'], //下拉列表的数据
     index: 0, //选择的下拉列表下标
     areaIndex: 0,
@@ -56,16 +57,20 @@ Page({
       //update_data
       console.log('更新数据')
       wx.request({
-        url: 'https://lunyiliu.eicp.vip/DataInsert.php',
+        url: 'https://lunyiliu.eicp.vip/Interface.php',
         data: {
-          command: 'update_user_data',
-          //此处需先获取nickName与userID
-          user_nickname: app.globalData.nickName,
-          userID: app.globalData.userID,
+          sql:'update client set score=?, province=?,subject=?,self_rank=? where user_nickname=? and userID=?',
+          //凡是涉及到具体的值的，一律以？代替
+          format:'ississ',//有多少个？就有多少个字符
+          mode:'update',
+          //这后面的变量安排要按照？出现的顺序
+          trans_grade: app.globalData.StudentGrade,
           trans_province: app.globalData.StudentProvince,
           trans_kelei: app.globalData.StudentKelei,
-          trans_grade: app.globalData.StudentGrade,
-          trans_rank: app.globalData.StudentRank
+          trans_rank: app.globalData.StudentRank,
+          user_nickname: app.globalData.nickName,
+          userID: app.globalData.userID,
+          command: 'handle_data'
         },
         method: 'GET',
         header: {
@@ -90,15 +95,34 @@ Page({
       });
       console.log('插入数据')
       wx.request({
-        url: 'https://lunyiliu.eicp.vip/DataInsert.php',
+        url: 'https://lunyiliu.eicp.vip/Interface.php',
         data: {
-          command: 'insert_user_data',
-          user_nickname: app.globalData.nickName,
+          
+          table:'client',
           userID: app.globalData.userID,
-          trans_province: app.globalData.StudentProvince,
-          trans_kelei: app.globalData.StudentKelei,
-          trans_grade: app.globalData.StudentGrade,
-          trans_rank: app.globalData.StudentRank
+          user_nickname: app.globalData.nickName,
+          score: app.globalData.StudentGrade,
+          province: app.globalData.StudentProvince,
+          //subject: app.globalData.StudentKelei,
+          subject: '啦啦啦',
+          year:2019,
+          pici:'null',
+          choose_list:'null',
+          focus:'null',
+          rank: app.globalData.StudentRank,
+          history:'null',
+          command: 'insert_data',
+          
+          /*
+          table: 'test1',
+          userID: '啦啦啦',
+          user_nickname: app.globalData.nickName,
+          score: app.globalData.StudentGrade,
+          province: app.globalData.StudentProvince,
+          //subject: app.globalData.StudentKelei,
+          subject1: '啦啦啦1',
+          command: 'insert_data'
+          */
         },
         method: 'GET',
         header: {
@@ -143,12 +167,14 @@ Page({
   {
     if (this.data.Province != 0 && this.data.Kelei != 0 && this.data.Grade != 0 && this.data.Grade <=750 && this.data.Rank > 0) 
     {
+      var that = this;
       //更改变量
-      app.globalData.StudentProvince = this.data.selectData1[parseInt(this.data.Province)];
+      app.globalData.StudentProvince = this.data.provinceid[parseInt(this.data.Province)];
+      //app.globalData.StudentKelei = 'abcd';
       app.globalData.StudentKelei = this.data.area[parseInt(this.data.Kelei)];
       app.globalData.StudentGrade = this.data.Grade;
       app.globalData.StudentRank = this.data.Rank;
-      this.Update();
+      
 
       wx.login({
         success: function (data) {
@@ -205,6 +231,7 @@ Page({
                 app.globalData.userID = res.data.openid;
                 console.log(app.globalData.userID);
                 wx.hideLoading();
+                that.Update();
 
                 //页面跳转
                 wx.switchTab({
