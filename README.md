@@ -1,5 +1,5 @@
 # College-Entrance-Application-Helper-
-A wechat program that assesses the success rate for clients' applications of school and recommend schools based on big data.
+A wechat program that assesses the success rate for clients' applications of school and recommend schools based on big data. To run and test this, the source code should be deployed on wechat platform.
 ## Catalog:  
 * **数据采集:** The program is used for volunteers to manually collect and process some missing extra data 
 * **高考志愿程序_前端:**  Front-end codes on wechat mini-program platform
